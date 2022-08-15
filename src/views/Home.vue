@@ -2,14 +2,14 @@
   <div class="home">
     <div class="home__container">
       <section
-        class="home__banner bg-primary-base text-center h-9-screen flex flex-col items-center justify-between p-5"
+        class="home__banner bg-primary-base text-center sm:h-7-screen h-9-screen flex flex-col items-center sm:justify-start justify-between p-5"
       >
         <div class="home__banner-logo">
           <img src="@/assets/logo.svg" alt="Perfil Político" />
         </div>
 
         <div
-          class="home__banner-content sm:flex flex-col justify-center h-auto items-center text-white font-bold uppercase"
+          class="home__banner-content sm:flex flex-col justify-center sm:h-5-screen h-auto items-center text-white font-bold uppercase"
         >
           <div class="home__banner-content-emphasis flex items-center flex-col sm:flex-row mb-6">
             <div class="sm:pr-5 mb-4">
@@ -101,12 +101,12 @@
       </section>
 
       <section class="home__differentials bg-background-light sm:h-4-screen sm:relative">
-        <div class="container sm:relative">
+        <div class="container sm:relative px-5">
           <div
             class="home__differentials_content sm:absolute bg-white text-center -top-16 p-10 rounded-3xl"
           >
             <h2
-              class="home__differentials_title text-primary-base uppercase font-bold sm:text-4xl sm:text-left text-center text-xl"
+              class="home__differentials_title text-primary-base uppercase font-bold sm:text-4xl text-center text-xl"
             >
               Diferenciais do Perfil Político
             </h2>
@@ -159,12 +159,12 @@
         </div>
       </section>
 
-      <section class="home__about bg-background-light py-32">
+      <section class="home__about bg-background-light sm:py-32 py-20">
         <div class="home__about-content container px-5 sm:grid sm:grid-cols-9 sm:gap-16">
-          <div class="col-span-3 col-start-2 ">
-            <img src="@/assets/icons/icon-sobre-perfil-politico.svg" class="sm:w-full w-40" alt="" />
+          <div class="col-span-3 col-start-2 flex items-center justify-center">
+            <img src="@/assets/icons/icon-sobre-perfil-politico.svg" class="sm:w-full w-40 mb-5" alt="Sobre o Perfil Político" />
           </div>
-          <div class="col-span-4 flex flex-col justify-center items-start container">
+          <div class="col-span-4 flex flex-col justify-center sm:items-start items-center container">
             <h2 class="text-primary-base uppercase font-bold sm:text-4xl sm:text-left text-center text-xl">
               Sobre o Perfil Político
             </h2>
@@ -187,9 +187,9 @@
       </section>
 
       <section class="home__common-questions bg-background-light py-20">
-        <div class="container">
+        <div class="container px-5">
           <h2
-            class="text-primary-base uppercase font-bold text-4xl text-center mb-16"
+            class="text-primary-base uppercase font-bold sm:text-4xl text-center text-xl sm:mb-16 mb-5"
           >
             PERGUNTAS FREQUENTES
           </h2>
