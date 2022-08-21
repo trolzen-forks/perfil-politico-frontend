@@ -193,44 +193,48 @@
           >
             PERGUNTAS FREQUENTES
           </h2>
-          <div id="accordion-collapse" data-accordion="collapse">
-            <div class="mb-4 rounded-xl shadow-md">
-              <h2 id="accordion-collapse-heading-1">
-                <button
-                  type="button"
-                  class="bg-background-white flex items-center justify-between w-full p-5 font-regular text-left text-xl border border-gray-200 rounded-t-xl"
-                  data-accordion-target="#accordion-collapse-body-1"
-                  aria-expanded="true"
-                  aria-controls="accordion-collapse-body-1"
-                >
-                  <span
-                    >Quais candidatos posso analisar no Perfil Político?</span
-                  >
-                  <span
-                  data-accordion-icon
-                    class="material-symbols-outlined w-6 h-6 rotate-180 shrink-0"
-                  >
-                    expand_more
-                  </span>
-                </button>
-              </h2>
-              <div
-                id="accordion-collapse-body-1"
-                class=""
-                aria-labelledby="accordion-collapse-heading-1"
-              >
-                <div
-                  class="p-5 font-light border border-gray-200 bg-background-white rounded-b-xl"
-                >
-                  <p class="mb-2 text-gray-500">
-                    Você pode achar dados sobre todos os candidatos aos cargos
-                    de deputado federal, estadual e distrital, senador,
-                    governador e presidente nas eleições gerais de 2018
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+          <Accordion title="Quais candidatos posso analisar no Perfil Político?">
+            Você pode achar dados sobre todos os candidatos aos cargos de deputado federal, estadual e distrital, senador, governador e presidente nas eleições gerais de 2018.
+          </Accordion>
+          <Accordion title="Como faço para realizar uma busca?">
+            Para fazer sua busca:
+            <ol>
+              <li>Selecione um Cargo e o Estado (não se aplica quando a busca é de presidenciáveis);</li>
+              <li>Selecione uma pergunta… no menu roxo (barra inferior da página);</li>
+              <li>Você pode selecionar uma pergunta em seguida da outra para refinar sua busca;</li>
+              <li>A qualquer momento você pode selecionar um partido para destacar dentre os candidatos da busca;</li>
+              <li>Você pode clicar em um dos círculos e ver informações mais detalhadas do candidato ou da candidata que desejar;</li>
+              <li>Nossos parceiros do The Intercept Brasil explicaram como a busca funciona em vídeo.</li>
+            </ol>
+          </Accordion>
+          <Accordion title="Como utilizo a busca por nome?">
+            Você pode buscar um candidato específico, no campo <i>Busque por nome</i>, selecionando o cargo antes de fazer essa busca. Essa funcionalidade não está disponível no Internet Explorer 9 (ou mais antigo) e no Safari.
+          </Accordion>
+          <Accordion title="Quem são os criadores do Perfil Político?">
+            O projeto faz parte do <i>Programa Ciência de Dados para Inovação Cívica</i> da Open Knowledge Brasil. O Perfil Político também conta com a parceria do The Intercept Brasil e do Brasil.io.
+          </Accordion>
+          <Accordion title="De onde são os dados do Perfil Político?">
+            A fonte primária dos dados, ou seja, de onde eles foram retirados, é o TSE (Tribunal Superior Eleitoral). Você pode obter esses dados, já organizados, no Brasil.io e no Raspador Legislativo.
+          </Accordion>
+          <Accordion title="Quais dados são utilizados na plataforma?">
+            A ficha dos candidatos reúne informações básicas como idade, sexo, cor/raça, escolaridade e ocupação, mas também dados sobre patrimônio declarado em todas as eleições disputadas, mudanças de partidos, histórico de candidaturas e de eleições ganhas.
+          </Accordion>
+          <Accordion title="Quando os dados foram coletados? Eles são atualizados com alguma periodicidade?">
+            Os dados do TSE foram coletados pelo Brasil.io no Repositório de Dados Eleitorais na semana de 20 de agosto, logo após o TSE oficializar as candidaturas para as eleições gerais de 2018. Os dados da Câmara dos Deputados e do Senado Federal foram coletados no início de setembro. Depois dessas coletas iniciais o site ainda não passou por nenhuma atualização nos dados.
+          </Accordion>
+          <Accordion title="Encontrei dados na plataforma que estão diferentes dos dados encontrados no site do TSE, por quê?">
+            O TSE oferece duas formas para os cidadãos acessarem os dados. Um é um site navegável para humanos, o Divulgação de Candidaturas e Contas Eleitorais, outro é o Repositório de Dados Eleitorais, que oferece dados em massa, legíveis por máquinas. Em raros casos o site diverge do repositório de dados, então existem chances da diferença ser uma inconsistência do próprio TSE ou uma atualização no repositório de dados que ainda não foi incorporada ao Perfil Político.
+          </Accordion>
+          <Accordion title="Como a plataforma é financiada?">
+            O projeto foi desenvolvido com recursos da Open Knowledge Brasil. O The Intercept Brasil apoiou o projeto cobrindo os custos de infraestrutura tecnológica para armazenamento dos dados. Para que a equipe do projeto possa continuar aperfeiçoando esse e outros projetos do Programa de Ciência de Dados para Inovação Cívica, dependemos das contribuições dos nossos usuários, que podem doar pelo site apoia.se/serenata.
+          </Accordion>
+          <Accordion title="Qual o objetivo da ferramenta?">
+            Perfil Político é uma plataforma para comparar e conhecer o histórico dos milhares de candidatos às eleições. A ferramenta ajuda as pessoas a selecionar perfis de candidatos: você pode filtrar por novatos e por velhos políticos. Pode ver como o seu estado está em termos de representatividade de gênero e raça – e se as candidaturas, de fato, representam você.
+            A ficha dos candidatos reúne informações básicas como idade, sexo, cor/raça, escolaridade e ocupação, mas também dados sobre patrimônio declarado em todas as eleições disputadas, mudanças de partidos, histórico de candidaturas e de eleições ganhas.
+          </Accordion>
+          <Accordion title="É código aberto?">
+            Sim! Temos dois repositórios com o código que faz o Perfil Político funcionar. Um para a API que é em Python, e outro para a interface que é JavaScript, HTML e CSS.
+          </Accordion>
         </div>
       </section>
     </div>
@@ -241,10 +245,12 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import Footer from "@/components/Footer.vue";
+import Accordion from "@/components/Accordion.vue";
 
 @Options({
   components: {
-    Footer
+    Footer,
+    Accordion
   },
 })
 export default class Home extends Vue {}

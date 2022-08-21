@@ -1,8 +1,8 @@
 <template>
 <Navbar></Navbar>
   <div class="about">
-    <div class="container sm:grid grid-cols-8 gap-5 sm:mt-44 mt-24 px-5">
-      <div class="about__image col-span-2 sm:w-auto w-32 mx-auto">
+    <div class="sm:grid grid-cols-8 gap-5 sm:mt-44 mt-24 px-5">
+      <div class="about__image col-span-2 sm:w-4/5 w-32 mx-auto">
         <img src="@/assets/icons/icon-sobre-perfil-politico.svg" alt="Perfil Político">
       </div>
       <div class="about__content col-span-5 mt-10 text-center sm:text-left">

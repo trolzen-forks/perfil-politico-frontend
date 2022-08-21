@@ -18,15 +18,15 @@
     </div>
     <div class="c-footer__content-actions container flex flex-col sm:flex-row sm:justify-between sm:items-center items-start text-white mt-10">
         <div class="flex flex-col sm:flex-row sm:items-center mb-5">  
-            <h3 class="font-bold text-xl mr-3 mb-4">Link Úteis:</h3>
+            <h3 class="font-bold text-xl mr-3 sm:mb-0 mb-4">Link Úteis:</h3>
             <ul class="flex flex-row flex-wrap font-regular text-xs">
-                <li class="sm:mr-3 mr-5 mb-5 hover:underline"><a href="">Sobre o projeto</a></li>
-                <li class="sm:mr-3 mb-5 hover:underline"><a href="">Perguntas frequentes</a></li>
-                <li class="sm:mr-3 mb-5 hover:underline"><a href="">Apoie o projeto</a></li>
+                <li class="sm:mr-3 mr-5 sm:mb-0 mb-5 hover:underline"><a href="">Sobre o projeto</a></li>
+                <li class="sm:mr-3 sm:mb-0 mb-5 hover:underline"><a href="">Perguntas frequentes</a></li>
+                <li class="sm:mr-3 sm:mb-0 mb-5 hover:underline"><a href="">Apoie o projeto</a></li>
             </ul>
         </div>
         <div class="flex flex-col sm:flex-row sm:items-center items-start">
-            <h3 class="font-bold text-xl mr-3 mb-4">Realização:</h3>
+            <h3 class="font-bold text-xl mr-3 sm:mb-0 mb-4">Realização:</h3>
             <a href="https://ok.org.br/" target="_blank" rel="noopener noreferrer">
                 <img src="@/assets/images/logo-open-knowledge.svg" alt="Open Knowledge" />
             </a>
