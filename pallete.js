@@ -26,15 +26,7 @@ module.exports = {
     purpleDark: "#5A44A0",
     purpleLight: "#7360AE",
   },
-  border: {
-    base: "#D9D9D9",
-  },
   focus: {
-    base: "#82D1E2",
-  },
-  status: {
-    planejado: "#DA3582",
-    empenhado: "#31AD33",
-    liquidado: "#35B4CF",
-  },
+    base: "#7360AE",
+  }
 };

@@ -50,7 +50,7 @@
                   <input
                     type="text"
                     id="first_name"
-                    class="bg-background-purpleLight text-white text-sm rounded-full font-regular placeholder:text-white placeholder-white focus:ring-secondary-base focus:border-secondary-base block w-full py-3 pl-10 pr-5"
+                    class="bg-background-purpleLight text-white text-sm rounded-full font-regular placeholder:text-white placeholder-white focus:ring-secondary-base focus:border-secondary-base focus:bg-background-purpleLight block w-full py-3 pl-10 pr-5"
                     placeholder="Digite o nome da pessoa candidata"
                     required
                   />

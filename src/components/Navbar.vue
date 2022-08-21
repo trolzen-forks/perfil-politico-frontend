@@ -13,10 +13,10 @@
     </div>
     <div class="hidden sm:w-3/5 grow md:flex md:order-1" id="navbar-sticky">
         <div class="hidden relative md:block w-full">
-        <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-            <span class="material-symbols-outlined text-white">search</span>
-        </div>
-        <input type="text" id="search-navbar" class="block p-3 pl-10 w-full text-white bg-white bg-opacity-20 placeholder-white rounded-lg sm:text-sm" placeholder="Pesquisar por:">
+            <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                <span class="material-symbols-outlined text-white">search</span>
+            </div>
+            <input type="text" id="search-navbar" class="block p-3 pl-10 w-full text-white bg-white bg-opacity-20 placeholder-white rounded-lg sm:text-sm focus:ring-secondary-base focus:border-secondary-base focus:bg-background-purpleLight" placeholder="Pesquisar por:">
         </div>
     </div>
   </div>
