@@ -1,3 +1,4 @@
+/* eslint-disable */
 module.exports = {
   primary: {
     base: "#5A44A0",
@@ -12,6 +13,8 @@ module.exports = {
   },
   neutral: {
     base: "#D9D9D9",
+    baseMedium: "#B4B4B4",
+    baseDark: "#9E9E9E",
     light: "#F4F4F4",
     dark: "#000000",
   },
@@ -28,5 +31,5 @@ module.exports = {
   },
   focus: {
     base: "#7360AE",
-  }
+  },
 };

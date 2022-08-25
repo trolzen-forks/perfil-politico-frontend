@@ -23,7 +23,9 @@ const routes: Array<RouteRecordRaw> = [
     // this generates a separate chunk (CandidateList.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "CandidateList" */ "../views/CandidateList.vue"),
+      import(
+        /* webpackChunkName: "CandidateList" */ "../views/CandidateList.vue"
+      ),
   },
 ];
 

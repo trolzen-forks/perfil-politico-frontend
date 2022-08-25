@@ -1,3 +1,4 @@
+/* eslint-disable */
 /** @type {import('tailwindcss').Config} */
 const colors = require("tailwindcss/colors");
 const palette = require("./pallete");

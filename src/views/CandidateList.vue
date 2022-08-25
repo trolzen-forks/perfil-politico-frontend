@@ -1,13 +1,12 @@
 <template>
-<Navbar></Navbar>
-  <div class="candidate-list my-48">
-    <div class="container">
-      <CardCandidate />
-      <Pagination />
-      <CardInfo />
-    </div> 
+  <Navbar></Navbar>
+  <div class="candidate-list mt-20">
+    <Sidebar />
+    <main class="candidate-list__content">
+      <div class="container"></div>
+    </main>
   </div>
-<Footer></Footer>
+  <Footer></Footer>
 </template>
 
 <script lang="ts">
@@ -17,6 +16,7 @@ import Navbar from "@/components/Navbar.vue";
 import CardCandidate from "@/components/CardCandidate.vue";
 import Pagination from "@/components/Pagination.vue";
 import CardInfo from "../components/CardInfo.vue";
+import Sidebar from "../components/Sidebar.vue";
 
 @Options({
   components: {
@@ -24,7 +24,8 @@ import CardInfo from "../components/CardInfo.vue";
     Navbar,
     CardCandidate,
     Pagination,
-    CardInfo
+    CardInfo,
+    Sidebar,
   },
 })
 export default class Home extends Vue {}
