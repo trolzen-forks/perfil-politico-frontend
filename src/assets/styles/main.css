@@ -15,5 +15,9 @@ body,
 }
 
 select {
-  background-image: url("../icons/arrow-down.svg");
+  background-image: url("../icons/arrow-down-white.svg");
+}
+
+select#estados {
+  background-image: url("../icons/arrow-down-black.svg");
 }

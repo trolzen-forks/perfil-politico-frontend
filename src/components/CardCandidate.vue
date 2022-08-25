@@ -1,7 +1,7 @@
 <template>
   <div class="c-card">
     <div
-      class="p-5 w-full max-w-xs bg-white rounded-2xl border border-neutral-base"
+      class="p-5 mt-16 bg-white rounded-2xl border border-neutral-base"
     >
       <div class="flex flex-col items-center mb-3">
         <img
