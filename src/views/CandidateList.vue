@@ -1,9 +1,9 @@
 <template>
   <Navbar></Navbar>
-  <div class="candidate-list mt-20 flex">
+  <div class="candidate-list mt-20 sm:flex">
     <Sidebar />
     <main class="candidate-list__content w-full">
-      <div class="container sm:p-12">
+      <div class="container sm:p-12 px-5">
         <div class="candidate-list__title mb-12">
            <h1 class="text-primary-base font-bold text-3xl mb-4">Confira os candidatos para presidente no Brasil</h1>
             <p>Descritiva do cargo</p>
@@ -11,7 +11,7 @@
         <div class="candidate-list__analisys w-full">
           <Analysis />
         </div>
-        <div class="candidate-list__candidates grid grid-cols-4 gap-3">
+        <div class="candidate-list__candidates block sm:grid grid-cols-4 gap-3">
           <CardCandidate />
           <CardCandidate />
           <CardCandidate />

@@ -14,13 +14,13 @@
     <div class="c-filters-analysis__content mt-5"> 
       <div class="w-full mb-3">
         <label 
-          for="toogleA"
+          for="tNuncaEleitos"
           class="flex items-center cursor-pointer"
         >
           <div class="relative">
-            <input id="toogleA" type="checkbox" class="sr-only" />
-            <div class="w-10 h-4 bg-gray-400 rounded-full shadow-inner"></div>
-            <div class="dot absolute w-6 h-6 bg-white rounded-full shadow -left-1 -top-1 transition"></div>
+            <input id="tNuncaEleitos" type="checkbox" class="sr-only" />
+            <div class="w-8 h-3 bg-gray-400 rounded-full shadow-inner"></div>
+            <div class="dot absolute w-5 h-5 bg-white rounded-full shadow -left-1 -top-1 transition"></div>
           </div>
           <div class="ml-3 text-white font-medium text-sm">
             Quantos nunca foram eleitos?
@@ -29,13 +29,13 @@
       </div>
       <div class="w-full mb-3">
         <label 
-          for="toogleA"
+          for="tEleitos"
           class="flex items-center cursor-pointer"
         >
           <div class="relative">
-            <input id="toogleA" type="checkbox" class="sr-only" />
-            <div class="w-10 h-4 bg-gray-400 rounded-full shadow-inner"></div>
-            <div class="dot absolute w-6 h-6 bg-white rounded-full shadow -left-1 -top-1 transition"></div>
+            <input id="tEleitos" type="checkbox" class="sr-only" />
+            <div class="w-8 h-3 bg-gray-400 rounded-full shadow-inner"></div>
+            <div class="dot absolute w-5 h-5 bg-white rounded-full shadow -left-1 -top-1 transition"></div>
           </div>
           <div class="ml-3 text-white font-medium text-sm">
             Quantos já foram eleitos?
@@ -44,13 +44,13 @@
       </div>
       <div class="w-full mb-3">
         <label 
-          for="toogleA"
+          for="tNuncaConcorreram"
           class="flex items-center cursor-pointer"
         >
           <div class="relative">
-            <input id="toogleA" type="checkbox" class="sr-only" />
-            <div class="w-10 h-4 bg-gray-400 rounded-full shadow-inner"></div>
-            <div class="dot absolute w-6 h-6 bg-white rounded-full shadow -left-1 -top-1 transition"></div>
+            <input id="tNuncaConcorreram" type="checkbox" class="sr-only" />
+            <div class="w-8 h-3 bg-gray-400 rounded-full shadow-inner"></div>
+            <div class="dot absolute w-5 h-5 bg-white rounded-full shadow -left-1 -top-1 transition"></div>
           </div>
           <div class="ml-3 text-white font-medium text-sm">
             Quantos nunca concorreram?
@@ -59,13 +59,13 @@
       </div>
       <div class="w-full mb-3">
         <label 
-          for="toogleA"
+          for="tMulheres"
           class="flex items-center cursor-pointer"
         >
           <div class="relative">
-            <input id="toogleA" type="checkbox" class="sr-only" />
-            <div class="w-10 h-4 bg-gray-400 rounded-full shadow-inner"></div>
-            <div class="dot absolute w-6 h-6 bg-white rounded-full shadow -left-1 -top-1 transition"></div>
+            <input id="tMulheres" type="checkbox" class="sr-only" />
+            <div class="w-8 h-3 bg-gray-400 rounded-full shadow-inner"></div>
+            <div class="dot absolute w-5 h-5 bg-white rounded-full shadow -left-1 -top-1 transition"></div>
           </div>
           <div class="ml-3 text-white font-medium text-sm">
             Quantas são mulheres?
@@ -74,13 +74,13 @@
       </div>
       <div class="w-full mb-3">
         <label 
-          for="toogleA"
+          for="tHomens"
           class="flex items-center cursor-pointer"
         >
           <div class="relative">
-            <input id="toogleA" type="checkbox" class="sr-only" />
-            <div class="w-10 h-4 bg-gray-400 rounded-full shadow-inner"></div>
-            <div class="dot absolute w-6 h-6 bg-white rounded-full shadow -left-1 -top-1 transition"></div>
+            <input id="tHomens" type="checkbox" class="sr-only" />
+            <div class="w-8 h-3 bg-gray-400 rounded-full shadow-inner"></div>
+            <div class="dot absolute w-5 h-5 bg-white rounded-full shadow -left-1 -top-1 transition"></div>
           </div>
           <div class="ml-3 text-white font-medium text-sm">
             Quantos são homens?
@@ -89,13 +89,13 @@
       </div>
       <div class="w-full mb-3">
         <label 
-          for="toogleA"
+          for="tNegros"
           class="flex items-center cursor-pointer"
         >
           <div class="relative">
-            <input id="toogleA" type="checkbox" class="sr-only" />
-            <div class="w-10 h-4 bg-gray-400 rounded-full shadow-inner"></div>
-            <div class="dot absolute w-6 h-6 bg-white rounded-full shadow -left-1 -top-1 transition"></div>
+            <input id="tNegros" type="checkbox" class="sr-only" />
+            <div class="w-8 h-3 bg-gray-400 rounded-full shadow-inner"></div>
+            <div class="dot absolute w-5 h-5 bg-white rounded-full shadow -left-1 -top-1 transition"></div>
           </div>
           <div class="ml-3 text-white font-medium text-sm">
             Quantos são negros ou pardos?
@@ -104,13 +104,13 @@
       </div>
       <div class="w-full mb-3">
         <label 
-          for="toogleA"
+          for="tBrancos"
           class="flex items-center cursor-pointer"
         >
           <div class="relative">
-            <input id="toogleA" type="checkbox" class="sr-only" />
-            <div class="w-10 h-4 bg-gray-400 rounded-full shadow-inner"></div>
-            <div class="dot absolute w-6 h-6 bg-white rounded-full shadow -left-1 -top-1 transition"></div>
+            <input id="tBrancos" type="checkbox" class="sr-only" />
+            <div class="w-8 h-3 bg-gray-400 rounded-full shadow-inner"></div>
+            <div class="dot absolute w-5 h-5 bg-white rounded-full shadow -left-1 -top-1 transition"></div>
           </div>
           <div class="ml-3 text-white font-medium text-sm">
             Quantos são brancos?
