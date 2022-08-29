@@ -3,9 +3,9 @@
  <div class="candidate mt-20 sm:flex">
     <SidebarCandidate></SidebarCandidate>
     <div class="candidate__content w-full bg-background-light">
-        <div class="candidate__header flex justify-between items-center py-5 sm:px-12 border border-neutral-light bg-white">
+        <div class="candidate__header sm:flex justify-between items-center py-5 sm:px-12 px-5 border border-neutral-light bg-white">
             <div>
-                <h1 class="uppercase font-bold text-xl text-primary-base">Comparação com os eleitos em 2014</h1>
+                <h1 class="uppercase font-bold text-xl text-primary-base sm:text-left text-center">Comparação com os eleitos em 2014</h1>
             </div>
             <div class="flex items-center justify-between">
                 <button type="button" class="text-primary-base font-bold rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 hover:underline">
@@ -18,12 +18,12 @@
                 </button>
             </div>
         </div>
-        <div class="candidate__graphs py-10 sm:px-12 grid grid-cols-2 gap-10">
+        <div class="candidate__graphs py-10 sm:px-12 px-5 grid sm:grid-cols-2 grid-cols-1 gap-10">
             <CardInfo></CardInfo>
             <CardInfo></CardInfo>
             <CardInfo></CardInfo>
             <CardInfo></CardInfo>
-            <CardInfo class="col-span-2"></CardInfo>
+            <CardInfo class="sm:col-span-2"></CardInfo>
         </div>
     </div>
  </div> 

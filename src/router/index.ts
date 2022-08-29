@@ -14,7 +14,7 @@ const routes: Array<RouteRecordRaw> = [
     component: About,
   },
   {
-    path: "/listagem-pleitos-2022",
+    path: "/listagem-candidaturas",
     name: "Listagem de pessoas candidatas",
     // route level code-splitting
     // this generates a separate chunk (CandidateList.[hash].js) for this route
