@@ -4,7 +4,9 @@
       <div
         class="sm:bg-black flex-none sm:bg-opacity-20 sm:w-1/4 w-2/4 sm:h-20 py-5 px-5 flex justify-center"
       >
-        <img src="@/assets/logo.svg" alt="Perfil Político" />
+        <router-link :to="{ name: 'Home' }">
+          <img src="@/assets/logo.svg" alt="Perfil Político" />
+        </router-link>
       </div>
       <div class="flex sm:flex-none md:order-2 px-2 sm:px-6 py-2.5">
         <div

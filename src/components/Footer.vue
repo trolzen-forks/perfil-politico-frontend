@@ -1,5 +1,5 @@
 <template>
-  <footer class="c-footer bg-primary-base p-10 bottom-0">
+  <footer class="c-footer bg-primary-base p-10 bottom-0 static">
     <div
       class="c-footer__content container bg-background-purpleLight flex flex-col sm:flex-row justify-center items-center p-5 text-white rounded-lg"
     >

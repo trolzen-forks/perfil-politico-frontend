@@ -5,7 +5,9 @@
         class="home__banner bg-primary-base text-center sm:h-7-screen h-9-screen flex flex-col items-center sm:justify-start justify-between p-5"
       >
         <div class="home__banner-logo">
-          <img src="@/assets/logo.svg" alt="Perfil Político" />
+          <router-link :to="{ name: 'Home' }">
+            <img src="@/assets/logo.svg" alt="Perfil Político" />
+          </router-link>
         </div>
 
         <div
@@ -192,12 +194,13 @@
               estado está em termos de representatividade de gênero e raça – e
               se as candidaturas, de fato, representam você.
             </p>
-            <button
+            <router-link
               type="button"
               class="text-primary-base uppercase font-bold bg-secondary-base hover:bg-secondary-light font-medium rounded-full text-sm px-12 py-4 text-center mr-2 mb-2"
+              :to="{ name: 'About' }"
             >
               Continuar lendo
-            </button>
+            </router-link>
           </div>
         </div>
       </section>

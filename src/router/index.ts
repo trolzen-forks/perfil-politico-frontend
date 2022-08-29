@@ -1,6 +1,9 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import Home from "../views/Home.vue";
-import About from "../views/About.vue";
+
+const Home = () => import('@/views/Home/index.vue')
+const About = () => import('@/views/About/index.vue')
+const Candidate = () => import('@/views/Candidate/index.vue')
+const CandidateList = () => import('@/views/CandidateList/index.vue')
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -14,32 +17,27 @@ const routes: Array<RouteRecordRaw> = [
     component: About,
   },
   {
-    path: "/listagem-candidaturas",
-    name: "Listagem de pessoas candidatas",
-    // route level code-splitting
-    // this generates a separate chunk (CandidateList.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(
-        /* webpackChunkName: "CandidateList" */ "../views/CandidateList.vue"
-      ),
+    path: "/pessoa-candidata",
+    name: "Candidate",
+    component: Candidate,
   },
   {
-    path: "/pessoa-candidata",
-    name: "Página sobre a pessoa candidata",
-    // route level code-splitting
-    // this generates a separate chunk (CandidateList.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(
-        /* webpackChunkName: "CandidateList" */ "../views/Candidate.vue"
-      ),
+    path: "/candidaturas-2022",
+    name: "CandidateList",
+    component: CandidateList,
   },
+  {
+    path: '/:pathMath(.*)*',
+    redirect: { name: 'Home' }
+  }
 ];
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHistory('/'),
   routes,
+  scrollBehavior() {
+    window.scrollTo(0,0);
+  }
 });
 
 export default router;

@@ -1,6 +1,7 @@
 <template>
+<div class="flex flex-col min-h-screen">
   <Navbar></Navbar>
-  <div class="candidate-list mt-20 sm:flex">
+  <div class="candidate-list mt-20 sm:flex flex-grow">
     <Sidebar />
     <main class="candidate-list__content w-full">
       <div class="container sm:p-12 px-5">
@@ -28,6 +29,7 @@
     </main>
   </div>
   <Footer></Footer>
+</div>
 </template>
 
 <script lang="ts">
