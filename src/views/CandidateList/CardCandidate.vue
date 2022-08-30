@@ -1,8 +1,6 @@
 <template>
   <div class="c-card">
-    <div
-      class="p-5 mt-16 bg-white rounded-2xl border border-neutral-base"
-    >
+    <div class="p-5 mt-16 bg-white rounded-2xl border border-neutral-base">
       <div class="flex flex-col items-center mb-3">
         <img
           class="w-24 h-24 rounded-full shadow-lg mb-3 -mt-16"

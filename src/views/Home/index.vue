@@ -2,7 +2,7 @@
   <div class="home">
     <div class="home__container">
       <section
-        class="home__banner bg-primary-base text-center sm:h-7-screen h-9-screen flex flex-col items-center sm:justify-start justify-between p-5"
+        class="home__banner bg-no-repeat bg-cover bg-center bg-primary-base text-center sm:h-7-screen h-9-screen flex flex-col items-center sm:justify-start justify-between p-5"
       >
         <div class="home__banner-logo">
           <router-link :to="{ name: 'Home' }">
@@ -328,7 +328,7 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import Footer from "@/components/Footer.vue";
-import Accordion from "@/components/Accordion.vue";
+import Accordion from "./Accordion.vue";
 
 @Options({
   components: {
@@ -339,4 +339,8 @@ import Accordion from "@/components/Accordion.vue";
 export default class Home extends Vue {}
 </script>
 
-<style></style>
+<style>
+.home__banner {
+  background-image: url("../../assets/images/banner-principal.png");
+}
+</style>

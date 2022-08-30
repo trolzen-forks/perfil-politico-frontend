@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 
-const Home = () => import('@/views/Home/index.vue')
-const About = () => import('@/views/About/index.vue')
-const Candidate = () => import('@/views/Candidate/index.vue')
-const CandidateList = () => import('@/views/CandidateList/index.vue')
+const Home = () => import("@/views/Home/index.vue");
+const About = () => import("@/views/About/index.vue");
+const Candidate = () => import("@/views/Candidate/index.vue");
+const CandidateList = () => import("@/views/CandidateList/index.vue");
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -27,17 +27,17 @@ const routes: Array<RouteRecordRaw> = [
     component: CandidateList,
   },
   {
-    path: '/:pathMath(.*)*',
-    redirect: { name: 'Home' }
-  }
+    path: "/:pathMath(.*)*",
+    redirect: { name: "Home" },
+  },
 ];
 
 const router = createRouter({
-  history: createWebHistory('/'),
+  history: createWebHistory("/"),
   routes,
   scrollBehavior() {
-    window.scrollTo(0,0);
-  }
+    window.scrollTo(0, 0);
+  },
 });
 
 export default router;
