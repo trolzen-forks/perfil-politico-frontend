@@ -93,7 +93,9 @@
           <template v-slot:title>Sobre o candidato</template>
           <template v-slot:content>
             <div class="mb-4">
-              <h4 class="font-light text-base text-neutral-baseMedium">Idade</h4>
+              <h4 class="font-light text-base text-neutral-baseMedium">
+                Idade
+              </h4>
               <p class="font-bold text-base text-primary-base">48</p>
             </div>
             <div class="mb-4">
@@ -101,12 +103,18 @@
               <p class="font-bold text-base text-primary-base">Masculino</p>
             </div>
             <div class="mb-4">
-              <h4 class="font-light text-base text-neutral-baseMedium">Cor/Raça</h4>
+              <h4 class="font-light text-base text-neutral-baseMedium">
+                Cor/Raça
+              </h4>
               <p class="font-bold text-base text-primary-base">Branca</p>
             </div>
             <div>
-              <h4 class="font-light text-base text-neutral-baseMedium">Escolaridade</h4>
-              <p class="font-bold text-base text-primary-base">Superior Completo</p>
+              <h4 class="font-light text-base text-neutral-baseMedium">
+                Escolaridade
+              </h4>
+              <p class="font-bold text-base text-primary-base">
+                Superior Completo
+              </p>
             </div>
           </template>
         </CardInfo>
@@ -129,7 +137,7 @@ import Timeline from "./Timeline.vue";
 @Options({
   components: {
     CardInfo,
-    Timeline
+    Timeline,
   },
 })
 export default class Home extends Vue {}

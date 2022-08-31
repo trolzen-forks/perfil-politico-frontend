@@ -10,14 +10,40 @@
         >
           <span>{{ title }}</span>
           <span>
-            <svg v-if="isOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path></svg>
-            <svg v-else class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            <svg
+              v-if="isOpen"
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 15l7-7 7 7"
+              ></path>
+            </svg>
+            <svg
+              v-else
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"
+              ></path>
+            </svg>
           </span>
         </button>
       </h2>
-      <div
-        :class="isOpen ? 'd-block' : 'hidden'"
-      >
+      <div :class="isOpen ? 'd-block' : 'hidden'">
         <div
           class="p-5 font-light border border-gray-200 bg-background-white rounded-b-xl"
         >
@@ -31,13 +57,15 @@
 </template>
 
 <script lang="ts">
+import { IAccordion } from "@/models/accordion.model";
+
 export default {
-  data: () => {
+  data: (): IAccordion => {
     return {
       isOpen: false,
-    }
+    };
   },
-  name: 'Accordion',
+  name: "Accordion",
   props: ["title"],
 };
 </script>

@@ -205,7 +205,10 @@
         </div>
       </section>
 
-      <section class="home__common-questions bg-background-light py-20" id="perguntas-frequentes">
+      <section
+        class="home__common-questions bg-background-light py-20"
+        id="perguntas-frequentes"
+      >
         <div class="container px-5">
           <h2
             class="text-primary-base uppercase font-bold sm:text-4xl text-center text-xl sm:mb-16 mb-5"
@@ -227,7 +230,8 @@
                 presidenciáveis);
               </li>
               <li>
-                <i>Selecione uma pergunta…</i> no menu roxo (barra inferior da página);
+                <i>Selecione uma pergunta…</i> no menu roxo (barra inferior da
+                página);
               </li>
               <li>
                 Você pode selecionar uma pergunta em seguida da outra para
@@ -242,7 +246,20 @@
                 detalhadas do candidato ou da candidata que desejar;
               </li>
             </ol>
-            Nossos parceiros do <a href="https://theintercept.com/brasil/" target="_blank" class="font-bold hover:underline">The Intercept Brasil</a> explicaram  <a href="https://theintercept.com/brasil/" target="_blank" class="font-bold hover:underline">como a busca funciona em vídeo</a>.
+            Nossos parceiros do
+            <a
+              href="https://theintercept.com/brasil/"
+              target="_blank"
+              class="font-bold hover:underline"
+              >The Intercept Brasil</a
+            >
+            explicaram
+            <a
+              href="https://theintercept.com/brasil/"
+              target="_blank"
+              class="font-bold hover:underline"
+              >como a busca funciona em vídeo</a
+            >.
           </Accordion>
           <Accordion title="Como utilizo a busca por nome?">
             Você pode buscar um candidato específico, no campo
@@ -252,14 +269,51 @@
           </Accordion>
           <Accordion title="Quem são os criadores do Perfil Político?">
             O projeto faz parte do
-            <i>Programa Ciência de Dados para Inovação Cívica</i> da <a href="https://theintercept.com/brasil/" target="_blank" class="font-bold hover:underline">The Intercept Brasil</a> explicaram  <a href="https://ok.org.br/" target="_blank" class="font-bold hover:underline">Open
-            Knowledge Brasil</a>. O Perfil Político também conta com a parceria do
-             <a href="https://theintercept.com/brasil/" target="_blank" class="font-bold hover:underline">The Intercept Brasil</a> e do <a href="https://brasil.io/home/" target="_blank" class="font-bold hover:underline">Brasil.io</a>.
+            <i>Programa Ciência de Dados para Inovação Cívica</i> da
+            <a
+              href="https://theintercept.com/brasil/"
+              target="_blank"
+              class="font-bold hover:underline"
+              >The Intercept Brasil</a
+            >
+            explicaram
+            <a
+              href="https://ok.org.br/"
+              target="_blank"
+              class="font-bold hover:underline"
+              >Open Knowledge Brasil</a
+            >. O Perfil Político também conta com a parceria do
+            <a
+              href="https://theintercept.com/brasil/"
+              target="_blank"
+              class="font-bold hover:underline"
+              >The Intercept Brasil</a
+            >
+            e do
+            <a
+              href="https://brasil.io/home/"
+              target="_blank"
+              class="font-bold hover:underline"
+              >Brasil.io</a
+            >.
           </Accordion>
           <Accordion title="De onde são os dados do Perfil Político?">
             A fonte primária dos dados, ou seja, de onde eles foram retirados, é
             o TSE (Tribunal Superior Eleitoral). Você pode obter esses dados, já
-            organizados, no <a href="https://brasil.io/home/" target="_blank" class="font-bold hover:underline">Brasil.io</a> e no <a href="https://github.com/cuducos/raspadorlegislativo" target="_blank" class="font-bold hover:underline">Raspador Legislativo</a>.
+            organizados, no
+            <a
+              href="https://brasil.io/home/"
+              target="_blank"
+              class="font-bold hover:underline"
+              >Brasil.io</a
+            >
+            e no
+            <a
+              href="https://github.com/cuducos/raspadorlegislativo"
+              target="_blank"
+              class="font-bold hover:underline"
+              >Raspador Legislativo</a
+            >.
           </Accordion>
           <Accordion title="Quais dados são utilizados na plataforma?">
             A ficha dos candidatos reúne informações básicas como idade, sexo,
@@ -270,45 +324,98 @@
           <Accordion
             title="Quando os dados foram coletados? Eles são atualizados com alguma periodicidade?"
           >
-            Os dados do TSE foram coletados pelo Brasil.io no <a href="https://dadosabertos.tse.jus.br/" target="_blank" class="font-bold hover:underline">Repositório de
-            Dados Eleitorais</a> na semana de 20 de agosto, logo após o TSE
-            oficializar as candidaturas para as eleições gerais de 2018. Os
-            dados da Câmara dos Deputados e do Senado Federal foram coletados no
-            início de setembro. Depois dessas coletas iniciais o site ainda não
-            passou por nenhuma atualização nos dados.
+            Os dados do TSE foram coletados pelo Brasil.io no
+            <a
+              href="https://dadosabertos.tse.jus.br/"
+              target="_blank"
+              class="font-bold hover:underline"
+              >Repositório de Dados Eleitorais</a
+            >
+            na semana de 20 de agosto, logo após o TSE oficializar as
+            candidaturas para as eleições gerais de 2018. Os dados da Câmara dos
+            Deputados e do Senado Federal foram coletados no início de setembro.
+            Depois dessas coletas iniciais o site ainda não passou por nenhuma
+            atualização nos dados.
           </Accordion>
           <Accordion
             title="Encontrei dados na plataforma que estão diferentes dos dados encontrados no site do TSE, por quê?"
           >
             O TSE oferece duas formas para os cidadãos acessarem os dados. Um é
-            um site navegável para humanos, o <a href="https://divulgacandcontas.tse.jus.br/divulga/#/" target="_blank" class="font-bold hover:underline">Divulgação de Candidaturas e
-            Contas Eleitorais</a>, outro é o <a href="https://dadosabertos.tse.jus.br/" target="_blank" class="font-bold hover:underline">Repositório de Dados Eleitorais</a>, que
-            oferece dados em massa, legíveis por máquinas. Em raros casos o site
-            diverge do repositório de dados, então existem chances da diferença
-            ser uma inconsistência do próprio TSE ou uma atualização no
-            repositório de dados que ainda não foi incorporada ao <span class="text-primary-base">Perfil
-            Político</span>.
+            um site navegável para humanos, o
+            <a
+              href="https://divulgacandcontas.tse.jus.br/divulga/#/"
+              target="_blank"
+              class="font-bold hover:underline"
+              >Divulgação de Candidaturas e Contas Eleitorais</a
+            >, outro é o
+            <a
+              href="https://dadosabertos.tse.jus.br/"
+              target="_blank"
+              class="font-bold hover:underline"
+              >Repositório de Dados Eleitorais</a
+            >, que oferece dados em massa, legíveis por máquinas. Em raros casos
+            o site diverge do repositório de dados, então existem chances da
+            diferença ser uma inconsistência do próprio TSE ou uma atualização
+            no repositório de dados que ainda não foi incorporada ao
+            <span class="text-primary-base">Perfil Político</span>.
           </Accordion>
           <Accordion title="Como a plataforma é financiada?">
-            O projeto foi desenvolvido com recursos da <a href="https://ok.org.br/" target="_blank" class="font-bold hover:underline">Open Knowledge Brasil</a>. O <a href="https://theintercept.com/brasil/" target="_blank" class="font-bold hover:underline">The Intercept Brasil</a> apoiou o projeto cobrindo os custos de infraestrutura tecnológica para armazenamento dos dados. Para que a equipe do projeto possa continuar aperfeiçoando esse e outros
-            projetos do <i>Programa de Ciência de Dados para Inovação Cívica</i>,
-            dependemos das contribuições dos nossos usuários, que podem doar
-            pelo site <a href="https://apoia.se/serenata" target="_blank" class="font-bold hover:underline">apoia.se/serenata</a>.
+            O projeto foi desenvolvido com recursos da
+            <a
+              href="https://ok.org.br/"
+              target="_blank"
+              class="font-bold hover:underline"
+              >Open Knowledge Brasil</a
+            >. O
+            <a
+              href="https://theintercept.com/brasil/"
+              target="_blank"
+              class="font-bold hover:underline"
+              >The Intercept Brasil</a
+            >
+            apoiou o projeto cobrindo os custos de infraestrutura tecnológica
+            para armazenamento dos dados. Para que a equipe do projeto possa
+            continuar aperfeiçoando esse e outros projetos do
+            <i>Programa de Ciência de Dados para Inovação Cívica</i>, dependemos
+            das contribuições dos nossos usuários, que podem doar pelo site
+            <a
+              href="https://apoia.se/serenata"
+              target="_blank"
+              class="font-bold hover:underline"
+              >apoia.se/serenata</a
+            >.
           </Accordion>
           <Accordion title="Qual o objetivo da ferramenta?">
-            <span class="text-primary-base">Perfil Político</span> é uma plataforma para comparar e conhecer o
-            histórico dos milhares de candidatos às eleições. A ferramenta ajuda
-            as pessoas a selecionar perfis de candidatos: você pode filtrar por
-            novatos e por velhos políticos. Pode ver como o seu estado está em
-            termos de representatividade de gênero e raça – e se as
-            candidaturas, de fato, representam você. A ficha dos candidatos
-            reúne informações básicas como idade, sexo, cor/raça, escolaridade e
-            ocupação, mas também dados sobre patrimônio declarado em todas as
-            eleições disputadas, mudanças de partidos, histórico de candidaturas
-            e de eleições ganhas.
+            <span class="text-primary-base">Perfil Político</span> é uma
+            plataforma para comparar e conhecer o histórico dos milhares de
+            candidatos às eleições. A ferramenta ajuda as pessoas a selecionar
+            perfis de candidatos: você pode filtrar por novatos e por velhos
+            políticos. Pode ver como o seu estado está em termos de
+            representatividade de gênero e raça – e se as candidaturas, de fato,
+            representam você. A ficha dos candidatos reúne informações básicas
+            como idade, sexo, cor/raça, escolaridade e ocupação, mas também
+            dados sobre patrimônio declarado em todas as eleições disputadas,
+            mudanças de partidos, histórico de candidaturas e de eleições
+            ganhas.
           </Accordion>
           <Accordion title="É código aberto?">
-            Sim! Temos dois repositórios com o código que faz o <span class="text-primary-base">Perfil Político</span> funcionar. Um para a <a href="https://github.com/okfn-brasil/perfil-politico" target="_blank" class="font-bold hover:underline">API</a> que é em Python, e outro para a <a href="https://github.com/okfn-brasil/perfil-politico-frontend/" target="_blank" class="font-bold hover:underline">interface</a> que é JavaScript, HTML e CSS.
+            Sim! Temos dois repositórios com o código que faz o
+            <span class="text-primary-base">Perfil Político</span> funcionar. Um
+            para a
+            <a
+              href="https://github.com/okfn-brasil/perfil-politico"
+              target="_blank"
+              class="font-bold hover:underline"
+              >API</a
+            >
+            que é em Python, e outro para a
+            <a
+              href="https://github.com/okfn-brasil/perfil-politico-frontend/"
+              target="_blank"
+              class="font-bold hover:underline"
+              >interface</a
+            >
+            que é JavaScript, HTML e CSS.
           </Accordion>
         </div>
       </section>

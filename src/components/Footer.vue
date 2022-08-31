@@ -35,10 +35,12 @@
         <h3 class="font-bold text-xl mr-3 sm:mb-0 mb-4">Link Úteis:</h3>
         <ul class="flex flex-row flex-wrap font-regular text-xs">
           <li class="sm:mr-3 mr-5 sm:mb-0 mb-5 hover:underline">
-             <router-link :to="{ name: 'About' }">Sobre o projeto</router-link>
+            <router-link :to="{ name: 'About' }">Sobre o projeto</router-link>
           </li>
           <li class="sm:mr-3 sm:mb-0 mb-5 hover:underline">
-            <router-link :to="{ name: 'Home' }">Perguntas frequentes</router-link>
+            <router-link :to="{ name: 'Home' }"
+              >Perguntas frequentes</router-link
+            >
           </li>
           <li class="sm:mr-3 sm:mb-0 mb-5 hover:underline">
             <a
