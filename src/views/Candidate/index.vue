@@ -61,13 +61,35 @@
           class="candidate__graphs py-10 sm:px-12 px-5 grid sm:grid-cols-2 grid-cols-1 gap-10"
         >
           <CardInfo>
-            <template v-slot:title>Histórico</template>
-            <template v-slot:content>Texto</template>
+            <template v-slot:title>Idade: <span class="font-light ml-1">48</span></template>
+            <template v-slot:content>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </template>
           </CardInfo>
-          <CardInfo></CardInfo>
-          <CardInfo></CardInfo>
-          <CardInfo></CardInfo>
-          <CardInfo class="sm:col-span-2"></CardInfo>
+          <CardInfo>
+            <template v-slot:title>Sexto: <span class="font-light ml-1">Masculino</span></template>
+            <template v-slot:content>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </template>
+          </CardInfo>
+          <CardInfo>
+            <template v-slot:title>Cor/Raça: <span class="font-light ml-1">Branca</span></template>
+            <template v-slot:content>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </template>
+          </CardInfo>
+          <CardInfo>
+            <template v-slot:title>Escolaridade: <span class="font-light ml-1">Superior Completo</span></template>
+            <template v-slot:content>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </template>
+          </CardInfo>
+          <CardInfo class="sm:col-span-2">
+            <template v-slot:title>Patrimônio declarado</template>
+            <template v-slot:content>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </template>
+          </CardInfo>
         </div>
       </div>
     </div>

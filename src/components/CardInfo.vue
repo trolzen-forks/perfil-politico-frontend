@@ -1,9 +1,9 @@
 <template>
   <div
-    class="c-card-info w-full bg-white rounded-lg border border-neutral-light"
+    class="c-card-info w-full bg-white rounded-xl border border-neutral-light"
   >
     <div
-      class="c-card-info__title flex flex-wrap text-center text-white bg-primary-base rounded-t-lg py-5 px-3 text-base font-semibold"
+      class="c-card-info__title flex flex-wrap text-center text-white bg-primary-base rounded-t-xl py-5 px-3 text-base font-semibold"
     >
       <slot name="title"></slot>
     </div>
@@ -14,5 +14,7 @@
 </template>
 
 <script lang="ts">
-export default {};
+export default {
+  name: "CardInfo",
+};
 </script>

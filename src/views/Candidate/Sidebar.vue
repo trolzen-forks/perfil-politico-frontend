@@ -32,8 +32,8 @@
       <div
         class="c-sidebar-candidate__return py-5 border-b border-neutral-light"
       >
-        <button
-          type="button"
+        <router-link
+          :to="{ name: 'CandidateList' }"
           class="text-primary-base text-xl font-bold rounded-lg sm:px-8 py-2 text-center inline-flex items-center mr-2 hover:underline"
         >
           <svg
@@ -51,7 +51,7 @@
             ></path>
           </svg>
           <span class="uppercase">Voltar</span>
-        </button>
+        </router-link>
       </div>
       <div class="c-sidebar-candidate__info-candidate">
         <div class="sm:px-10 px-5 py-5 flex items-center">
@@ -90,12 +90,31 @@
         class="c-sidebar-candidate__cards sm:px-10 px-5 py-5 grid grid-cols-1 gap-5"
       >
         <CardInfo>
-          <template v-slot:title>Histórico</template>
-          <template v-slot:content>Texto</template>
+          <template v-slot:title>Sobre o candidato</template>
+          <template v-slot:content>
+            <div class="mb-4">
+              <h4 class="font-light text-base text-neutral-baseMedium">Idade</h4>
+              <p class="font-bold text-base text-primary-base">48</p>
+            </div>
+            <div class="mb-4">
+              <h4 class="font-light text-base text-neutral-baseMedium">Sexo</h4>
+              <p class="font-bold text-base text-primary-base">Masculino</p>
+            </div>
+            <div class="mb-4">
+              <h4 class="font-light text-base text-neutral-baseMedium">Cor/Raça</h4>
+              <p class="font-bold text-base text-primary-base">Branca</p>
+            </div>
+            <div>
+              <h4 class="font-light text-base text-neutral-baseMedium">Escolaridade</h4>
+              <p class="font-bold text-base text-primary-base">Superior Completo</p>
+            </div>
+          </template>
         </CardInfo>
         <CardInfo>
-          <template v-slot:title>Histórico</template>
-          <template v-slot:content>Texto</template>
+          <template v-slot:title>Histórico de candidaturas</template>
+          <template v-slot:content>
+            <Timeline></Timeline>
+          </template>
         </CardInfo>
       </div>
     </div>
@@ -105,10 +124,12 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import CardInfo from "@/components/CardInfo.vue";
+import Timeline from "./Timeline.vue";
 
 @Options({
   components: {
     CardInfo,
+    Timeline
   },
 })
 export default class Home extends Vue {}

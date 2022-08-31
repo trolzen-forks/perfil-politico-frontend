@@ -44,5 +44,7 @@
 </template>
 
 <script lang="ts">
-export default {};
+export default {
+  name: "Navbar",
+};
 </script>
