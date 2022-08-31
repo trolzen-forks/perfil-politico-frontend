@@ -89,8 +89,14 @@
       <div
         class="c-sidebar-candidate__cards sm:px-10 px-5 py-5 grid grid-cols-1 gap-5"
       >
-        <CardInfo></CardInfo>
-        <CardInfo></CardInfo>
+        <CardInfo>
+          <template v-slot:title>Histórico</template>
+          <template v-slot:content>Texto</template>
+        </CardInfo>
+        <CardInfo>
+          <template v-slot:title>Histórico</template>
+          <template v-slot:content>Texto</template>
+        </CardInfo>
       </div>
     </div>
   </nav>

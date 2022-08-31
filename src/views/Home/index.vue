@@ -205,7 +205,7 @@
         </div>
       </section>
 
-      <section class="home__common-questions bg-background-light py-20">
+      <section class="home__common-questions bg-background-light py-20" id="perguntas-frequentes">
         <div class="container px-5">
           <h2
             class="text-primary-base uppercase font-bold sm:text-4xl text-center text-xl sm:mb-16 mb-5"

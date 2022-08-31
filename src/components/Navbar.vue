@@ -15,10 +15,10 @@
           <img src="@/assets/icons/icon-github.svg" alt="Github" />
           <span
             ><a
-              href="http://"
+              href="https://github.com/okfn-brasil/perfil-politico-frontend"
               target="_blank"
               rel="noopener noreferrer"
-              class="ml-2 text-white"
+              class="ml-2 text-white hover:underline"
               >Ver Github</a
             ></span
           >

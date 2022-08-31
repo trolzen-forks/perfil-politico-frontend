@@ -19,10 +19,10 @@
         <img src="@/assets/icons/icon-github.svg" alt="Github" />
         <span
           ><a
-            href="http://"
+            href="https://github.com/okfn-brasil/perfil-politico-frontend"
             target="_blank"
             rel="noopener noreferrer"
-            class="ml-2"
+            class="ml-2 hover:underline"
             >Ver Github</a
           ></span
         >
@@ -35,13 +35,19 @@
         <h3 class="font-bold text-xl mr-3 sm:mb-0 mb-4">Link Úteis:</h3>
         <ul class="flex flex-row flex-wrap font-regular text-xs">
           <li class="sm:mr-3 mr-5 sm:mb-0 mb-5 hover:underline">
-            <a href="">Sobre o projeto</a>
+             <router-link :to="{ name: 'About' }">Sobre o projeto</router-link>
           </li>
           <li class="sm:mr-3 sm:mb-0 mb-5 hover:underline">
-            <a href="">Perguntas frequentes</a>
+            <router-link :to="{ name: 'Home' }">Perguntas frequentes</router-link>
           </li>
           <li class="sm:mr-3 sm:mb-0 mb-5 hover:underline">
-            <a href="">Apoie o projeto</a>
+            <a
+              href="https://apoia.se/serenata"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="ml-2 text-white hover:underline"
+              >Apoie o projeto</a
+            >
           </li>
         </ul>
       </div>

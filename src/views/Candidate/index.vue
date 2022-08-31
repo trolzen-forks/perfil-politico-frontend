@@ -60,7 +60,10 @@
         <div
           class="candidate__graphs py-10 sm:px-12 px-5 grid sm:grid-cols-2 grid-cols-1 gap-10"
         >
-          <CardInfo></CardInfo>
+          <CardInfo>
+            <template v-slot:title>Histórico</template>
+            <template v-slot:content>Texto</template>
+          </CardInfo>
           <CardInfo></CardInfo>
           <CardInfo></CardInfo>
           <CardInfo></CardInfo>
