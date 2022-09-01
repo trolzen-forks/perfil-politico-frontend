@@ -60,12 +60,13 @@
                   />
                 </label>
               </div>
-              <button
+              <router-link
+                :to="{ name: 'Candidate' }"
                 type="button"
                 class="flex-none text-primary-base sm:w-auto sm:mt-0 xs:block w-full mt-4 uppercase font-bold bg-secondary-base font-medium rounded-full text-sm px-5 py-3 text-center mr-2 mb-2"
               >
                 Buscar
-              </button>
+              </router-link>
             </div>
 
             <h3 class="home__banner_subtitle text-left mt-6 mb-3">
@@ -88,12 +89,13 @@
                 </select>
               </div>
               <div>
-                <button
+                <router-link
+                  :to="{ name: 'CandidateList' }"
                   type="button"
                   class="flex-none sm:w-auto sm:mt-0 xs:block w-full mt-4 text-primary-base uppercase font-bold bg-secondary-base hover:bg-secondary-light focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-3 text-center mr-2 mb-2"
                 >
                   Buscar candidato
-                </button>
+                </router-link>
               </div>
             </div>
           </div>
