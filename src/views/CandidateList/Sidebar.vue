@@ -30,16 +30,18 @@
         <h3 class="text-primary-base text-xl font-bold mb-3">Estado</h3>
 
         <label for="estados" class="sr-only">Selecione um Estado</label>
-        <select
-          id="estados"
-          class="bg-neutral-light border border-neutral-light text-neutral-baseDark text-base rounded-lg focus:ring-secondary-base focus:border-secondary-base block w-full p-4"
-        >
-          <option selected>Selecione aqui</option>
-          <option value="SP">São Paulo</option>
-          <option value="RJ">Rio de Janeiro</option>
-          <option value="ES">Espírito Santo</option>
-          <option value="MG">Minas Gerais</option>
-        </select>
+          <select
+            id="localeCandidates"
+            name="localeCandidates"
+            v-model="localeCandidates"
+            class="bg-background-purpleLight py-3 px-5 text-white text-sm rounded-full font-regular focus:ring-secondary-base focus:border-secondary-base block w-full"
+            required
+          >
+            <option selected disabled value="">Localidade</option>
+            <option v-for="locale in data.locales" :key="locale.initials" :value="locale.initials">
+              {{ !locale ? "Não foi possível carregar as informações" : locale.name }}
+            </option>
+          </select>
       </div>
 
       <div class="c-sidebar__role mb-10">
@@ -58,53 +60,8 @@
                 href="#"
                 class="py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 flex justify-between"
               >
-                <span>Presidente</span>
-                <span>10</span>
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                class="py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 flex justify-between"
-              >
-                <span>Governador</span>
-                <span>10</span>
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                class="py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 flex justify-between"
-              >
-                <span>Senador</span>
-                <span>10</span>
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                class="py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 flex justify-between"
-              >
-                <span>Deputado Distrital</span>
-                <span>10</span>
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                class="py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 flex justify-between"
-              >
-                <span>Deputado Estadual</span>
-                <span>10</span>
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                class="py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 flex justify-between"
-              >
-                <span>Deputado Federal</span>
-                <span>10</span>
+                <span>{{ role }}</span>
+                <span>{{ countRole }}</span>
               </a>
             </li>
           </ul>
@@ -124,42 +81,7 @@
           <span
             class="px-4 py-2 mr-2 mb-2 rounded text-black bg-neutral-light font-light text-xs flex align-center w-max cursor-pointer actived:bg-secondary-base hover:bg-secondary-base hover:text-primary-base transition duration-300 ease"
           >
-            Partido A (10)
-          </span>
-          <span
-            class="px-4 py-2 mr-2 mb-2 rounded text-black bg-neutral-light font-light text-xs flex align-center w-max cursor-pointer actived:bg-secondary-base hover:bg-secondary-base hover:text-primary-base transition duration-300 ease"
-          >
-            PB (5)
-          </span>
-          <span
-            class="px-4 py-2 mr-2 mb-2 rounded text-black bg-neutral-light font-light text-xs flex align-center w-max cursor-pointer actived:bg-secondary-base hover:bg-secondary-base hover:text-primary-base transition duration-300 ease"
-          >
-            Partido C (9)
-          </span>
-          <span
-            class="px-4 py-2 mr-2 mb-2 rounded text-black bg-neutral-light font-light text-xs flex align-center w-max cursor-pointer actived:bg-secondary-base hover:bg-secondary-base hover:text-primary-base transition duration-300 ease"
-          >
-            Partido D (13)
-          </span>
-          <span
-            class="px-4 py-2 mr-2 mb-2 rounded text-black bg-neutral-light font-light text-xs flex align-center w-max cursor-pointer actived:bg-secondary-base hover:bg-secondary-base hover:text-primary-base transition duration-300 ease"
-          >
-            Partido E (20)
-          </span>
-          <span
-            class="px-4 py-2 mr-2 mb-2 rounded text-black bg-neutral-light font-light text-xs flex align-center w-max cursor-pointer actived:bg-secondary-base hover:bg-secondary-base hover:text-primary-base transition duration-300 ease"
-          >
-            PC (9)
-          </span>
-          <span
-            class="px-4 py-2 mr-2 mb-2 rounded text-black bg-neutral-light font-light text-xs flex align-center w-max cursor-pointer actived:bg-secondary-base hover:bg-secondary-base hover:text-primary-base transition duration-300 ease"
-          >
-            Partido D (13)
-          </span>
-          <span
-            class="px-4 py-2 mr-2 mb-2 rounded text-black bg-neutral-light font-light text-xs flex align-center w-max cursor-pointer actived:bg-secondary-base hover:bg-secondary-base hover:text-primary-base transition duration-300 ease"
-          >
-            PE (20)
+            {{ party }} ({{ countParty }})
           </span>
         </div>
       </div>
@@ -168,7 +90,9 @@
 </template>
 
 <script lang="ts">
-export default {};
+export default {
+  props: ["party", "countParty", "role", "countRole"]
+};
 </script>
 
 <style></style>

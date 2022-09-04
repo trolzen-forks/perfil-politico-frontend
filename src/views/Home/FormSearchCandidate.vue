@@ -79,7 +79,7 @@
       </button>
     </div>
     <h3 class="home__banner_subtitle text-left mt-6 mb-3">
-        Não tem nenhuma pessoa candidata em mente?
+      Não tem alguém em mente?
     </h3>
     <div class="sm:flex block">
       <button
@@ -99,6 +99,7 @@ import services from "@/services/index";
 import * as roles from "../../services/mocks/filtersRoles.json";
 import * as locales from "../../services/mocks/filtersLocales.json"
 import { defineComponent, reactive } from 'vue';
+import { setCurrentCandidates } from "@/store/candidates";
 
 export default defineComponent({
   props: ["candidates"],
@@ -156,6 +157,7 @@ export default defineComponent({
                 this.roleCandidates
                 );
                 console.log("CANDIDATOS", data);
+                setCurrentCandidates(data);
                 this.$router.push({ name: 'CandidateList', params: { year: 2022, locale: this.localeCandidates, role: this.roleCandidates }})
             } catch (error) {
                 console.log("Erro no carregamento de candidatos", error);

@@ -1,39 +1,39 @@
 {
     "data": [
         {
-            "id": "deputado-federal",
-            "name": "Deputado Federal",
-            "feminine": "Deputada Federal",
-            "plural": "Deputados Federais"
-        },
-        {
-            "id": "deputado-estadual",
-            "name": "Deputado Estadual",
-            "feminine": "Deputada Estadual",
-            "plural": "Deputados Estaduais"
-        },
-        {
-            "id": "deputado-distrital",
-            "name": "Deputado Distrital",
-            "feminine": "Deputada Distrital",
-            "plural": "Deputados Distritais"
+            "id": "presidente",
+            "name": "Presidente(a)",
+            "feminine": "Presidente"
         },
         {
             "id": "senador",
-            "name": "Senador",
+            "name": "Senador(a)",
             "feminine": "Senadora",
             "plural": "Senadores"
         },
         {
+            "id": "deputado-federal",
+            "name": "Deputado(a) Federal",
+            "feminine": "Deputada Federal",
+            "plural": "Deputados Federais"
+        },
+        {
             "id": "governador",
-            "name": "Governador",
+            "name": "Governador(a)",
             "feminine": "Governadora",
             "plural": "Governadores"
         },
         {
-            "id": "presidente",
-            "name": "Presidente",
-            "feminine": "Presidente"
+            "id": "deputado-distrital",
+            "name": "Deputado(a) Distrital",
+            "feminine": "Deputada Distrital",
+            "plural": "Deputados Distritais"
+        },
+        {
+            "id": "deputado-estadual",
+            "name": "Deputado(a) Estadual",
+            "feminine": "Deputada Estadual",
+            "plural": "Deputados Estaduais"
         }
     ]
 }

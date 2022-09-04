@@ -2,16 +2,17 @@
   <div class="home">
     <div class="home__container">
       <section
-        class="home__banner bg-primary-base sm:h-7-screen h-9-screen p-5"
+        class="home__banner bg-primary-base p-5 flex"
       >
-        <div class="container h-full">
-          <div class="home__banner-logo flex justify-center">
+        <div class="container">
+
+          <div class="home__banner-logo flex justify-center self-start">
             <router-link :to="{ name: 'Home' }">
               <img src="@/assets/logo.svg" alt="Perfil Político" />
             </router-link>
           </div>
 
-          <div class="flex justify-center items-start mt-20 h-full">
+          <div class="flex justify-center items-center h-4/5">
             <div>
               <div
                 class="home__banner-content text-white font-bold uppercase"
@@ -47,7 +48,7 @@
           </div>
 
           <div class="flex flex-col items-center text-white">
-            <p>Como funciona?</p>
+            <p class="">Por que usar o Perfil Político?</p>
             <span
               class="material-symbols-outlined animate__animated animate__bounce animate__infinite"
             >
@@ -136,12 +137,7 @@
             <p
               class="text-text-light my-10 sm:text-2xl sm:text-left text-center text-base font-regular"
             >
-              Perfil Político é uma plataforma para comparar e conhecer o
-              histórico dos milhares de candidatos às eleições. A ferramenta
-              ajuda as pessoas a selecionar perfis de candidatos: você pode
-              filtrar por novatos e por velhos políticos. Pode ver como o seu
-              estado está em termos de representatividade de gênero e raça – e
-              se as candidaturas, de fato, representam você.
+              Perfil Político é uma plataforma baseada em dados abertos disponibilizados por órgãos como o Tribunal Superior Eleitoral e através de uma base de código aberta e colaborativa mantida pela Open Knowledge Brasil. A plataforma permite comparar as candidaturas e realizar perguntas sobre histórico e representatividade de forma abrangente, transparente e gratuita para dar mais poder ao eleitorado para escolher as candidaturas em que irá votar.
             </p>
             <router-link
               type="button"
@@ -393,6 +389,7 @@ export default {
   .home__banner {
     @apply bg-no-repeat bg-center;
     background-image: url('../../assets/icons/mapa-brasil-bolhas.svg');
+    min-height: 769px;
   }
   .home__banner::after {
     @apply bg-primary-base opacity-25;

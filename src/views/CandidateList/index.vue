@@ -9,7 +9,7 @@
             <h1 class="text-primary-base font-bold text-3xl mb-4">
               Confira os candidatos para presidente no Brasil
             </h1>
-            <p>Descritiva do cargo</p>
+            <p>{{ candidates }}</p>
           </div>
           <div class="candidate-list__analisys w-full">
             <Analysis />
@@ -45,6 +45,9 @@ import Pagination from "./Pagination.vue";
 import Sidebar from "./Sidebar.vue";
 import CardCandidate from "./CardCandidate.vue";
 import Analysis from "./Analysis/index.vue";
+import useStore from '../../hooks/useStore';
+import { reactive, watch } from 'vue';
+import store from '@/store';
 
 export default {
   components: {
@@ -56,7 +59,29 @@ export default {
     Analysis,
   },
   setup () {
-      console.log()
+    const candidates = useStore();
+    const state = reactive({
+      hasError: false,
+      isLoading: false
+    })
+    
+    watch(() => candidates.Candidates.currentCandidates, () => {
+      if (!store.Global.isLoading) {
+        handleError(true)
+      }
+    })
+    
+    function handleError (error: boolean) {
+      state.isLoading = false
+      state.hasError = !!error
+    }
+    
+    return {
+      state,
+      candidates
+    }
   }
+
+
 }
 </script>
