@@ -39,25 +39,24 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from "vue-class-component";
 import Footer from "@/components/Footer.vue";
 import Navbar from "@/components/Navbar.vue";
-import CardInfo from "@/components/CardInfo.vue";
 import Pagination from "./Pagination.vue";
 import Sidebar from "./Sidebar.vue";
 import CardCandidate from "./CardCandidate.vue";
 import Analysis from "./Analysis/index.vue";
 
-@Options({
+export default {
   components: {
     Footer,
     Navbar,
     CardCandidate,
     Pagination,
-    CardInfo,
     Sidebar,
     Analysis,
   },
-})
-export default class Home extends Vue {}
+  setup () {
+      console.log()
+  }
+}
 </script>

@@ -22,7 +22,7 @@ const routes: Array<RouteRecordRaw> = [
     component: Candidate,
   },
   {
-    path: "/candidaturas-2022",
+    path: "/candidaturas/:year/:locale/:role",
     name: "CandidateList",
     component: CandidateList,
   },

@@ -2,112 +2,63 @@
   <div class="home">
     <div class="home__container">
       <section
-        class="home__banner bg-no-repeat bg-cover bg-center bg-primary-base text-center sm:h-7-screen h-9-screen flex flex-col items-center sm:justify-start justify-between p-5"
+        class="home__banner bg-primary-base sm:h-7-screen h-9-screen p-5"
       >
-        <div class="home__banner-logo">
-          <router-link :to="{ name: 'Home' }">
-            <img src="@/assets/logo.svg" alt="Perfil Político" />
-          </router-link>
-        </div>
+        <div class="container h-full">
+          <div class="home__banner-logo flex justify-center">
+            <router-link :to="{ name: 'Home' }">
+              <img src="@/assets/logo.svg" alt="Perfil Político" />
+            </router-link>
+          </div>
 
-        <div
-          class="home__banner-content sm:flex flex-col justify-center sm:h-5-screen h-auto items-center text-white font-bold uppercase"
-        >
-          <div
-            class="home__banner-content-emphasis flex items-center flex-col sm:flex-row mb-6"
-          >
-            <div class="sm:pr-5 mb-4">
-              <img
-                src="@/assets/icons/icon-perfil-politico.svg"
-                alt="Ícone Perfil Político"
-              />
-            </div>
+          <div class="flex justify-center items-start mt-20 h-full">
             <div>
-              <h1
-                class="home__banner-content-emphasis_title text-white text-xl sm:text-4xl uppercase sm:text-left"
+              <div
+                class="home__banner-content text-white font-bold uppercase"
               >
-                Conheça o Perfil Político das <br />
-                <span class="text-secondary-base"
-                  >pessoas candidatas em 2022</span
+                <div
+                  class="home__banner-content-emphasis flex items-center flex-col sm:flex-row mb-3"
                 >
-              </h1>
+                  <div class="sm:pr-5 mb-4">
+                    <img
+                      src="@/assets/icons/icon-perfil-politico.svg"
+                      alt="Ícone Perfil Político"
+                    />
+                  </div>
+                  <div>
+                    <h1
+                      class="home__banner-content-emphasis_title text-white text-xl sm:text-4xl uppercase sm:text-left"
+                    >
+                      Conheça o Perfil Político das <br />
+                      <span class="text-secondary-base"
+                        >pessoas candidatas em 2022</span
+                      >
+                    </h1>
+                  </div>
+                </div>
+      
+                <div
+                  class="home__banner-content-action flex flex-col w-full mt-6"
+                >
+                  <FormSearchCandidate></FormSearchCandidate>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div
-            class="home__banner-content-action flex flex-col self-start w-full mt-6"
-          >
-            <h3
-              class="home__banner-content-action_subtitle text-base text-left mb-3"
+          <div class="flex flex-col items-center text-white">
+            <p>Como funciona?</p>
+            <span
+              class="material-symbols-outlined animate__animated animate__bounce animate__infinite"
             >
-              Tem uma pessoa candidata em mente?
-            </h3>
-            <div class="home__banner-content-action_form sm:flex flex-grow">
-              <div class="flex-auto mr-2">
-                <label class="relative block">
-                  <span class="sr-only">Digite o nome da pessoa candidata</span>
-                  <span
-                    class="absolute inset-y-0 left-0 flex items-center pl-3"
-                  >
-                    <span class="material-symbols-outlined">search</span>
-                  </span>
-                  <input
-                    type="text"
-                    id="first_name"
-                    class="bg-background-purpleLight text-white text-sm rounded-full font-regular placeholder:text-white placeholder-white focus:ring-secondary-base focus:border-secondary-base focus:bg-background-purpleLight block w-full py-3 pl-10 pr-5"
-                    placeholder="Digite o nome da pessoa candidata"
-                    required
-                  />
-                </label>
-              </div>
-              <router-link
-                :to="{ name: 'Candidate' }"
-                type="button"
-                class="flex-none text-primary-base sm:w-auto sm:mt-0 xs:block w-full mt-4 uppercase font-bold bg-secondary-base font-medium rounded-full text-sm px-5 py-3 text-center mr-2 mb-2"
-              >
-                Buscar
-              </router-link>
-            </div>
-
-            <h3 class="home__banner_subtitle text-left mt-6 mb-3">
-              Não tem nenhuma pessoa candidata em mente?
-            </h3>
-            <div class="sm:flex block">
-              <div class="flex-auto mr-2">
-                <span class="sr-only">Cargo</span>
-                <select
-                  id="countries"
-                  class="bg-background-purpleLight py-3 px-5 text-white text-sm rounded-full font-regular focus:ring-secondary-base focus:border-secondary-base block w-full"
-                  required
-                >
-                  <option selected>Cargo</option>
-                  <option value="US">Presidente</option>
-                  <option value="CA">Senador</option>
-                  <option value="FR">Governador</option>
-                  <option value="DE">Deputado Federal</option>
-                  <option value="DE">Deputado Estadual</option>
-                </select>
-              </div>
-              <div>
-                <router-link
-                  :to="{ name: 'CandidateList' }"
-                  type="button"
-                  class="flex-none sm:w-auto sm:mt-0 xs:block w-full mt-4 text-primary-base uppercase font-bold bg-secondary-base hover:bg-secondary-light focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-3 text-center mr-2 mb-2"
-                >
-                  Buscar candidato
-                </router-link>
-              </div>
-            </div>
+              expand_more
+            </span>
           </div>
-        </div>
-        <div class="flex flex-col justify-center text-white">
-          <p>Como funciona?</p>
-          <span class="material-symbols-outlined"> expand_more </span>
         </div>
       </section>
 
       <section
-        class="home__differentials bg-background-light sm:h-4-screen sm:relative"
+        class="home__differentials bg-background-light sm:h-3-screen sm:relative"
       >
         <div class="container sm:relative px-5">
           <div
@@ -167,16 +118,12 @@
         </div>
       </section>
 
-      <section class="home__about bg-background-light sm:py-32 py-20">
+      <section class="home__about bg-background-light pt-20">
         <div
-          class="home__about-content container px-5 sm:grid sm:grid-cols-9 sm:gap-16"
+          class="home__about-content container px-5 sm:grid sm:grid-cols-9 sm:gap-16 py-20"
         >
           <div class="col-span-3 col-start-2 flex items-center justify-center">
-            <img
-              src="@/assets/icons/icon-sobre-perfil-politico.svg"
-              class="sm:w-full w-40 mb-5"
-              alt="Sobre o Perfil Político"
-            />
+            <IconPP></IconPP>
           </div>
           <div
             class="col-span-4 flex flex-col justify-center sm:items-start items-center container"
@@ -427,21 +374,27 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from "vue-class-component";
 import Footer from "@/components/Footer.vue";
 import Accordion from "./Accordion.vue";
+import FormSearchCandidate from "./FormSearchCandidate.vue";
+import IconPP from "../../components/IconPP.vue";
 
-@Options({
+export default {
   components: {
     Footer,
     Accordion,
+    FormSearchCandidate,
+    IconPP,
   },
-})
-export default class Home extends Vue {}
+};
 </script>
 
-<style>
-.home__banner {
-  background-image: url("../../assets/images/banner-principal.png");
-}
+<style lang="postcss">
+  .home__banner {
+    @apply bg-no-repeat bg-center;
+    background-image: url('../../assets/icons/mapa-brasil-bolhas.svg');
+  }
+  .home__banner::after {
+    @apply bg-primary-base opacity-25;
+  }
 </style>

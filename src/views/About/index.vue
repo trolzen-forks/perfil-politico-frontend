@@ -4,10 +4,7 @@
     <div class="about flex-grow">
       <div class="sm:grid grid-cols-8 gap-5 sm:mt-44 mt-24 px-5">
         <div class="about__image col-span-2 sm:w-4/5 w-32 mx-auto">
-          <img
-            src="@/assets/icons/icon-sobre-perfil-politico.svg"
-            alt="Perfil Político"
-          />
+          <IconPP></IconPP>
         </div>
         <div class="about__content col-span-5 mt-10 text-center sm:text-left">
           <h1 class="text-primary-base uppercase font-bold sm:text-4xl text-xl">
@@ -88,15 +85,15 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from "vue-class-component";
 import Footer from "@/components/Footer.vue";
 import Navbar from "@/components/Navbar.vue";
+import IconPP from "@/components/IconPP.vue";
 
-@Options({
+export default {
   components: {
     Footer,
     Navbar,
+    IconPP,
   },
-})
-export default class Home extends Vue {}
+};
 </script>
