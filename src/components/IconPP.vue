@@ -1,5 +1,6 @@
 <template>
   <svg
+    class="icon-pp"
     width="405"
     height="355"
     viewBox="0 0 345 355"
@@ -33,7 +34,7 @@
       rx="26.5"
       ry="27"
       fill="#9BDB52"
-      class="animate__animated animate__rotateIn animate__slow"
+      class="sm:animate__animated sm:animate__rotateIn sm:animate__slow"
     />
     <defs>
       <clipPath id="clip0_209_16">
@@ -52,4 +53,8 @@
 export default {};
 </script>
 
-<style></style>
+<style>
+.icon-pp {
+  @apply w-3/5 sm:w-full;
+}
+</style>

@@ -18,6 +18,6 @@ select {
   background-image: url("../icons/arrow-down-white.svg");
 }
 
-select#estados {
+select.sidebar {
   background-image: url("../icons/arrow-down-black.svg");
 }

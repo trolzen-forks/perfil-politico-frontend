@@ -7,9 +7,9 @@
         <div class="container sm:p-12 px-5">
           <div class="candidate-list__title mb-12">
             <h1 class="text-primary-base font-bold text-3xl mb-4">
-              Confira os candidatos para presidente no Brasil
+              Confira os candidatos para no Brasil
             </h1>
-            <p>{{ candidates }}</p>
+            <p>descricao</p>
           </div>
           <div class="candidate-list__analisys w-full">
             <Analysis />
@@ -17,14 +17,14 @@
           <div
             class="candidate-list__candidates block sm:grid grid-cols-4 gap-3"
           >
-            <CardCandidate />
-            <CardCandidate />
-            <CardCandidate />
-            <CardCandidate />
-            <CardCandidate />
-            <CardCandidate />
-            <CardCandidate />
-            <CardCandidate />
+            <CardCandidate
+              v-for="candidate in data.Candidates.currentInfosCadidates"
+              :name="candidate.ballot_name"
+              :number="candidate.ballot_number"
+              :party="candidate.party_abbreviation"
+              :role="candidate.post"
+              :key="candidate.id"
+            />
           </div>
           <div
             class="candidate-list__pagintation flex justify-center border-t border-neutral-base mt-10 p-5"
@@ -45,43 +45,34 @@ import Pagination from "./Pagination.vue";
 import Sidebar from "./Sidebar.vue";
 import CardCandidate from "./CardCandidate.vue";
 import Analysis from "./Analysis/index.vue";
-import useStore from '../../hooks/useStore';
-import { reactive, watch } from 'vue';
-import store from '@/store';
+import useStore from "../../hooks/useStore";
+import { reactive, watch } from "vue";
 
 export default {
   components: {
     Footer,
     Navbar,
-    CardCandidate,
     Pagination,
-    Sidebar,
     Analysis,
+    CardCandidate,
+    Sidebar
   },
-  setup () {
-    const candidates = useStore();
+  setup() {
+    const data = useStore();
     const state = reactive({
       hasError: false,
-      isLoading: false
-    })
-    
-    watch(() => candidates.Candidates.currentCandidates, () => {
-      if (!store.Global.isLoading) {
-        handleError(true)
-      }
-    })
-    
-    function handleError (error: boolean) {
-      state.isLoading = false
-      state.hasError = !!error
-    }
-    
+      isLoading: false,
+    });
+
+    watch(
+      () => data.Candidates.currentCandidates,
+      () => data.Candidates.currentInfosCadidates
+    );
+
     return {
       state,
-      candidates
-    }
-  }
-
-
-}
+      data,
+    };
+  },
+};
 </script>

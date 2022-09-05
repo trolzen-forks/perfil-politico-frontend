@@ -30,38 +30,38 @@
         <h3 class="text-primary-base text-xl font-bold mb-3">Estado</h3>
 
         <label for="estados" class="sr-only">Selecione um Estado</label>
-          <select
-            id="localeCandidates"
-            name="localeCandidates"
-            v-model="localeCandidates"
-            class="bg-background-purpleLight py-3 px-5 text-white text-sm rounded-full font-regular focus:ring-secondary-base focus:border-secondary-base block w-full"
-            required
+        <select
+          id="localeCandidates"
+          name="localeCandidates"
+          class="bg-neutral-light border-neutral-light sidebar py-3 px-5 text-neutral-baseDark text-sm rounded-full font-regular focus:ring-secondary-base focus:border-secondary-base block w-full"
+        >
+          <option
+            v-for="(locale, index) in items.locales"
+            :key="index"
+            :value="locale.initials"
+            v-on:click="selectItemLocale(index)"
+            :selected="locale.initials == dataStore.Locale.currentLocale ? true : false"
           >
-            <option selected disabled value="">Localidade</option>
-            <option v-for="locale in data.locales" :key="locale.initials" :value="locale.initials">
-              {{ !locale ? "Não foi possível carregar as informações" : locale.name }}
-            </option>
-          </select>
+            {{
+              locale.name
+            }}
+          </option>
+        </select>
       </div>
 
       <div class="c-sidebar__role mb-10">
         <div class="flex justify-between items-center">
           <h3 class="text-primary-base text-xl font-bold mb-3">Cargo</h3>
-          <a
-            href="#"
-            class="text-neutral-baseMedium text-sm underline hover:no-underline"
-            >Limpar</a
-          >
         </div>
         <div>
           <ul class="py-1" aria-labelledby="user-menu-button">
-            <li>
+            <li v-for="role in items.roles" :key="role.id" :class="role.id === dataStore.Role.currentRole ? 'border-l-8 border-primary-base bg-gray-100' : 'border-l-4 border-transparent'">
               <a
                 href="#"
                 class="py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 flex justify-between"
               >
-                <span>{{ role }}</span>
-                <span>{{ countRole }}</span>
+                <span>{{ role.name }}</span>
+                <span>{{ role.id.length }}</span>
               </a>
             </li>
           </ul>
@@ -80,8 +80,9 @@
         <div class="inline-flex flex-wrap">
           <span
             class="px-4 py-2 mr-2 mb-2 rounded text-black bg-neutral-light font-light text-xs flex align-center w-max cursor-pointer actived:bg-secondary-base hover:bg-secondary-base hover:text-primary-base transition duration-300 ease"
+            v-for="party in dataParty" :key="party"
           >
-            {{ party }} ({{ countParty }})
+            {{ party }} ({{party.length}})
           </span>
         </div>
       </div>
@@ -90,9 +91,78 @@
 </template>
 
 <script lang="ts">
-export default {
-  props: ["party", "countParty", "role", "countRole"]
-};
+import useStore from "@/hooks/useStore";
+import { defineComponent, reactive, ref } from "vue";
+import { watch } from "vue";
+import * as roles from "../../services/mocks/filtersRoles.json";
+import * as locales from "../../services/mocks/filtersLocales.json";
+
+export default defineComponent({
+  props: ["party", "countParty", "role", "countRole"],
+  data() {
+    return {
+      location: false,
+      roleCandidates: "",
+      localeCandidates: "",
+      dataLocales: [],
+      isActiveRole: true
+    };
+  },
+  setup() {
+    const selectedItemLocale = ref(0)
+    const selectedItemRole = ref(0)
+    const dataStore = useStore();
+    const dataParty: any[] = [];
+    let isActiveLocale = false;
+    const state = reactive({
+      hasError: false,
+      isLoading: false,
+    });
+    const items = reactive({
+      roles: roles.data,
+      locales: locales.data,
+    });
+
+    const selectItemLocale = (i: number) => {
+      selectedItemLocale.value = i
+      items.locales.forEach((item, index) => {
+        return (isActiveLocale = item == items.locales[index])
+      })
+      return selectedItemLocale
+    }
+
+    const selectItemRole = (i: number) => {
+      selectedItemRole.value = i
+      items.roles.forEach((item, index) => {
+        return (isActiveLocale = item == items.roles[index])
+      })
+      return selectedItemRole
+    }
+
+
+    dataStore.Candidates.currentInfosCadidates.forEach((i: any) => {
+      dataParty.push(i.party_abbreviation)
+    })
+
+    dataStore.Candidates.currentInfosCadidates.forEach((i: any) => {
+      dataParty.push(i.party_abbreviation)
+    })
+
+    watch(
+      () => dataStore.Locale.currentLocale,
+      () => dataStore.Role.currentRole
+    );
+
+    return {
+      state,
+      dataStore,
+      items,
+      selectItemLocale,
+      selectItemRole,
+      dataParty
+    };
+  },
+});
 </script>
 
 <style></style>

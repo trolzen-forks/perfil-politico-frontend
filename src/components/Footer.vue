@@ -1,20 +1,22 @@
 <template>
   <footer class="c-footer bg-primary-base p-10 bottom-0 static">
     <div
-      class="c-footer__content container bg-background-purpleLight flex flex-col sm:flex-row justify-center items-center p-5 text-white rounded-lg"
+      class="c-footer__content container bg-background-purpleLight flex flex-col sm:flex-row justify-center items-center p-8 text-white rounded-lg"
     >
-      <div class="c-footer__content-logo">
-        <img src="@/assets/logo.svg" alt="Perfil Político" />
+      <div class="c-footer__content-logo w-1/5">
+        <img src="@/assets/logo.svg" alt="Perfil Político" class="w-full" />
       </div>
-      <div class="c-footer__content-description mx-5 my-5 sm:my-0 text-left">
+      <div
+        class="c-footer__content-description mx-14 my-5 sm:my-0 text-left text-base font-regular"
+      >
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-          egestas, purus a pretium tristique, erat velit congue libero, et
-          volutpat neque sem ut augue.
+          O Perfil Político é um projeto que permite ao eleitorado comparar os
+          perfis das candidaturas às eleições gerais do Brasil, para saber quem
+          realmente o representa.
         </p>
       </div>
       <div
-        class="c-footer__content-link-project flex w-full sm:w-auto items-center justify-center bg-opacity-10 bg-white p-3 rounded-lg"
+        class="c-footer__content-link-project flex w-full sm:w-1/6 items-center justify-center bg-opacity-10 bg-white p-3 rounded-lg"
       >
         <img src="@/assets/icons/icon-github.svg" alt="Github" />
         <span
