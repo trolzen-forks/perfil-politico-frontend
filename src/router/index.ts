@@ -17,7 +17,7 @@ const routes: Array<RouteRecordRaw> = [
     component: About,
   },
   {
-    path: "/pessoa-candidata",
+    path: "/pessoa-candidata/:year/:locale/:role/:keyCandidate",
     name: "Candidate",
     component: Candidate,
   },

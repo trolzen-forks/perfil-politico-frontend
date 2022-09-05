@@ -4,7 +4,9 @@
       class="c-footer__content container bg-background-purpleLight flex flex-col sm:flex-row justify-center items-center p-8 text-white rounded-lg"
     >
       <div class="c-footer__content-logo w-1/5">
-        <img src="@/assets/logo.svg" alt="Perfil Político" class="w-full" />
+        <router-link :to="{ name: 'Home' }">
+          <img src="@/assets/logo.svg" alt="Perfil Político" class="w-full" />
+        </router-link>
       </div>
       <div
         class="c-footer__content-description mx-14 my-5 sm:my-0 text-left text-base font-regular"

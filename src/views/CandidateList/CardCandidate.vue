@@ -8,21 +8,7 @@
           :src="image"
           alt="Candidato"
         />
-        <svg
-          v-else
-          xmlns="http://www.w3.org/2000/svg"
-          fill="#9BDB52"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="#9BDB52"
-          class="w-24 h-24 p-4 rounded-full shadow-lg mb-3 -mt-16 bg-primary-base"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
-          />
-        </svg>
+        <IconCandidate v-else class="w-24 h-24 shadow-lg mb-3 -mt-16"></IconCandidate>
         <h4 class="text-lg font-semibold text-black">{{ name }}</h4>
         <span class="text-sm font-light text-black">{{ role }}</span>
       </div>
@@ -37,18 +23,49 @@
         </div>
       </div>
       <div class="flex flex-col items-center">
-        <a
-          href="#"
+        <button
           class="w-full py-3 px-8 text-sm font-light text-center text-white bg-primary-base rounded-full hover:bg-primary-dark focus:ring-4 focus:outline-none focus:ring-secondary-base"
-          >Ver candidatura</a
-        >
+          v-on:click="onClickCandidate(keyCandidate, locale, role)"
+          >Ver candidatura</button>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-export default {
-  props: ["name", "number", "party", "role", "image"],
-};
+import IconCandidate from "@/components/IconCandidate.vue";
+import { cleanInfoCandidateSelected, setInfoCandidateSelected } from '@/store/candidates';
+import services from '@/services';
+import { defineComponent } from "vue";
+
+export default defineComponent({
+    props: ["name", "number", "party", "role", "image", "locale", "keyCandidate"],
+    components: { IconCandidate },
+    methods: {
+
+      async onClickCandidate (key, locale, role) {
+        cleanInfoCandidateSelected();
+        try {
+          const { dataCandidate } = await services.dataCandidates.candidate(key);
+          setInfoCandidateSelected(dataCandidate);
+
+          this.$router.push({
+            name: "Candidate",
+            params: {
+              year: 2022,
+              locale: locale,
+              role: role,
+              keyCandidate: key,
+            },
+          });
+
+        } catch (error) {
+          console.log(
+            "Erro no carregamento dos dados de cada candidato",
+            error
+          );
+        }
+      }
+    }
+});
 </script>

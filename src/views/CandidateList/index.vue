@@ -44,6 +44,8 @@
               :party="candidate.party_abbreviation"
               :role="candidate.post"
               :key="candidate.id"
+              :keyCandidate="candidate.id"
+              :locale="data.Locale.currentLocale"
             />
           </div>
           <div

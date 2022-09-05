@@ -1,8 +1,19 @@
+
 <template>
   <div class="flex flex-col min-h-screen">
     <Navbar></Navbar>
     <div class="candidate mt-20 sm:flex flex-grow">
-      <Sidebar></Sidebar>
+      <Sidebar 
+        :name="data.Candidates.currentCandidateSelected.name"
+        :party="data.Candidates.currentCandidateSelected.party_abbreviation"
+        :number="data.Candidates.currentCandidateSelected.number"
+        :role="data.Candidates.currentCandidateSelected.post"
+        :age="data.Candidates.currentCandidateSelected.age"
+        :education="data.Candidates.currentCandidateSelected.education"
+        :gender="data.Candidates.currentCandidateSelected.gender"
+        :ethnicity="data.Candidates.currentCandidateSelected.ethnicity"
+        :timeline="data.Candidates.currentCandidateSelected.election_history"
+      ></Sidebar>
       <div class="candidate__content w-full bg-background-light">
         <div
           class="candidate__header sm:flex justify-between items-center py-5 sm:px-12 px-5 border border-neutral-light bg-white"
@@ -62,7 +73,7 @@
         >
           <CardInfo>
             <template v-slot:title
-              >Idade: <span class="font-light ml-1">48</span></template
+              >Idade: <span class="font-light ml-1">{{data.Candidates.currentCandidateSelected.age}}</span></template
             >
             <template v-slot:content>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -76,7 +87,7 @@
           </CardInfo>
           <CardInfo>
             <template v-slot:title
-              >Sexto: <span class="font-light ml-1">Masculino</span></template
+              >Sexo: <span class="font-light ml-1">{{data.Candidates.currentCandidateSelected.gender}}</span></template
             >
             <template v-slot:content>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -90,7 +101,7 @@
           </CardInfo>
           <CardInfo>
             <template v-slot:title
-              >Cor/Raça: <span class="font-light ml-1">Branca</span></template
+              >Cor/Raça: <span class="font-light ml-1">{{data.Candidates.currentCandidateSelected.ethnicity}}</span></template
             >
             <template v-slot:content>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -105,7 +116,7 @@
           <CardInfo>
             <template v-slot:title
               >Escolaridade:
-              <span class="font-light ml-1">Superior Completo</span></template
+              <span class="font-light ml-1">{{data.Candidates.currentCandidateSelected.education}}</span></template
             >
             <template v-slot:content>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -137,21 +148,28 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from "vue-class-component";
 import Footer from "@/components/Footer.vue";
 import Navbar from "@/components/Navbar.vue";
 import Sidebar from "./Sidebar.vue";
 import CardInfo from "@/components/CardInfo.vue";
+import useStore from '@/hooks/useStore';
+import { reactive } from 'vue';
 
-@Options({
+export default {
   components: {
     Footer,
     Navbar,
     Sidebar,
     CardInfo,
   },
-})
-export default class Home extends Vue {}
+  setup() {
+    const data = useStore();
+  
+    return{
+      data
+    }
+  }
+}
 </script>
 
 <style></style>

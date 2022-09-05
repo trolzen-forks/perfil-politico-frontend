@@ -3,6 +3,7 @@ import { reactive } from "vue";
 const state: any = reactive({
   currentCandidates: {},
   currentInfosCadidates: [],
+  currentCandidateSelected: {}
 });
 
 export default state;
@@ -13,6 +14,14 @@ export function setCurrentCandidates(candidates: any) {
 
 export function setInfosCandidates(candidate: any) {
   state.currentInfosCadidates.push(candidate);
+}
+
+export function setInfoCandidateSelected(candidate: any) {
+  state.currentCandidateSelected = candidate;
+}
+
+export function cleanInfoCandidateSelected() {
+  state.currentCandidateSelected = {};
 }
 
 export function cleanCurrentCandidates() {

@@ -55,17 +55,13 @@
       </div>
       <div class="c-sidebar-candidate__info-candidate">
         <div class="sm:px-10 px-5 py-5 flex items-center">
-          <div>
-            <img
-              class="w-28 h-28 rounded-full p-1 ring-4 ring-primary-base"
-              src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80"
-              alt="Candidato"
-            />
+          <div class="w-28 h-28 rounded-full p-1 ring-4 ring-primary-base">
+            <IconCandidate></IconCandidate>
           </div>
           <div class="ml-10">
-            <h2 class="text-primary-base font-bold text-xl">Jonh Doe</h2>
+            <h2 class="text-primary-base font-bold text-xl">{{name}}</h2>
             <p class="text-sm font-light text-primary-base">
-              Deputado Estadual
+              {{role}}
             </p>
           </div>
         </div>
@@ -74,13 +70,13 @@
             <div
               class="py-3 text-sm w-1/2 font-medium text-white bg-primary-base rounded-l-full border"
             >
-              <p class="text-base font-bold">PV</p>
+              <p class="text-base font-bold">{{party}}</p>
               <p class="text-base font-light">Partido</p>
             </div>
             <div
               class="py-3 text-sm w-1/2 font-medium text-primary-base bg-secondary-base rounded-r-full border"
             >
-              <p class="text-base font-bold">1200</p>
+              <p class="text-base font-bold">{{number}}</p>
               <p class="text-base font-light">Número</p>
             </div>
           </div>
@@ -96,24 +92,24 @@
               <h4 class="font-light text-base text-neutral-baseMedium">
                 Idade
               </h4>
-              <p class="font-bold text-base text-primary-base">48</p>
+              <p class="font-bold text-base text-primary-base">{{age}}</p>
             </div>
             <div class="mb-4">
               <h4 class="font-light text-base text-neutral-baseMedium">Sexo</h4>
-              <p class="font-bold text-base text-primary-base">Masculino</p>
+              <p class="font-bold text-base text-primary-base">{{gender}}</p>
             </div>
             <div class="mb-4">
               <h4 class="font-light text-base text-neutral-baseMedium">
                 Cor/Raça
               </h4>
-              <p class="font-bold text-base text-primary-base">Branca</p>
+              <p class="font-bold text-base text-primary-base">{{ethnicity}}</p>
             </div>
             <div>
               <h4 class="font-light text-base text-neutral-baseMedium">
                 Escolaridade
               </h4>
               <p class="font-bold text-base text-primary-base">
-                Superior Completo
+                {{education}}
               </p>
             </div>
           </template>
@@ -121,7 +117,7 @@
         <CardInfo>
           <template v-slot:title>Histórico de candidaturas</template>
           <template v-slot:content>
-            <Timeline></Timeline>
+            <Timeline :data="timeline"></Timeline>
           </template>
         </CardInfo>
       </div>
@@ -130,17 +126,18 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from "vue-class-component";
 import CardInfo from "@/components/CardInfo.vue";
 import Timeline from "./Timeline.vue";
+import IconCandidate from "@/components/IconCandidate.vue";
 
-@Options({
+export default {
+  props: ["name", "role", "party", "number", "education", "ethnicity", "gender", "age", "timeline"],
   components: {
     CardInfo,
     Timeline,
+    IconCandidate
   },
-})
-export default class Home extends Vue {}
+}
 </script>
 
 <style></style>
