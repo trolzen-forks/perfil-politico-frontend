@@ -127,7 +127,7 @@ import services from "@/services/index";
 import * as roles from "../../services/mocks/filtersRoles.json";
 import * as locales from "../../services/mocks/filtersLocales.json";
 import { defineComponent, reactive } from "vue";
-import { setCurrentCandidates, setInfosCandidates } from "@/store/candidates";
+import { cleanCurrentCandidates, cleanInfosCandidates, setCurrentCandidates, setInfosCandidates } from "@/store/candidates";
 import { setCurrentLocale } from "@/store/locales";
 import { setCurrentRole } from "@/store/roles";
 
@@ -148,6 +148,9 @@ export default defineComponent({
       roles: roles.data,
       locales: locales.data,
     });
+
+    cleanCurrentCandidates();
+    cleanInfosCandidates();
 
     async function handleSubmitCandidate(): Promise<any> {
       try {

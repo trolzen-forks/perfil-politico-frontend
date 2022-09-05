@@ -35,6 +35,10 @@
           name="localeCandidates"
           class="bg-neutral-light border-neutral-light sidebar py-3 px-5 text-neutral-baseDark text-sm rounded-full font-regular focus:ring-secondary-base focus:border-secondary-base block w-full"
         >
+          <option v-if="dataStore.Locale.currentLocale === 'br'" 
+          :value="dataStore.Locale.currentLocale.initials" selected disabled>
+            Selecione um estado
+          </option>
           <option
             v-for="(locale, index) in items.locales"
             :key="index"
@@ -61,7 +65,9 @@
                 class="py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 flex justify-between"
               >
                 <span>{{ role.name }}</span>
-                <span>{{ role.id.length }}</span>
+                <span v-if="dataStore.Role.currentRole === 'presidente'">{{ (role.id !== 'presidente') ? 0 : role.id.length }}</span>
+                <span v-else-if="dataStore.Role.currentRole === 'deputado-distrital'">{{ (role.id !== 'deputado-distrital') ? 0 : role.id.length }}</span>
+                <span v-else>{{ role.id.length }}</span>
               </a>
             </li>
           </ul>
@@ -138,11 +144,6 @@ export default defineComponent({
       })
       return selectedItemRole
     }
-
-
-    dataStore.Candidates.currentInfosCadidates.forEach((i: any) => {
-      dataParty.push(i.party_abbreviation)
-    })
 
     dataStore.Candidates.currentInfosCadidates.forEach((i: any) => {
       dataParty.push(i.party_abbreviation)
