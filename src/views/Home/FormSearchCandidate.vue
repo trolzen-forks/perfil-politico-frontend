@@ -195,34 +195,19 @@ export default defineComponent({
           this.localeCandidates,
           this.roleCandidates
         );
-        console.log("CANDIDATOS", data);
         setCurrentCandidates(data);
 
-        try {
-          for (let item of data.objects) {
-            const { dataCandidate } = await services.dataCandidates.candidate(
-              item.id
-            );
-            setInfosCandidates(dataCandidate);
-          }
+        console.log(data);
 
-          setCurrentLocale(this.localeCandidates);
-          setCurrentRole(this.roleCandidates);
+        this.$router.push({
+          name: "CandidateList",
+          params: {
+            year: 2022,
+            locale: this.localeCandidates,
+            role: this.roleCandidates,
+          },
+        });
 
-          this.$router.push({
-            name: "CandidateList",
-            params: {
-              year: 2022,
-              locale: this.localeCandidates,
-              role: this.roleCandidates,
-            },
-          });
-        } catch (error) {
-          console.log(
-            "Erro no carregamento dos dados de cada candidato",
-            error
-          );
-        }
       } catch (error) {
         console.log("Erro no carregamento de candidatos", error);
       }

@@ -38,14 +38,15 @@
             class="candidate-list__candidates block sm:grid grid-cols-4 gap-3"
           >
             <CardCandidate
-              v-for="candidate in data.Candidates.currentInfosCadidates"
-              :name="candidate.ballot_name"
+              v-for="candidate in data.Candidates.currentCandidates.objects"
+              :name="candidate.name"
               :number="candidate.ballot_number"
-              :party="candidate.party_abbreviation"
+              :party="candidate.party"
               :role="candidate.post"
               :key="candidate.id"
               :keyCandidate="candidate.id"
               :locale="data.Locale.currentLocale"
+              :image="candidate.image"
             />
           </div>
           <div
@@ -85,6 +86,7 @@ export default {
     const data = useStore();
     let dataRole = '';
     let dataLocale = {};
+    
     const state = reactive({
       hasError: false,
       isLoading: false,
