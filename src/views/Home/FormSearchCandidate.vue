@@ -92,12 +92,12 @@
             </label>
             <div v-if="showListCandidates" class="block">
               <ul class="list-search inline-block absolute z-10 box-content py-2 px-3 text-sm tooltip font-medium text-white bg-primary-dark rounded-lg shadow-sm">
-                <li v-for="candidate in filteredList" :key="candidate.id" class="w-full cursor-pointer px-2 py-3 border-b border-primary-base" v-on:click="searchListCandidates.name = candidate.name, searchListCandidates.id = candidate.id, showListCandidates = false">
+                <li v-for="candidate in filteredList.slice(0,4)" :key="candidate.id" class="w-full cursor-pointer px-2 py-3 border-b border-primary-base" v-on:click="searchListCandidates.name = candidate.name, searchListCandidates.id = candidate.id, showListCandidates = false">
                   <span
                     class="w-full capitalize">{{ candidate.name }}
                   </span>
                 </li>
-                <li v-if="searchListCandidates&&!filteredList.length">
+                <li v-if="searchListCandidates&&!filteredList.length" class="px-2 py-3">
                   <span>Não encontramos resultados para sua pesquisa!</span>
                 </li>
               </ul>
