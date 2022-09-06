@@ -69,7 +69,7 @@ import Sidebar from "./Sidebar.vue";
 import CardCandidate from "./CardCandidate.vue";
 import Analysis from "./Analysis/index.vue";
 import useStore from "../../hooks/useStore";
-import { reactive, watch } from "vue";
+import { reactive } from "vue";
 import * as roles from "../../services/mocks/filtersRoles.json";
 import * as locales from "../../services/mocks/filtersLocales.json";
 

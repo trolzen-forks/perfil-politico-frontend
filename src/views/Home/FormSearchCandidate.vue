@@ -152,22 +152,8 @@ export default defineComponent({
     cleanCurrentCandidates();
     cleanInfosCandidates();
 
-    async function handleSubmitCandidate(): Promise<any> {
-      try {
-        const { data } = await services.dataCandidates.candidates(
-          2022,
-          "br",
-          "presidente"
-        );
-        console.log("CANDIDATOS", data);
-      } catch (error) {
-        console.log("ERRO CANDIDATO", error);
-      }
-    }
-
     return {
       data,
-      handleSubmitCandidate,
     };
   },
   methods: {
@@ -196,6 +182,8 @@ export default defineComponent({
           this.roleCandidates
         );
         setCurrentCandidates(data);
+        setCurrentLocale(this.localeCandidates);
+        setCurrentRole(this.roleCandidates);
 
         console.log(data);
 
