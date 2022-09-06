@@ -84,12 +84,24 @@
                 id="first_name"
                 autocomplete="off"
                 v-model="searchListCandidates.name"
-                v-on:input="searchListCandidates.name.length > 2 ? showListCandidates = true : showListCandidates = false"
+                v-on:input="searchListCandidates.name.length > 1 ? showListCandidates = true : showListCandidates = false"
                 class="bg-background-purpleLight text-white text-sm rounded-full font-regular placeholder:text-white placeholder-white focus:ring-secondary-base focus:border-secondary-base focus:bg-background-purpleLight block w-full py-3 pl-10 pr-5"
                 placeholder="Digite o nome da pessoa candidata"
                 required
               />
             </label>
+            <div v-if="showListCandidates" class="block">
+              <ul class="list-search inline-block absolute z-10 box-content py-2 px-3 text-sm tooltip font-medium text-white bg-primary-dark rounded-lg shadow-sm">
+                <li v-for="candidate in filteredList" :key="candidate.id" class="w-full cursor-pointer px-2 py-3 border-b border-primary-base" v-on:click="searchListCandidates.name = candidate.name, searchListCandidates.id = candidate.id, showListCandidates = false">
+                  <span
+                    class="w-full capitalize">{{ candidate.name }}
+                  </span>
+                </li>
+                <li v-if="searchListCandidates&&!filteredList.length">
+                  <span>Não encontramos resultados para sua pesquisa!</span>
+                </li>
+              </ul>
+            </div>
           </div>
           <button
             type="button"
@@ -98,18 +110,6 @@
           >
             Buscar candidato(a)
           </button>
-        </div>
-        <div v-if="showListCandidates" class="block">
-          <ul class="inline-block absolute z-10 w-2/5 py-2 px-3 text-sm tooltip font-medium text-white bg-gray-900 rounded-lg shadow-sm">
-            <li v-for="candidate in filteredList" :key="candidate.id" class="w-full cursor-pointer" v-on:click="searchListCandidates.name = candidate.name, searchListCandidates.id = candidate.id, showListCandidates = false">
-              <span
-                class="w-full">{{ candidate.name }}
-              </span>
-            </li>
-            <li v-if="searchListCandidates&&!filteredList.length">
-              <span>Não encontramos resultados para sua pesquisa!</span>
-            </li>
-          </ul>
         </div>
       <h3 class="home__banner_subtitle text-left mt-6 mb-3">
         Não tem alguém em mente?
@@ -250,4 +250,8 @@ export default defineComponent({
 });
 </script>
 
-<style></style>
+<style>
+  .list-search {
+    width: 470px;
+  }
+</style>

@@ -56,7 +56,13 @@
       <div class="c-sidebar-candidate__info-candidate">
         <div class="sm:px-10 px-5 py-5 flex items-center">
           <div class="w-28 h-28 rounded-full p-1 ring-4 ring-primary-base">
-            <IconCandidate></IconCandidate>
+            <img
+              v-if="image"
+              class="w-28 h-28 rounded-full"
+              :src="image"
+              alt="Candidato"
+            />
+            <IconCandidate v-else></IconCandidate>
           </div>
           <div class="ml-10">
             <h2 class="text-primary-base font-bold text-xl">{{name}}</h2>
@@ -131,7 +137,7 @@ import Timeline from "./Timeline.vue";
 import IconCandidate from "@/components/IconCandidate.vue";
 
 export default {
-  props: ["name", "role", "party", "number", "education", "ethnicity", "gender", "age", "timeline"],
+  props: ["name", "role", "party", "number", "education", "ethnicity", "gender", "age", "timeline", "image"],
   components: {
     CardInfo,
     Timeline,
@@ -140,4 +146,8 @@ export default {
 }
 </script>
 
-<style></style>
+<style lang="postcss" scoped>
+  :v-deep.svg-icon-candidate {
+    @apply w-28 h-28
+  }
+</style>

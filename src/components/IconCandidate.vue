@@ -5,7 +5,7 @@
         viewBox="0 0 24 24"
         stroke-width="1.5"
         stroke="#9BDB52"
-        class="p-4 rounded-full bg-primary-base"
+        class="p-4 rounded-full bg-primary-base svg-icon-candidate"
     >
         <path
         stroke-linecap="round"

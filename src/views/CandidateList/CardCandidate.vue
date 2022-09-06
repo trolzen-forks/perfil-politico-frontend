@@ -69,3 +69,9 @@ export default defineComponent({
     }
 });
 </script>
+
+<style lang="postcss" scoped>
+  .svg-icon-candidate{
+    @apply w-24 h-24
+  }
+</style>
