@@ -1,9 +1,8 @@
-
 <template>
   <div class="flex flex-col min-h-screen">
     <Navbar></Navbar>
     <div class="candidate mt-20 sm:flex flex-grow">
-      <Sidebar 
+      <Sidebar
         :name="data.Candidates.currentCandidateSelected.name"
         :party="data.Candidates.currentCandidateSelected.party_abbreviation"
         :number="data.Candidates.currentCandidateSelected.number"
@@ -13,6 +12,7 @@
         :gender="data.Candidates.currentCandidateSelected.gender"
         :ethnicity="data.Candidates.currentCandidateSelected.ethnicity"
         :timeline="data.Candidates.currentCandidateSelected.election_history"
+        :image="data.Candidates.currentCandidateSelected.image"
       ></Sidebar>
       <div class="candidate__content w-full bg-background-light">
         <div
@@ -73,7 +73,10 @@
         >
           <CardInfo>
             <template v-slot:title
-              >Idade: <span class="font-light ml-1">{{data.Candidates.currentCandidateSelected.age}}</span></template
+              >Idade:
+              <span class="font-light ml-1">{{
+                data.Candidates.currentCandidateSelected.age
+              }}</span></template
             >
             <template v-slot:content>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -87,7 +90,10 @@
           </CardInfo>
           <CardInfo>
             <template v-slot:title
-              >Sexo: <span class="font-light ml-1">{{data.Candidates.currentCandidateSelected.gender}}</span></template
+              >Sexo:
+              <span class="font-light ml-1">{{
+                data.Candidates.currentCandidateSelected.gender
+              }}</span></template
             >
             <template v-slot:content>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -101,7 +107,10 @@
           </CardInfo>
           <CardInfo>
             <template v-slot:title
-              >Cor/Raça: <span class="font-light ml-1">{{data.Candidates.currentCandidateSelected.ethnicity}}</span></template
+              >Cor/Raça:
+              <span class="font-light ml-1">{{
+                data.Candidates.currentCandidateSelected.ethnicity
+              }}</span></template
             >
             <template v-slot:content>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -116,7 +125,9 @@
           <CardInfo>
             <template v-slot:title
               >Escolaridade:
-              <span class="font-light ml-1">{{data.Candidates.currentCandidateSelected.education}}</span></template
+              <span class="font-light ml-1">{{
+                data.Candidates.currentCandidateSelected.education
+              }}</span></template
             >
             <template v-slot:content>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -152,8 +163,7 @@ import Footer from "@/components/Footer.vue";
 import Navbar from "@/components/Navbar.vue";
 import Sidebar from "./Sidebar.vue";
 import CardInfo from "@/components/CardInfo.vue";
-import useStore from '@/hooks/useStore';
-import { reactive } from 'vue';
+import useStore from "@/hooks/useStore";
 
 export default {
   components: {
@@ -164,12 +174,12 @@ export default {
   },
   setup() {
     const data = useStore();
-  
-    return{
-      data
-    }
-  }
-}
+
+    return {
+      data,
+    };
+  },
+};
 </script>
 
 <style></style>

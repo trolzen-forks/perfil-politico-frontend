@@ -35,20 +35,23 @@
           name="localeCandidates"
           class="bg-neutral-light border-neutral-light sidebar py-3 px-5 text-neutral-baseDark text-sm rounded-full font-regular focus:ring-secondary-base focus:border-secondary-base block w-full"
         >
-          <option v-if="dataStore.Locale.currentLocale === 'br'" 
-          :value="dataStore.Locale.currentLocale.initials" selected disabled>
+          <option
+            v-if="currentLocale === 'br'"
+            :value="currentLocale"
+            selected
+            disabled
+          >
             Selecione um estado
           </option>
           <option
             v-for="(locale, index) in items.locales"
             :key="index"
             :value="locale.initials"
-            v-on:click="selectItemLocale(index)"
-            :selected="locale.initials == dataStore.Locale.currentLocale ? true : false"
+            :selected="
+              locale.initials === currentLocale ? true : false
+            "
           >
-            {{
-              locale.name
-            }}
+            {{ locale.name }}
           </option>
         </select>
       </div>
@@ -59,15 +62,23 @@
         </div>
         <div>
           <ul class="py-1" aria-labelledby="user-menu-button">
-            <li v-for="role in items.roles" :key="role.id" :class="role.id === dataStore.Role.currentRole ? 'border-l-8 border-primary-base bg-gray-100' : 'border-l-4 border-transparent'">
+            <li
+              v-for="role in items.roles"
+              :key="role.id"
+              :class="
+                role.id === currentRole
+                  ? 'border-l-8 border-primary-base bg-gray-100'
+                  : 'border-l-4 border-transparent'
+              "
+            >
               <a
                 href="#"
                 class="py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 flex justify-between"
               >
                 <span>{{ role.name }}</span>
-                <span v-if="dataStore.Role.currentRole === 'presidente'">{{ (role.id !== 'presidente') ? 0 : role.id.length }}</span>
-                <span v-else-if="dataStore.Role.currentRole === 'deputado-distrital'">{{ (role.id !== 'deputado-distrital') ? 0 : role.id.length }}</span>
-                <span v-else>{{ role.id.length }}</span>
+                <!-- <span v-if="dataStore.Role.currentRole === 'presidente'">{{ (role.id !== 'presidente') ? 0 : filterCountRole(role.id) }}</span>
+                <span v-else-if="dataStore.Role.currentRole === 'deputado-distrital'">{{ (role.id !== 'deputado-distrital') ? 0 : filterCountRole(role.id) }}</span> -->
+                <!-- <span></span> -->
               </a>
             </li>
           </ul>
@@ -77,77 +88,90 @@
       <div class="c-sidebar__state mb-10">
         <div class="flex justify-between items-center">
           <h3 class="text-primary-base text-xl font-bold mb-3">Partidos</h3>
-          <a
-            href="#"
+          <button
+            type="button"
+            v-on:click="clearParty()"
             class="text-neutral-baseMedium text-sm underline hover:no-underline"
-            >Limpar</a
           >
+            Limpar
+          </button>
         </div>
         <div class="inline-flex flex-wrap">
-          <span
-            class="px-4 py-2 mr-2 mb-2 rounded text-black bg-neutral-light font-light text-xs flex align-center w-max cursor-pointer actived:bg-secondary-base hover:bg-secondary-base hover:text-primary-base transition duration-300 ease"
-            v-for="party in dataParty" :key="party"
+          <button
+            type="button"
+            v-on:click="selectParty(item.party)"
+            class="px-4 py-2 mr-2 mb-2 rounded font-light text-xs flex align-center w-max cursor-pointer actived:bg-secondary-base hover:bg-secondary-base hover:text-primary-base transition duration-300 ease"
+            :class="item.party == currentParty ? 'text-primary-base bg-secondary-base' : 'text-black bg-neutral-light'"
+            v-for="item in currentCandidates"
+            :key="item.party"
           >
-            {{ party }} ({{party.length}})
-          </span>
+            {{ item.party }}
+          </button>
         </div>
       </div>
+      <!-- <div class="c-sidebar__rounds mb-10">
+        <div class="flex justify-between items-center">
+          <h3 class="text-primary-base text-xl font-bold mb-3">Turnos</h3>
+        </div>
+        <div>
+          <select
+            id="localeCandidates"
+            name="localeCandidates"
+            class="bg-neutral-light border-neutral-light sidebar py-3 px-5 text-neutral-baseDark text-sm rounded-full font-regular focus:ring-secondary-base focus:border-secondary-base block w-full"
+          >
+            <option
+              v-for="item in currentCandidates"
+              :key="item.round"
+              :value="item.round"
+            >
+              {{ item.round }}
+            </option>
+          </select>
+        </div>
+      </div> -->
     </div>
   </nav>
 </template>
 
 <script lang="ts">
 import useStore from "@/hooks/useStore";
-import { defineComponent, reactive, ref } from "vue";
+import { computed, defineComponent, onMounted, reactive } from "vue";
 import { watch } from "vue";
 import * as roles from "../../services/mocks/filtersRoles.json";
 import * as locales from "../../services/mocks/filtersLocales.json";
+import { setCurrentParty, cleanCurrentParty } from "@/store/party";
 
 export default defineComponent({
-  props: ["party", "countParty", "role", "countRole"],
   data() {
     return {
-      location: false,
       roleCandidates: "",
       localeCandidates: "",
       dataLocales: [],
-      isActiveRole: true
+      isActiveRole: true,
     };
   },
   setup() {
-    const selectedItemLocale = ref(0)
-    const selectedItemRole = ref(0)
     const dataStore = useStore();
-    const dataParty: any[] = [];
-    let isActiveLocale = false;
-    const state = reactive({
-      hasError: false,
-      isLoading: false,
-    });
     const items = reactive({
       roles: roles.data,
       locales: locales.data,
     });
 
-    const selectItemLocale = (i: number) => {
-      selectedItemLocale.value = i
-      items.locales.forEach((item, index) => {
-        return (isActiveLocale = item == items.locales[index])
-      })
-      return selectedItemLocale
-    }
+    let currentRole = computed(function () {
+      return dataStore.Role.currentRole;
+    });
 
-    const selectItemRole = (i: number) => {
-      selectedItemRole.value = i
-      items.roles.forEach((item, index) => {
-        return (isActiveLocale = item == items.roles[index])
-      })
-      return selectedItemRole
-    }
+    let currentCandidates = computed(function () {
+      return dataStore.Candidates.currentCandidates.objects;
+    });
 
-    dataStore.Candidates.currentInfosCadidates.forEach((i: any) => {
-      dataParty.push(i.party_abbreviation)
-    })
+    let currentLocale = computed(function () {
+      return dataStore.Locale.currentLocale;
+    });
+
+    let currentParty = computed(function () {
+      return dataStore.Party.currentParty;
+    });
 
     watch(
       () => dataStore.Locale.currentLocale,
@@ -155,13 +179,21 @@ export default defineComponent({
     );
 
     return {
-      state,
       dataStore,
+      currentRole,
+      currentLocale,
+      currentParty,
       items,
-      selectItemLocale,
-      selectItemRole,
-      dataParty
+      currentCandidates
     };
+  },
+  methods: {
+    selectParty(item: any) {
+      setCurrentParty(item);
+    },
+    clearParty() {
+      cleanCurrentParty();
+    },
   },
 });
 </script>

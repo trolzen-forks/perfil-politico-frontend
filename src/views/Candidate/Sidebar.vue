@@ -3,30 +3,8 @@
     class="c-sidebar-candidate sticky sm:w-1/3 min-h-full"
     aria-label="Sidebar"
   >
-    <button
-      data-collapse-toggle="sidebar-candidates"
-      type="button"
-      class="inline-flex items-center p-2 ml-3 mb-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
-      aria-controls="sidebar-candidates"
-      aria-expanded="false"
-    >
-      <span class="sr-only">Abrir filtros</span>
-      <svg
-        class="w-6 h-6"
-        aria-hidden="true"
-        fill="currentColor"
-        viewBox="0 0 20 20"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          fill-rule="evenodd"
-          d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-          clip-rule="evenodd"
-        ></path>
-      </svg>
-    </button>
     <div
-      class="hidden w-full h-full md:block md:w-auto border-r border-neutral-light"
+      class="w-full h-full block md:w-auto border-r border-neutral-light"
       id="sidebar-candidates"
     >
       <div
@@ -55,19 +33,20 @@
       </div>
       <div class="c-sidebar-candidate__info-candidate">
         <div class="sm:px-10 px-5 py-5 flex items-center">
-          <div class="w-28 h-28 rounded-full p-1 ring-4 ring-primary-base">
-            <img
-              v-if="image"
-              class="w-28 h-28 rounded-full"
-              :src="image"
-              alt="Candidato"
-            />
-            <IconCandidate v-else></IconCandidate>
+          <div
+            v-if="image"
+            class="w-24 h-24 p-1 rounded-full ring-4 ring-primary-base overflow-hidden"
+          >
+            <img class="rounded-full" :src="image" alt="Candidato" />
           </div>
+          <IconCandidate
+            v-else
+            class="w-24 h-24 rounded-full p-1 ring-4 ring-primary-base"
+          ></IconCandidate>
           <div class="ml-10">
-            <h2 class="text-primary-base font-bold text-xl">{{name}}</h2>
+            <h2 class="text-primary-base font-bold text-xl">{{ name }}</h2>
             <p class="text-sm font-light text-primary-base">
-              {{role}}
+              {{ role }}
             </p>
           </div>
         </div>
@@ -76,13 +55,13 @@
             <div
               class="py-3 text-sm w-1/2 font-medium text-white bg-primary-base rounded-l-full border"
             >
-              <p class="text-base font-bold">{{party}}</p>
+              <p class="text-base font-bold">{{ party }}</p>
               <p class="text-base font-light">Partido</p>
             </div>
             <div
               class="py-3 text-sm w-1/2 font-medium text-primary-base bg-secondary-base rounded-r-full border"
             >
-              <p class="text-base font-bold">{{number}}</p>
+              <p class="text-base font-bold">{{ number }}</p>
               <p class="text-base font-light">Número</p>
             </div>
           </div>
@@ -98,24 +77,26 @@
               <h4 class="font-light text-base text-neutral-baseMedium">
                 Idade
               </h4>
-              <p class="font-bold text-base text-primary-base">{{age}}</p>
+              <p class="font-bold text-base text-primary-base">{{ age }}</p>
             </div>
             <div class="mb-4">
               <h4 class="font-light text-base text-neutral-baseMedium">Sexo</h4>
-              <p class="font-bold text-base text-primary-base">{{gender}}</p>
+              <p class="font-bold text-base text-primary-base">{{ gender }}</p>
             </div>
             <div class="mb-4">
               <h4 class="font-light text-base text-neutral-baseMedium">
                 Cor/Raça
               </h4>
-              <p class="font-bold text-base text-primary-base">{{ethnicity}}</p>
+              <p class="font-bold text-base text-primary-base">
+                {{ ethnicity }}
+              </p>
             </div>
             <div>
               <h4 class="font-light text-base text-neutral-baseMedium">
                 Escolaridade
               </h4>
               <p class="font-bold text-base text-primary-base">
-                {{education}}
+                {{ education }}
               </p>
             </div>
           </template>
@@ -137,17 +118,28 @@ import Timeline from "./Timeline.vue";
 import IconCandidate from "@/components/IconCandidate.vue";
 
 export default {
-  props: ["name", "role", "party", "number", "education", "ethnicity", "gender", "age", "timeline", "image"],
+  props: [
+    "name",
+    "role",
+    "party",
+    "number",
+    "education",
+    "ethnicity",
+    "gender",
+    "age",
+    "timeline",
+    "image",
+  ],
   components: {
     CardInfo,
     Timeline,
-    IconCandidate
+    IconCandidate,
   },
-}
+};
 </script>
 
 <style lang="postcss" scoped>
-  :v-deep.svg-icon-candidate {
-    @apply w-28 h-28
-  }
+:v-deep.svg-icon-candidate {
+  @apply w-24 h-24;
+}
 </style>

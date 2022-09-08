@@ -3,7 +3,7 @@ import { reactive } from "vue";
 const state: any = reactive({
   currentCandidates: {},
   currentInfosCadidates: [],
-  currentCandidateSelected: {}
+  currentCandidateSelected: {},
 });
 
 export default state;

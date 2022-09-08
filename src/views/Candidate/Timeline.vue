@@ -7,13 +7,16 @@
       <time
         class="mb-2 text-base font-bold text-primary-base flex items-center"
       >
-        <span class="mr-3">{{item.year}}</span>
-        <span v-if="item.result === 'ELEITO'" class="bg-primary-base rounded-2xl text-white py-1 px-2 text-xs"
+        <span class="mr-3">{{ item.year }}</span>
+        <span
+          v-if="item.result === 'ELEITO'"
+          class="bg-primary-base rounded-2xl text-white py-1 px-2 text-xs"
           >Eleito (a)</span
         >
       </time>
       <p class="mb-4 text-xs text-text-light font-regular">
-        Candidatou-se ao cargo de <span class="capitalize">{{item.post}}</span>
+        Candidatou-se ao cargo de
+        <span class="capitalize">{{ item.post }}</span>
       </p>
     </li>
   </ol>
@@ -22,7 +25,7 @@
 <script lang="ts">
 export default {
   name: "Timeline",
-  props:["data"]
+  props: ["data"],
 };
 </script>
 
