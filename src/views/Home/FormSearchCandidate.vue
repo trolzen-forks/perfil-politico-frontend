@@ -147,7 +147,7 @@
 import services from "@/services/index";
 import * as roles from "../../services/mocks/filtersRoles.json";
 import * as locales from "../../services/mocks/filtersLocales.json";
-import { defineComponent, reactive, ref } from "vue";
+import { computed, defineComponent, reactive, ref } from "vue";
 import {
   cleanCurrentCandidates,
   setCurrentCandidates,
@@ -182,10 +182,25 @@ export default defineComponent({
     });
     cleanCurrentCandidates();
 
+    let currentRole = computed(function () {
+      return store.Role.currentRole;
+    });
+
+    let currentCandidates = computed(function () {
+      return store.Candidates.currentCandidates.objects;
+    });
+
+    let currentLocale = computed(function () {
+      return store.Locale.currentLocale;
+    });
+
     return {
       data,
       store,
       listCandidates,
+      currentRole,
+      currentCandidates,
+      currentLocale
     };
   },
   methods: {

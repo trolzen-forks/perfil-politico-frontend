@@ -4,14 +4,14 @@
       <div class="flex flex-col items-center mb-3">
         <div
           v-if="image"
-          class="w-24 h-24 rounded-full shadow-lg mb-3 -mt-16 overflow-hidden"
+          class="w-28 h-28 rounded-full shadow-lg mb-3 -mt-16 overflow-hidden"
         >
           <img :src="image" alt="Candidato" />
         </div>
 
         <IconCandidate
           v-else
-          class="w-24 h-24 shadow-lg mb-3 -mt-16"
+          class="w-28 h-28 shadow-lg mb-3 -mt-16"
         ></IconCandidate>
         <h4 class="text-lg font-semibold text-black">{{ name }}</h4>
         <span class="text-sm font-light text-black">{{ role }}</span>
@@ -76,6 +76,6 @@ export default defineComponent({
 
 <style lang="postcss" scoped>
 .svg-icon-candidate {
-  @apply w-24 h-24;
+  @apply w-28 h-28;
 }
 </style>

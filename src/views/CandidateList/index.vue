@@ -151,6 +151,14 @@ export default defineComponent({
       return data.Party.currentParty;
     });
 
+    let currentLocale = computed(function () {
+      return data.Locale.currentLocale;
+    });
+
+    let currentRole = computed(function () {
+      return data.Role.currentRole;
+    });
+
     let hasSelectedParty = computed(function () {
       return data.Party.hasSelectedParty;
     });
@@ -197,6 +205,8 @@ export default defineComponent({
       data,
       dataRole,
       dataLocale,
+      currentLocale,
+      currentRole,
       currentParty,
       currentCandidates,
       currentCandidatesFilter,

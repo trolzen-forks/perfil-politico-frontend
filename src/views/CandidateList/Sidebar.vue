@@ -33,11 +33,12 @@
         <select
           id="localeCandidates"
           name="localeCandidates"
+          v-model="localeCandidates"
           class="bg-neutral-light border-neutral-light sidebar py-3 px-5 text-neutral-baseDark text-sm rounded-full font-regular focus:ring-secondary-base focus:border-secondary-base block w-full"
         >
           <option
             v-if="currentLocale === 'br'"
-            :value="currentLocale"
+            value=""
             selected
             disabled
           >
@@ -71,15 +72,18 @@
                   : 'border-l-4 border-transparent'
               "
             >
-              <a
-                href="#"
-                class="py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 flex justify-between"
+              <button
+                data-tooltip-target="tooltip-right"
+                data-tooltip-placement="right"
+                type="button"
+                @click="selectRole(role.id)"
+                class="py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 flex justify-between w-full"
               >
                 <span>{{ role.name }}</span>
                 <!-- <span v-if="dataStore.Role.currentRole === 'presidente'">{{ (role.id !== 'presidente') ? 0 : filterCountRole(role.id) }}</span>
                 <span v-else-if="dataStore.Role.currentRole === 'deputado-distrital'">{{ (role.id !== 'deputado-distrital') ? 0 : filterCountRole(role.id) }}</span> -->
                 <!-- <span></span> -->
-              </a>
+              </button>
             </li>
           </ul>
         </div>
@@ -102,7 +106,7 @@
             v-on:click="selectParty(item.party)"
             class="px-4 py-2 mr-2 mb-2 rounded font-light text-xs flex align-center w-max cursor-pointer actived:bg-secondary-base hover:bg-secondary-base hover:text-primary-base transition duration-300 ease"
             :class="item.party == currentParty ? 'text-primary-base bg-secondary-base' : 'text-black bg-neutral-light'"
-            v-for="item in currentCandidates"
+            v-for="item in reduceParty"
             :key="item.party"
           >
             {{ item.party }}
@@ -135,16 +139,18 @@
 
 <script lang="ts">
 import useStore from "@/hooks/useStore";
-import { computed, defineComponent, onMounted, reactive } from "vue";
-import { watch } from "vue";
+import { computed, defineComponent, reactive } from "vue";
 import * as roles from "../../services/mocks/filtersRoles.json";
 import * as locales from "../../services/mocks/filtersLocales.json";
 import { setCurrentParty, cleanCurrentParty } from "@/store/party";
+import { setCurrentLocale } from "@/store/locales";
+import services from "@/services";
+import { setCurrentCandidates } from "@/store/candidates";
+import { setCurrentRole } from "@/store/roles";
 
 export default defineComponent({
   data() {
     return {
-      roleCandidates: "",
       localeCandidates: "",
       dataLocales: [],
       isActiveRole: true,
@@ -165,6 +171,10 @@ export default defineComponent({
       return dataStore.Candidates.currentCandidates.objects;
     });
 
+    let hasSelectedParty = computed(function () {
+      return dataStore.hasSelectedParty;
+    });
+
     let currentLocale = computed(function () {
       return dataStore.Locale.currentLocale;
     });
@@ -173,10 +183,23 @@ export default defineComponent({
       return dataStore.Party.currentParty;
     });
 
-    watch(
-      () => dataStore.Locale.currentLocale,
-      () => dataStore.Role.currentRole
-    );
+    let reduceParty = computed(function () {
+      const valuesData: any = [];
+      dataStore.Candidates.currentCandidates.objects?.forEach((i) =>
+        valuesData.push(i)
+      );
+
+      let set = new Set();
+      let unionArray = valuesData.filter(item => {
+        if (!set.has(item.party)) {
+          set.add(item.party);
+          return true;
+        }
+        return false;
+      }, set);
+
+      return unionArray
+    });
 
     return {
       dataStore,
@@ -184,16 +207,68 @@ export default defineComponent({
       currentLocale,
       currentParty,
       items,
-      currentCandidates
+      reduceParty,
+      currentCandidates,
+      hasSelectedParty
     };
+  },
+  watch: {
+    localeCandidates(newLocal) {
+      if (newLocal && this.currentRole != "presidente") {
+        setCurrentLocale(newLocal);
+        this.handleData(this.currentRole, newLocal)
+      } 
+      else if (newLocal && this.currentRole == "deputado-distrital") {
+        setCurrentLocale("df");
+        this.handleData(this.currentRole, "df")
+      } 
+      else {
+        setCurrentLocale("br");
+        this.handleData(this.currentRole, 'br')
+      }
+    }
   },
   methods: {
     selectParty(item: any) {
       setCurrentParty(item);
     },
+    
     clearParty() {
       cleanCurrentParty();
     },
+
+    selectRole(item: any) {       
+      setCurrentRole(item);
+      if (item == "presidente" || (item == "presidente" && this.currentLocale != 'br')) {
+        this.localeCandidates = "";
+        this.handleData(item, 'br')
+      }
+      else if(item == "deputado-distrital") {
+        this.localeCandidates = "df";
+        this.handleData(item, 'df')
+      }
+      else if(item != "presidente" && this.currentLocale == 'br') alert("Insira uma localização!!")
+    },
+
+    async handleData(role: any, locale: any) {
+      try {
+        const { data } = await services.dataCandidates.candidatesList(
+          2022,
+          locale,
+          role
+        );
+        setCurrentCandidates(data);
+        this.$router.replace({ name: "CandidateList",
+            params: {
+              year: 2022,
+              locale: locale,
+              role: role,
+            } 
+        });
+      } catch (error) {
+        console.log("Erro no carregamento de candidatos", error);
+      }
+    }
   },
 });
 </script>

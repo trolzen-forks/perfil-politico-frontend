@@ -13,6 +13,11 @@
           class="bg-primary-base rounded-2xl text-white py-1 px-2 text-xs"
           >Eleito (a)</span
         >
+        <span
+          v-if="item.result === '2O TURNO'"
+          class="bg-primary-base rounded-2xl text-white py-1 px-2 text-xs"
+          >2º TURNO</span
+        >
       </time>
       <p class="mb-4 text-xs text-text-light font-regular">
         Candidatou-se ao cargo de
