@@ -1,6 +1,6 @@
 <template>
-  <nav class="c-sidebar sticky sm:w-1/3 w-full min-h-full" aria-label="Sidebar">
-    <div class="c-sidebar__mobile md:hidden pt-3 pb-5 mb-5 border-b border-neutral-base">
+  <nav class="c-sidebar relative sm:w-1/3 w-full min-h-full border-r border-neutral-base" aria-label="Sidebar">
+    <div class="c-sidebar__mobile md:hidden pt-3 mb-5 border-b border-neutral-base">
       <button
         data-collapse-toggle="sidebar-candidates"
         type="button"
@@ -14,11 +14,11 @@
       </button>
     </div>
     <div
-      class="w-full h-full md:block md:w-auto p-6 border-r border-neutral-base"
+      class="md:sticky md:top-20 md:block md:w-auto px-6 py-3 overflow-scroll"
       id="sidebar-candidates"
       :class="isOpenSidebar ? 'd-block' : 'hidden'"
     >
-      <div class="c-sidebar__state mb-10">
+      <div class="c-sidebar__state mb-10 mt-3">
         <h3 class="text-primary-base text-xl font-bold mb-3">Estado</h3>
 
         <label for="estados" class="sr-only">Selecione um Estado</label>

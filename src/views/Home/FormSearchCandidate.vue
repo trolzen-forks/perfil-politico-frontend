@@ -48,9 +48,7 @@
               :value="locale.initials"
             >
               {{
-                !locale
-                  ? "Não foi possível carregar as informações"
-                  : locale.name
+                locale.name
               }}
             </option>
           </select>
