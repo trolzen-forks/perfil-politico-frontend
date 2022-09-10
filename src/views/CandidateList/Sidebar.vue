@@ -1,27 +1,17 @@
 <template>
-  <nav class="c-sidebar sticky sm:w-1/3 min-h-full" aria-label="Sidebar">
-    <button
-      data-collapse-toggle="sidebar-candidates"
-      type="button"
-      class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
-      aria-controls="sidebar-candidates"
-      aria-expanded="false"
-    >
-      <span class="sr-only">Abrir filtros</span>
-      <svg
-        class="w-6 h-6"
-        aria-hidden="true"
-        fill="currentColor"
-        viewBox="0 0 20 20"
-        xmlns="http://www.w3.org/2000/svg"
+  <nav class="c-sidebar sticky sm:w-1/3 w-full min-h-full" aria-label="Sidebar">
+    <div class="c-sidebar__mobile md:hidden py-3 border-neutral-base">
+      <button
+        data-collapse-toggle="sidebar-candidates"
+        type="button"
+        class="inline-flex items-center p-2 ml-3 text-sm rounded-lg ring-2 ring-primary-base hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-base"
+        aria-controls="sidebar-candidates"
+        aria-expanded="false"
       >
-        <path
-          fill-rule="evenodd"
-          d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-          clip-rule="evenodd"
-        ></path>
-      </svg>
-    </button>
+        <svg class="w-6 h-6" fill="none" stroke="#5A44A0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path></svg>
+        <span class="ml-2 text-lg font-semibold text-primary-base">Filtros</span>
+      </button>
+    </div>
     <div
       class="hidden w-full h-full md:block md:w-auto p-6 border-r border-neutral-base"
       id="sidebar-candidates"
@@ -31,13 +21,13 @@
 
         <label for="estados" class="sr-only">Selecione um Estado</label>
         <select
-          id="localeCandidates"
-          name="localeCandidates"
-          v-model="localeCandidates"
+          id="localeListCandidates"
+          name="localeListCandidates"
+          @change="localeListCandidates"
           class="bg-neutral-light border-neutral-light sidebar py-3 px-5 text-neutral-baseDark text-sm rounded-full font-regular focus:ring-secondary-base focus:border-secondary-base block w-full"
         >
           <option
-            v-if="currentLocale === 'br'"
+            v-if="currentLocale.initials === 'br'"
             value=""
             selected
             disabled
@@ -49,7 +39,7 @@
             :key="index"
             :value="locale.initials"
             :selected="
-              locale.initials === currentLocale ? true : false
+              currentLocale.initials !== locale.initials ? false : true
             "
           >
             {{ locale.name }}
@@ -80,8 +70,8 @@
                 class="py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 flex justify-between w-full"
               >
                 <span>{{ role.name }}</span>
-                <!-- <span v-if="dataStore.Role.currentRole === 'presidente'">{{ (role.id !== 'presidente') ? 0 : filterCountRole(role.id) }}</span>
-                <span v-else-if="dataStore.Role.currentRole === 'deputado-distrital'">{{ (role.id !== 'deputado-distrital') ? 0 : filterCountRole(role.id) }}</span> -->
+                <!-- <span v-if="store.Role.currentRole === 'presidente'">{{ (role.id !== 'presidente') ? 0 : filterCountRole(role.id) }}</span>
+                <span v-else-if="store.Role.currentRole === 'deputado-distrital'">{{ (role.id !== 'deputado-distrital') ? 0 : filterCountRole(role.id) }}</span> -->
                 <!-- <span></span> -->
               </button>
             </li>
@@ -103,7 +93,7 @@
         <div class="inline-flex flex-wrap">
           <button
             type="button"
-            v-on:click="selectParty(item.party)"
+            v-on:click="item.party == currentParty ? clearParty() : selectParty(item.party)"
             class="px-4 py-2 mr-2 mb-2 rounded font-light text-xs flex align-center w-max cursor-pointer actived:bg-secondary-base hover:bg-secondary-base hover:text-primary-base transition duration-300 ease"
             :class="item.party == currentParty ? 'text-primary-base bg-secondary-base' : 'text-black bg-neutral-light'"
             v-for="item in reduceParty"
@@ -151,45 +141,63 @@ import { setCurrentRole } from "@/store/roles";
 export default defineComponent({
   data() {
     return {
-      localeCandidates: "",
-      dataLocales: [],
       isActiveRole: true,
+      isOpenSidebar: false,
     };
   },
-  setup() {
-    const dataStore = useStore();
+  setup() {   
+    const store = useStore();
     const items = reactive({
       roles: roles.data,
       locales: locales.data,
     });
 
     let currentRole = computed(function () {
-      return dataStore.Role.currentRole;
+      return store.Role.currentRole;
     });
 
     let currentCandidates = computed(function () {
-      return dataStore.Candidates.currentCandidates.objects;
-    });
-
-    let hasSelectedParty = computed(function () {
-      return dataStore.hasSelectedParty;
+      return store.Candidates.currentCandidates.objects;
     });
 
     let currentLocale = computed(function () {
-      return dataStore.Locale.currentLocale;
+      let dataLocale = {
+        initials: "",
+        name: ""
+      };
+      items.locales.forEach((i: any) => {
+        if (i.initials === store.Locale.currentLocale) {
+          dataLocale = {
+            name: i.name,
+            initials: i.initials,
+          };
+        }
+        else if (store.Locale.currentLocale === "br") {
+          dataLocale = {
+            name: "Brasil",
+            initials: "br",
+          };
+        }
+      })
+      return dataLocale;
+    });
+
+    let hasSelectedParty = computed(function () {
+      return store.hasSelectedParty;
     });
 
     let currentParty = computed(function () {
-      return dataStore.Party.currentParty;
+      return store.Party.currentParty;
     });
 
     let reduceParty = computed(function () {
       const valuesData: any = [];
-      dataStore.Candidates.currentCandidates.objects?.forEach((i) =>
+      let set = new Set();
+
+      store.Candidates.currentCandidates.objects?.forEach((i) =>
         valuesData.push(i)
       );
-
-      let set = new Set();
+      
       let unionArray = valuesData.filter(item => {
         if (!set.has(item.party)) {
           set.add(item.party);
@@ -202,31 +210,15 @@ export default defineComponent({
     });
 
     return {
-      dataStore,
+      store,
+      items,
       currentRole,
       currentLocale,
       currentParty,
-      items,
       reduceParty,
+      hasSelectedParty,
       currentCandidates,
-      hasSelectedParty
     };
-  },
-  watch: {
-    localeCandidates(newLocal) {
-      if (newLocal && this.currentRole != "presidente") {
-        setCurrentLocale(newLocal);
-        this.handleData(this.currentRole, newLocal)
-      } 
-      else if (newLocal && this.currentRole == "deputado-distrital") {
-        setCurrentLocale("df");
-        this.handleData(this.currentRole, "df")
-      } 
-      else {
-        setCurrentLocale("br");
-        this.handleData(this.currentRole, 'br')
-      }
-    }
   },
   methods: {
     selectParty(item: any) {
@@ -237,17 +229,33 @@ export default defineComponent({
       cleanCurrentParty();
     },
 
+    localeListCandidates(event) {
+      if (event.target.value && (this.currentRole == "deputado-distrital")) {
+        setCurrentLocale("df");
+        this.handleData(this.currentRole, "df")
+      } 
+      else if (event.target.value && this.currentRole != "presidente") {
+        setCurrentLocale(event.target.value);
+        this.handleData(this.currentRole, event.target.value)
+      } 
+      else {
+        setCurrentLocale("br");
+        this.handleData(this.currentRole, "br")
+      }
+    },
+
     selectRole(item: any) {       
       setCurrentRole(item);
-      if (item == "presidente" || (item == "presidente" && this.currentLocale != 'br')) {
-        this.localeCandidates = "";
+      if (item === "presidente" || (item === "presidente" && this.currentLocale.initials !== 'br')) {
+        setCurrentLocale("br")
         this.handleData(item, 'br')
       }
-      else if(item == "deputado-distrital") {
-        this.localeCandidates = "df";
+      else if(item === "deputado-distrital") {
+        setCurrentLocale("df")
         this.handleData(item, 'df')
       }
-      else if(item != "presidente" && this.currentLocale == 'br') alert("Insira uma localização!!")
+      else if(item !== "presidente" && this.currentLocale.initials === 'br') alert("Insira uma localização!!")
+      else this.handleData(item, this.currentLocale.initials)
     },
 
     async handleData(role: any, locale: any) {

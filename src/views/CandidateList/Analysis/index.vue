@@ -1,37 +1,47 @@
 <template>
   <div
     class="c-card-info w-full bg-primary-base rounded-lg border border-neutral-light"
-    id="accordion-open"
-    data-accordion="open"
   >
-    <h4
-      class="c-card-info__title flexflex-wrap text-center text-white bg-primary-dark rounded-t-lg py-5 px-3 text-base font-semibold"
-      id="accordion-open-heading-1"
+    <button
+      class="c-card-info__title w-full flex flex-wrap justify-between text-center text-white bg-primary-dark rounded-t-lg py-5 px-5 text-base font-semibold"
+      :class="!isOpenAnalisys ? 'rounded-b-xl' : 'rounded-none'"
+      v-on:click="isOpenAnalisys = !isOpenAnalisys"
     >
-      <button
-        type="button"
-        class="flex items-center justify-between w-full"
-        data-accordion-target="#accordion-open-body-1"
-        aria-expanded="true"
-        aria-controls="accordion-open-body-1"
-      >
         <span>Filtros por análises</span>
-        <svg
-          data-accordion-icon
-          class="w-6 h-6 rotate-180 shrink-0"
-          fill="currentColor"
-          viewBox="0 0 20 20"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-            clip-rule="evenodd"
-          ></path>
-        </svg>
-      </button>
-    </h4>
-    <div id="accordion-open-body-1" aria-labelledby="accordion-open-heading-1">
+        <span>
+          <svg
+              v-if="isOpenAnalisys"
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 15l7-7 7 7"
+              ></path>
+            </svg>
+            <svg
+              v-else
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"
+              ></path>
+            </svg>
+        </span>
+    </button>
+    <div :class="isOpenAnalisys ? 'd-block' : 'hidden'">
       <div class="c-card-info__content p-5 sm:grid grid-cols-4 gap-4">
         <div class="flex flex-col justify-center items-center pb-8 sm:pb-0">
           <h2 class="text-secondary-base text-3xl font-bold mb-2">
@@ -54,5 +64,11 @@
 <script lang="ts">
 import FiltersAnalysis from "./FiltersAnalysis.vue";
 
-export default { components: { FiltersAnalysis } };
+export default { 
+  components: { FiltersAnalysis },
+  data() {
+    return {
+      isOpenAnalisys: true,
+    }
+  } };
 </script>

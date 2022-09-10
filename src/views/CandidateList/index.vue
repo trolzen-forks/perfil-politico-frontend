@@ -7,7 +7,7 @@
         <div class="container sm:p-12 px-5">
           <div class="candidate-list__title mb-12">
             <h1 class="text-primary-base font-bold text-3xl mb-4">
-              Confira os candidatos para {{dataRole}} {{dataLocale.preposition}} {{dataLocale.name}}
+              Confira os candidatos para {{currentRole}} {{currentLocale.preposition}} {{currentLocale.name}}
             </h1>
             <div class="pt-10 border-t border-neutral-base">
               <h2 class="text-primary-base font-bold text-xl mb-4">
@@ -134,13 +134,14 @@ export default defineComponent({
     CardCandidate,
     Sidebar,
   },
+  data() {
+    return {
+     
+      
+    }
+  },
   setup() {
     const data = useStore();
-    let dataRole = "";
-    let dataLocale = {
-      preposition: "",
-      name: ""
-    };
 
     const items = reactive({
       roles: roles.data,
@@ -152,11 +153,34 @@ export default defineComponent({
     });
 
     let currentLocale = computed(function () {
-      return data.Locale.currentLocale;
+      let dataLocale = {
+        preposition: "",
+        name: ""
+      };
+      items.locales.forEach((i: any) => {
+        if (i.initials === data.Locale.currentLocale) {
+          dataLocale = {
+            name: i.name,
+            preposition: i.preposition,
+          };
+        }
+        else if (data.Locale.currentLocale == "br") {
+          dataLocale = {
+            name: "Brasil",
+            preposition: "no",
+          };
+        }
+      })
+      return dataLocale;
     });
 
     let currentRole = computed(function () {
-      return data.Role.currentRole;
+      let dataRole = "";
+      items.roles.forEach((i: any) => {
+        if (i.id == data.Role.currentRole) dataRole = i.name;
+      });
+
+      return dataRole;
     });
 
     let hasSelectedParty = computed(function () {
@@ -183,28 +207,9 @@ export default defineComponent({
       );
       return valuesData;
     });
-
-    items.roles.forEach((i: any) => {
-      if (i.id == data.Role.currentRole) dataRole = i.name;
-    });
-    items.locales.forEach((i: any) => {
-      if (i.initials === data.Locale.currentLocale)
-        dataLocale = {
-          name: i.name,
-          preposition: i.preposition,
-        };
-      else if (data.Locale.currentLocale === "br") {
-        dataLocale = {
-          name: "Brasil",
-          preposition: "no",
-        };
-      }
-    });
-
     return {
+      items,
       data,
-      dataRole,
-      dataLocale,
       currentLocale,
       currentRole,
       currentParty,
@@ -212,14 +217,6 @@ export default defineComponent({
       currentCandidatesFilter,
       hasSelectedParty,
     };
-  },
-  methods: {
-    getCandidates() {
-      var i = this.currentParty;
-      this.currentCandidates.filter(function (el) {
-        if (el.party == i) return console.log(el.party);
-      });
-    },
-  },
+  }
 });
 </script>
