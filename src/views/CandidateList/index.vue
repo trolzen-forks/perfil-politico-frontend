@@ -9,7 +9,7 @@
             <h1 class="text-primary-base font-bold text-3xl mb-4">
               Confira os candidatos para {{currentRole}} {{currentLocale.preposition}} {{currentLocale.name}}
             </h1>
-            <div class="pt-10 border-t border-neutral-base">
+            <div class="pt-10 md:border-t border-neutral-base">
               <h2 class="text-primary-base font-bold text-xl mb-4">
                 Qual sua função?
               </h2>

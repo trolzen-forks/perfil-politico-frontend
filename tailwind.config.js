@@ -168,6 +168,7 @@ module.exports = {
     flexGrow: {
       0: "0",
       DEFAULT: "1",
+      large: "2",
     },
     flexShrink: {
       0: "0",

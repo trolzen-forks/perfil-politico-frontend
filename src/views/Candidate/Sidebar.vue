@@ -12,7 +12,7 @@
       >
         <router-link
           :to="{ name: 'CandidateList' }"
-          class="text-primary-base text-xl font-bold rounded-lg sm:px-8 py-2 text-center inline-flex items-center mr-2 hover:underline"
+          class="text-primary-base text-xl font-bold rounded-lg sm:px-8 px-4 py-2 text-center inline-flex items-center mr-2 hover:underline"
         >
           <svg
             class="w-6 h-6"
@@ -32,20 +32,20 @@
         </router-link>
       </div>
       <div class="c-sidebar-candidate__info-candidate">
-        <div class="sm:px-10 px-5 py-5 flex items-center">
+        <div class="px-5 md:px-10 py-5 inline-flex items-center">
           <div
             v-if="image"
-            class="w-24 h-24 p-1 rounded-full ring-4 ring-primary-base overflow-hidden"
+            class="c-sidebar-candidate__image w-28 h-28 rounded-full ring-4 ring-primary-base overflow-hidden"
           >
-            <img class="rounded-full" :src="image" alt="Candidato" />
+            <img class="w-full rounded-full" :src="image" alt="Candidato" />
           </div>
           <IconCandidate
             v-else
-            class="w-24 h-24 rounded-full p-1 ring-4 ring-primary-base"
+            class="w-28 h-28 rounded-full p-1 ring-4 ring-primary-base"
           ></IconCandidate>
-          <div class="ml-10">
-            <h2 class="text-primary-base font-bold text-xl">{{ name }}</h2>
-            <p class="text-sm font-light text-primary-base">
+          <div class="c-sidebar-candidate__infos ml-5">
+            <h2 class="text-primary-base font-bold text-base">{{ name }}</h2>
+            <p class="text-xs font-light text-primary-base">
               {{ role }}
             </p>
           </div>
@@ -141,5 +141,9 @@ export default {
 <style lang="postcss" scoped>
 :v-deep.svg-icon-candidate {
   @apply w-24 h-24;
+}
+.c-sidebar-candidate__infos {
+  flex-grow: 1;
+  flex-basis: 0;
 }
 </style>

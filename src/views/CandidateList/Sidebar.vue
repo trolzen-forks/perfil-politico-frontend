@@ -1,20 +1,22 @@
 <template>
   <nav class="c-sidebar sticky sm:w-1/3 w-full min-h-full" aria-label="Sidebar">
-    <div class="c-sidebar__mobile md:hidden py-3 border-neutral-base">
+    <div class="c-sidebar__mobile md:hidden pt-3 pb-5 mb-5 border-b border-neutral-base">
       <button
         data-collapse-toggle="sidebar-candidates"
         type="button"
         class="inline-flex items-center p-2 ml-3 text-sm rounded-lg ring-2 ring-primary-base hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-base"
         aria-controls="sidebar-candidates"
         aria-expanded="false"
+        v-on:click="isOpenSidebar = !isOpenSidebar"
       >
         <svg class="w-6 h-6" fill="none" stroke="#5A44A0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path></svg>
         <span class="ml-2 text-lg font-semibold text-primary-base">Filtros</span>
       </button>
     </div>
     <div
-      class="hidden w-full h-full md:block md:w-auto p-6 border-r border-neutral-base"
+      class="w-full h-full md:block md:w-auto p-6 border-r border-neutral-base"
       id="sidebar-candidates"
+      :class="isOpenSidebar ? 'd-block' : 'hidden'"
     >
       <div class="c-sidebar__state mb-10">
         <h3 class="text-primary-base text-xl font-bold mb-3">Estado</h3>
@@ -103,26 +105,6 @@
           </button>
         </div>
       </div>
-      <!-- <div class="c-sidebar__rounds mb-10">
-        <div class="flex justify-between items-center">
-          <h3 class="text-primary-base text-xl font-bold mb-3">Turnos</h3>
-        </div>
-        <div>
-          <select
-            id="localeCandidates"
-            name="localeCandidates"
-            class="bg-neutral-light border-neutral-light sidebar py-3 px-5 text-neutral-baseDark text-sm rounded-full font-regular focus:ring-secondary-base focus:border-secondary-base block w-full"
-          >
-            <option
-              v-for="item in currentCandidates"
-              :key="item.round"
-              :value="item.round"
-            >
-              {{ item.round }}
-            </option>
-          </select>
-        </div>
-      </div> -->
     </div>
   </nav>
 </template>
