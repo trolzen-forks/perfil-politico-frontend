@@ -47,9 +47,7 @@
               :key="locale.initials"
               :value="locale.initials"
             >
-              {{
-                locale.name
-              }}
+              {{ locale.name }}
             </option>
           </select>
         </div>
@@ -198,7 +196,7 @@ export default defineComponent({
       listCandidates,
       currentRole,
       currentCandidates,
-      currentLocale
+      currentLocale,
     };
   },
   methods: {

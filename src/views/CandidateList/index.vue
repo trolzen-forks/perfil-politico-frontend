@@ -7,7 +7,8 @@
         <div class="container sm:p-12 px-5">
           <div class="candidate-list__title mb-12">
             <h1 class="text-primary-base font-bold text-3xl mb-4">
-              Confira os candidatos para {{currentRole}} {{currentLocale.preposition}} {{currentLocale.name}}
+              Confira os candidatos para {{ currentRole }}
+              {{ currentLocale.preposition }} {{ currentLocale.name }}
             </h1>
             <div class="pt-10 md:border-t border-neutral-base">
               <h2 class="text-primary-base font-bold text-xl mb-4">
@@ -135,10 +136,7 @@ export default defineComponent({
     Sidebar,
   },
   data() {
-    return {
-     
-      
-    }
+    return {};
   },
   setup() {
     const data = useStore();
@@ -155,7 +153,7 @@ export default defineComponent({
     let currentLocale = computed(function () {
       let dataLocale = {
         preposition: "",
-        name: ""
+        name: "",
       };
       items.locales.forEach((i: any) => {
         if (i.initials === data.Locale.currentLocale) {
@@ -163,14 +161,13 @@ export default defineComponent({
             name: i.name,
             preposition: i.preposition,
           };
-        }
-        else if (data.Locale.currentLocale == "br") {
+        } else if (data.Locale.currentLocale == "br") {
           dataLocale = {
             name: "Brasil",
             preposition: "no",
           };
         }
-      })
+      });
       return dataLocale;
     });
 
@@ -217,6 +214,6 @@ export default defineComponent({
       currentCandidatesFilter,
       hasSelectedParty,
     };
-  }
+  },
 });
 </script>

@@ -1,6 +1,11 @@
 <template>
-  <nav class="c-sidebar relative sm:w-1/3 w-full min-h-full border-r border-neutral-base" aria-label="Sidebar">
-    <div class="c-sidebar__mobile md:hidden pt-3 mb-5 border-b border-neutral-base">
+  <nav
+    class="c-sidebar relative sm:w-1/3 w-full min-h-full border-r border-neutral-base"
+    aria-label="Sidebar"
+  >
+    <div
+      class="c-sidebar__mobile md:hidden pt-3 mb-5 border-b border-neutral-base"
+    >
       <button
         data-collapse-toggle="sidebar-candidates"
         type="button"
@@ -9,8 +14,23 @@
         aria-expanded="false"
         v-on:click="isOpenSidebar = !isOpenSidebar"
       >
-        <svg class="w-6 h-6" fill="none" stroke="#5A44A0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path></svg>
-        <span class="ml-2 text-lg font-semibold text-primary-base">Filtros</span>
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="#5A44A0"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"
+          ></path>
+        </svg>
+        <span class="ml-2 text-lg font-semibold text-primary-base"
+          >Filtros</span
+        >
       </button>
     </div>
     <div
@@ -95,9 +115,17 @@
         <div class="inline-flex flex-wrap">
           <button
             type="button"
-            v-on:click="item.party == currentParty ? clearParty() : selectParty(item.party)"
+            v-on:click="
+              item.party == currentParty
+                ? clearParty()
+                : selectParty(item.party)
+            "
             class="px-4 py-2 mr-2 mb-2 rounded font-light text-xs flex align-center w-max cursor-pointer actived:bg-secondary-base hover:bg-secondary-base hover:text-primary-base transition duration-300 ease"
-            :class="item.party == currentParty ? 'text-primary-base bg-secondary-base' : 'text-black bg-neutral-light'"
+            :class="
+              item.party == currentParty
+                ? 'text-primary-base bg-secondary-base'
+                : 'text-black bg-neutral-light'
+            "
             v-for="item in reduceParty"
             :key="item.party"
           >
@@ -127,7 +155,7 @@ export default defineComponent({
       isOpenSidebar: false,
     };
   },
-  setup() {   
+  setup() {
     const store = useStore();
     const items = reactive({
       roles: roles.data,
@@ -145,7 +173,7 @@ export default defineComponent({
     let currentLocale = computed(function () {
       let dataLocale = {
         initials: "",
-        name: ""
+        name: "",
       };
       items.locales.forEach((i: any) => {
         if (i.initials === store.Locale.currentLocale) {
@@ -153,14 +181,13 @@ export default defineComponent({
             name: i.name,
             initials: i.initials,
           };
-        }
-        else if (store.Locale.currentLocale === "br") {
+        } else if (store.Locale.currentLocale === "br") {
           dataLocale = {
             name: "Brasil",
             initials: "br",
           };
         }
-      })
+      });
       return dataLocale;
     });
 
@@ -179,8 +206,8 @@ export default defineComponent({
       store.Candidates.currentCandidates.objects?.forEach((i) =>
         valuesData.push(i)
       );
-      
-      let unionArray = valuesData.filter(item => {
+
+      let unionArray = valuesData.filter((item) => {
         if (!set.has(item.party)) {
           set.add(item.party);
           return true;
@@ -188,7 +215,7 @@ export default defineComponent({
         return false;
       }, set);
 
-      return unionArray
+      return unionArray;
     });
 
     return {
@@ -206,38 +233,38 @@ export default defineComponent({
     selectParty(item: any) {
       setCurrentParty(item);
     },
-    
+
     clearParty() {
       cleanCurrentParty();
     },
 
     localeListCandidates(event) {
-      if (event.target.value && (this.currentRole == "deputado-distrital")) {
+      if (event.target.value && this.currentRole == "deputado-distrital") {
         setCurrentLocale("df");
-        this.handleData(this.currentRole, "df")
-      } 
-      else if (event.target.value && this.currentRole != "presidente") {
+        this.handleData(this.currentRole, "df");
+      } else if (event.target.value && this.currentRole != "presidente") {
         setCurrentLocale(event.target.value);
-        this.handleData(this.currentRole, event.target.value)
-      } 
-      else {
+        this.handleData(this.currentRole, event.target.value);
+      } else {
         setCurrentLocale("br");
-        this.handleData(this.currentRole, "br")
+        this.handleData(this.currentRole, "br");
       }
     },
 
-    selectRole(item: any) {       
+    selectRole(item: any) {
       setCurrentRole(item);
-      if (item === "presidente" || (item === "presidente" && this.currentLocale.initials !== 'br')) {
-        setCurrentLocale("br")
-        this.handleData(item, 'br')
-      }
-      else if(item === "deputado-distrital") {
-        setCurrentLocale("df")
-        this.handleData(item, 'df')
-      }
-      else if(item !== "presidente" && this.currentLocale.initials === 'br') alert("Insira uma localização!!")
-      else this.handleData(item, this.currentLocale.initials)
+      if (
+        item === "presidente" ||
+        (item === "presidente" && this.currentLocale.initials !== "br")
+      ) {
+        setCurrentLocale("br");
+        this.handleData(item, "br");
+      } else if (item === "deputado-distrital") {
+        setCurrentLocale("df");
+        this.handleData(item, "df");
+      } else if (item !== "presidente" && this.currentLocale.initials === "br")
+        alert("Insira uma localização!!");
+      else this.handleData(item, this.currentLocale.initials);
     },
 
     async handleData(role: any, locale: any) {
@@ -248,17 +275,18 @@ export default defineComponent({
           role
         );
         setCurrentCandidates(data);
-        this.$router.replace({ name: "CandidateList",
-            params: {
-              year: 2022,
-              locale: locale,
-              role: role,
-            } 
+        this.$router.replace({
+          name: "CandidateList",
+          params: {
+            year: 2022,
+            locale: locale,
+            role: role,
+          },
         });
       } catch (error) {
         console.log("Erro no carregamento de candidatos", error);
       }
-    }
+    },
   },
 });
 </script>

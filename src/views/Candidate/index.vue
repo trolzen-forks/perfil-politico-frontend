@@ -3,16 +3,16 @@
     <Navbar></Navbar>
     <div class="candidate mt-20 sm:flex flex-grow">
       <Sidebar
-        :name="data.Candidates.currentCandidateSelected.name"
-        :party="data.Candidates.currentCandidateSelected.party_abbreviation"
-        :number="data.Candidates.currentCandidateSelected.number"
-        :role="data.Candidates.currentCandidateSelected.post"
-        :age="data.Candidates.currentCandidateSelected.age"
-        :education="data.Candidates.currentCandidateSelected.education"
-        :gender="data.Candidates.currentCandidateSelected.gender"
-        :ethnicity="data.Candidates.currentCandidateSelected.ethnicity"
-        :timeline="data.Candidates.currentCandidateSelected.election_history"
-        :image="data.Candidates.currentCandidateSelected.image"
+        :name="store.Candidates.currentCandidateSelected.name"
+        :party="store.Candidates.currentCandidateSelected.party_abbreviation"
+        :number="store.Candidates.currentCandidateSelected.number"
+        :role="store.Candidates.currentCandidateSelected.post"
+        :age="store.Candidates.currentCandidateSelected.age"
+        :education="store.Candidates.currentCandidateSelected.education"
+        :gender="store.Candidates.currentCandidateSelected.gender"
+        :ethnicity="store.Candidates.currentCandidateSelected.ethnicity"
+        :timeline="store.Candidates.currentCandidateSelected.election_history"
+        :image="store.Candidates.currentCandidateSelected.image"
       ></Sidebar>
       <div class="candidate__content w-full bg-background-light">
         <div
@@ -75,80 +75,50 @@
             <template v-slot:title
               >Idade:
               <span class="font-light ml-1">{{
-                data.Candidates.currentCandidateSelected.age
+                store.Candidates.currentCandidateSelected.age
               }}</span></template
             >
             <template v-slot:content>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
+              <AgeChart />
             </template>
           </CardInfo>
           <CardInfo>
             <template v-slot:title
               >Sexo:
               <span class="font-light ml-1">{{
-                data.Candidates.currentCandidateSelected.gender
+                store.Candidates.currentCandidateSelected.gender
               }}</span></template
             >
             <template v-slot:content>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
+              <GenderChart />
             </template>
           </CardInfo>
           <CardInfo>
             <template v-slot:title
               >Cor/Raça:
               <span class="font-light ml-1">{{
-                data.Candidates.currentCandidateSelected.ethnicity
+                store.Candidates.currentCandidateSelected.ethnicity
               }}</span></template
             >
             <template v-slot:content>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
+              <EthnicityChart />
             </template>
           </CardInfo>
           <CardInfo>
             <template v-slot:title
               >Escolaridade:
               <span class="font-light ml-1">{{
-                data.Candidates.currentCandidateSelected.education
+                store.Candidates.currentCandidateSelected.education
               }}</span></template
             >
             <template v-slot:content>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
+              <EducationChart />
             </template>
           </CardInfo>
           <CardInfo class="sm:col-span-2">
             <template v-slot:title>Patrimônio declarado</template>
             <template v-slot:content>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
+              <FiliationChart />
             </template>
           </CardInfo>
         </div>
@@ -159,27 +129,50 @@
 </template>
 
 <script lang="ts">
+import * as d3 from "d3";
+import { defineComponent } from "vue";
+
 import Footer from "@/components/Footer.vue";
 import Navbar from "@/components/Navbar.vue";
 import Sidebar from "./Sidebar.vue";
 import CardInfo from "@/components/CardInfo.vue";
 import useStore from "@/hooks/useStore";
+import AgeChart from "./Charts/AgeChart.vue";
+import EducationChart from "./Charts/EducationChart.vue";
+import EthnicityChart from "./Charts/EthnicityChart.vue";
+import GenderChart from "./Charts/GenderChart.vue";
+import FiliationChart from "./Charts/FiliationChart.vue";
 
-export default {
+export default defineComponent({
   components: {
     Footer,
     Navbar,
     Sidebar,
     CardInfo,
+    AgeChart,
+    EducationChart,
+    EthnicityChart,
+    GenderChart,
+    FiliationChart,
   },
-  setup() {
-    const data = useStore();
-
+  data() {
     return {
-      data,
+      loadData: [],
     };
   },
-};
+  setup() {
+    const store = useStore();
+    return {
+      store,
+    };
+  },
+  methods: {
+    async fetchData() {
+      let data = await d3.json(this.store.Candidates.currentCandidateSelected);
+      this.loadData = data;
+    },
+  },
+});
 </script>
 
 <style></style>
