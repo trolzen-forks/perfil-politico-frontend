@@ -1,34 +1,76 @@
 <template>
-  <div>
-    <svg :height="height" :width="width">
-      <!-- <g transform="translate(50,50)">
-          <circle
-            v-for="c in output"
-            :key="c.id"
-            :r="c.r"
-            :cx="c.x"
-            :cy="c.y"
-            :fill="c.fill"
-            :stroke="c.stroke"
-          >
-          </circle>
-        </g> -->
-    </svg>
+  <div class="container">
+    <Bar v-if="loaded" :styles="stylesBar" :chart-options="chartOptions" :chart-data="chartData" />
+    <div v-if="loaded && error">
+      <h4>Não foi possível carregar os dados</h4>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import * as d3 from "d3";
+import { computed, defineComponent } from 'vue'
 
-export default {
-  props: ["data"],
-  data() {
-    return {
-      height: 600,
-      width: 600,
-    };
+import { Bar } from 'vue-chartjs'
+import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
+
+import services from '@/services'
+import useStore from '@/hooks/useStore'
+
+ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
+
+export default defineComponent({
+  name: 'AgeChart',
+  components: {
+    Bar
   },
-  methods: {},
-  computed: {},
-};
+  data: () => ({
+    loaded: false,
+    error: false,
+    chartData: {
+        labels: ['Até 24', 'de 25 a 34', 'de 25 a 44', 'de 45 a 59', 'de 60 a 69', '70 ou mais'],
+        datasets: [
+          {
+            label: 'Quantidade',
+            backgroundColor: '#f2f2f2',
+            data: null,
+            borderRadius: "50%",
+          }
+        ]
+    }
+  }),
+  setup() {
+    const store = useStore();
+    let currentRole = computed(function () {
+      return store.Role.currentRole;
+    });
+    const chartOptions = {
+      responsive: true,
+      maintainAspectRatio: false,
+      indexAxis: 'y',
+    }
+    return {
+      currentRole,
+      chartOptions
+    }
+  },
+  computed: {
+    stylesBar () {
+      return {
+        position: 'relative'
+      }
+    }
+  },
+  async mounted () {
+    this.loaded = false
+
+    try {
+      const { data } = await services.dataCandidates.characteristic(2018, this.currentRole, 'age')
+      this.chartData.datasets[0].data = data.map(i =>  i.total)
+
+      this.loaded = true
+    } catch (e) {
+      this.error = true;
+    }
+  }
+})
 </script>

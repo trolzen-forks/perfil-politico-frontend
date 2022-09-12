@@ -18,4 +18,22 @@ export default (httpClient: any) => ({
       dataCandidate: response.data,
     };
   },
+
+  characteristic: async (year: number, post: string, characteristic: string) => {
+    setGlobalLoading(true);
+    const response = await httpClient.get(`/api/stats/${year}/${post}/${characteristic}/`);
+
+    return {
+      data: response.data,
+    };
+  },
+  
+  assets: async (state: string, post: string) => {
+    setGlobalLoading(true);
+    const response = await httpClient.get(`/api/asset-stats/`, { params: { state: state, candidate_post: post  } });
+
+    return {
+      data: response.data,
+    };
+  },
 });

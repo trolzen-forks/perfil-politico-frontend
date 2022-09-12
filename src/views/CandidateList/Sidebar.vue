@@ -263,7 +263,7 @@ export default defineComponent({
         setCurrentLocale("df");
         this.handleData(item, "df");
       } else if (item !== "presidente" && this.currentLocale.initials === "br")
-        alert("Insira uma localização!!");
+        alert("Selecione um estado!");
       else this.handleData(item, this.currentLocale.initials);
     },
 

@@ -5,7 +5,7 @@ import CandidatesService from "./candidates";
 import router from "../router";
 
 const httpClient = axios.create({
-  baseURL: apis.production,
+  baseURL: apis.staging,
 });
 
 httpClient.interceptors.response.use(
@@ -30,6 +30,8 @@ httpClient.interceptors.response.use(
     return error;
   }
 );
+
+
 
 export default {
   dataCandidates: CandidatesService(httpClient),

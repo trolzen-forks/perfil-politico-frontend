@@ -142,6 +142,7 @@ import EducationChart from "./Charts/EducationChart.vue";
 import EthnicityChart from "./Charts/EthnicityChart.vue";
 import GenderChart from "./Charts/GenderChart.vue";
 import FiliationChart from "./Charts/FiliationChart.vue";
+import services from "@/services";
 
 export default defineComponent({
   components: {
@@ -167,9 +168,13 @@ export default defineComponent({
     };
   },
   methods: {
-    async fetchData() {
-      let data = await d3.json(this.store.Candidates.currentCandidateSelected);
-      this.loadData = data;
+    async dataAge() {
+      const { data } = await services.dataCandidates.candidatesList(
+          2022,
+          this.store.Candidates.currentCandidateSelected.post,
+          'age'
+      );
+      this.loadData = data
     },
   },
 });
