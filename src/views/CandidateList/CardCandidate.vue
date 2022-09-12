@@ -31,7 +31,7 @@
           class="w-full py-3 px-8 text-sm font-light text-center text-white bg-primary-base rounded-full hover:bg-primary-dark focus:ring-4 focus:outline-none focus:ring-secondary-base"
           v-on:click="onClickCandidate(keyCandidate, locale, role)"
         >
-          Ver candidatura
+          Ver perfil
         </button>
       </div>
     </div>

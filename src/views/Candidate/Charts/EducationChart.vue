@@ -32,9 +32,9 @@
           datasets: [
             {
               label: 'Quantidade',
-              backgroundColor: '#f2f2f2',
+              backgroundColor: '',
+              borderRadius: Number.MAX_VALUE,
               data: null,
-              borderRadius: "50%",
             }
           ]
       }
@@ -44,6 +44,9 @@
       let currentRole = computed(function () {
         return store.Role.currentRole;
       });
+      let currentCandidateSelected = computed(function () {
+        return store.Candidates.currentCandidateSelected;
+      });
       const chartOptions = {
         responsive: true,
         maintainAspectRatio: false,
@@ -51,7 +54,8 @@
       }
       return {
         currentRole,
-        chartOptions
+        chartOptions,
+        currentCandidateSelected
       }
     },
     computed: {
@@ -67,6 +71,8 @@
       try {
         const { data } = await services.dataCandidates.characteristic(2018, this.currentRole, 'education')
         this.chartData.datasets[0].data = data.map(i =>  i.total)
+
+        this.chartData.datasets[0].backgroundColor = data.map(i =>  i.characteristic == this.currentCandidateSelected.education ? '#9BDB52' : '#D9D9D9')
   
         this.loaded = true
       } catch (e) {

@@ -27,13 +27,13 @@ export default defineComponent({
     loaded: false,
     error: false,
     chartData: {
-        labels: ['Até 24', 'de 25 a 34', 'de 25 a 44', 'de 45 a 59', 'de 60 a 69', '70 ou mais'],
+        labels: ['Até 24', 'de 25 a 34', 'de 35 a 44', 'de 45 a 59', 'de 60 a 69', '70 ou mais'],
         datasets: [
           {
             label: 'Quantidade',
-            backgroundColor: '#f2f2f2',
+            backgroundColor: [''],
+            borderRadius: Number.MAX_VALUE,
             data: null,
-            borderRadius: "50%",
           }
         ]
     }
@@ -43,6 +43,9 @@ export default defineComponent({
     let currentRole = computed(function () {
       return store.Role.currentRole;
     });
+    let currentCandidateSelected = computed(function () {
+      return store.Candidates.currentCandidateSelected;
+    });
     const chartOptions = {
       responsive: true,
       maintainAspectRatio: false,
@@ -50,7 +53,8 @@ export default defineComponent({
     }
     return {
       currentRole,
-      chartOptions
+      chartOptions,
+      currentCandidateSelected
     }
   },
   computed: {
@@ -64,9 +68,17 @@ export default defineComponent({
     this.loaded = false
 
     try {
-      const { data } = await services.dataCandidates.characteristic(2018, this.currentRole, 'age')
-      this.chartData.datasets[0].data = data.map(i =>  i.total)
+      const { data } = await services.dataCandidates.characteristic(2018, this.currentRole, 'age');
+      this.chartData.datasets[0].data = data.map(i =>  i.total);
 
+      this.chartData.datasets[0].backgroundColor = 
+        this.currentCandidateSelected.age < 25 ? ['#9BDB52', '#D9D9D9', '#D9D9D9', '#D9D9D9', '#D9D9D9', '#D9D9D9'] : 
+        this.currentCandidateSelected.age >= 25 && this.currentCandidateSelected.age < 35 ? ['#D9D9D9', '#9BDB52', '#D9D9D9', '#D9D9D9', '#D9D9D9', '#D9D9D9'] : 
+        this.currentCandidateSelected.age >= 35 && this.currentCandidateSelected.age < 45 ? ['#D9D9D9', '#D9D9D9', '#9BDB52', '#D9D9D9', '#D9D9D9', '#D9D9D9']: 
+        this.currentCandidateSelected.age >= 45 && this.currentCandidateSelected.age < 60 ? ['#D9D9D9', '#D9D9D9', '#D9D9D9', '#9BDB52', '#D9D9D9', '#D9D9D9'] : 
+        this.currentCandidateSelected.age >= 60 && this.currentCandidateSelected.age < 70 ? ['#D9D9D9', '#D9D9D9', '#D9D9D9', '#D9D9D9', '#9BDB52', '#D9D9D9'] : 
+        ['#D9D9D9', '#D9D9D9', '#D9D9D9', '#D9D9D9', '#D9D9D9', '#9BDB52']
+  
       this.loaded = true
     } catch (e) {
       this.error = true;

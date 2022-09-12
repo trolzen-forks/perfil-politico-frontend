@@ -39,7 +39,7 @@ ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale)
           datasets: [
             {
               label: 'Quantidade',
-              backgroundColor: ['#9BDB52', '#F2F2F2'],
+              backgroundColor: '',
               data: null,
             }
           ]
@@ -50,13 +50,17 @@ ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale)
       let currentRole = computed(function () {
         return store.Role.currentRole;
       });
+      let currentCandidateSelected = computed(function () {
+        return store.Candidates.currentCandidateSelected;
+      });
       const chartOptions = {
         responsive: true,
         maintainAspectRatio: false,
       }
       return {
         currentRole,
-        chartOptions
+        chartOptions,
+        currentCandidateSelected
       }
     },
     computed: {
@@ -72,6 +76,8 @@ ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale)
       try {
         const { data } = await services.dataCandidates.characteristic(2018, this.currentRole, 'gender')
         this.chartData.datasets[0].data = data.map(i =>  i.total)
+
+        this.chartData.datasets[0].backgroundColor = data.map(i =>  i.characteristic == this.currentCandidateSelected.gender ? '#9BDB52' : '#D9D9D9')
   
         this.loaded = true
       } catch (e) {

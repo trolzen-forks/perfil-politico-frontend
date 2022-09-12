@@ -52,12 +52,28 @@
               label: 'Patrimônio da pessoa candidata',
               backgroundColor: '#5A44A0',
               borderColor: '#5A44A0',
+              pointRadius: 8,
               data: null,
             },
             {
               label: 'Mediana do patrimônio de todos os candidatos eleitos',
               backgroundColor: '#9BDB52',
               borderColor: '#9BDB52',
+              pointRadius: 8,
+              data: null,
+            },
+            {
+              label: 'Filiação a partido',
+              backgroundColor: '#333',
+              borderColor: '#333',
+              pointRadius: 8,
+              data: null,
+            },
+            {
+              label: 'Mandato eletivo',
+              backgroundColor: '#9BDB52',
+              borderColor: '#9BDB52',
+              pointRadius: 8,
               data: null,
             }
           ]
@@ -105,6 +121,7 @@
         this.chartData.labels = data.mediana_patrimonios.map(i => i.year);
         this.chartData.datasets[0].data = this.store.Candidates.currentCandidateSelected.asset_history.map(i =>  i.value);
         this.chartData.datasets[1].data = data.mediana_patrimonios.map(i =>  i.value);
+        this.chartData.datasets[2].data = this.store.Candidates.currentCandidateSelected.affiliation_history.map(i =>  i.party);
         this.loaded = true;
       } catch (e) {
         this.error = true;
