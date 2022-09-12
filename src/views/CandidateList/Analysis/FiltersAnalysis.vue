@@ -20,7 +20,7 @@
             ></div>
           </div>
           <div class="ml-3 text-white font-medium text-sm">
-            Quantos nunca foram eleitos?
+            Quantas nunca foram eleitas?
           </div>
         </label>
       </div>
@@ -34,7 +34,7 @@
             ></div>
           </div>
           <div class="ml-3 text-white font-medium text-sm">
-            Quantos já foram eleitos?
+            Quantas já foram eleitas?
           </div>
         </label>
       </div>
@@ -48,7 +48,7 @@
             ></div>
           </div>
           <div class="ml-3 text-white font-medium text-sm">
-            Quantos nunca concorreram?
+            Quantas nunca concorreram?
           </div>
         </label>
       </div>
@@ -90,7 +90,7 @@
             ></div>
           </div>
           <div class="ml-3 text-white font-medium text-sm">
-            Quantos são negros ou pardos?
+            Quantas são PPI (pretas, pardas e indígenas)?
           </div>
         </label>
       </div>
@@ -104,7 +104,7 @@
             ></div>
           </div>
           <div class="ml-3 text-white font-medium text-sm">
-            Quantos são brancos?
+            Quantas são brancas?
           </div>
         </label>
       </div>

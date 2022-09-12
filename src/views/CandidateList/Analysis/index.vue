@@ -45,11 +45,11 @@
       <div class="c-card-info__content p-5 sm:grid grid-cols-4 gap-4">
         <div class="flex flex-col justify-center items-center pb-8 sm:pb-0">
           <h2 class="text-secondary-base text-3xl font-bold mb-2">
-            Análises sobre os candidatos
+            Análises sobre as candidaturas
           </h2>
           <p class="text-white">
-            As perguntas também serão aplicadas como filtros na listagem abaixo
-            de canditatos.
+            Ao clicar nas perguntas, você verá apenas as candidaturas que
+            atendam aos critérios selecionados na listagem abaixo.
           </p>
         </div>
         <div class="col-span-2"></div>

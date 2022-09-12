@@ -49,14 +49,14 @@
           labels: null,
           datasets: [
             {
-              label: 'Patrimônio da pessoa candidata',
+              label: 'Patrimônio declarado da pessoa candidata',
               backgroundColor: '#5A44A0',
               borderColor: '#5A44A0',
               pointRadius: 8,
               data: null,
             },
             {
-              label: 'Mediana do patrimônio de todos os candidatos eleitos',
+              label: 'Mediana do patrimônio declarado de todas as candidaturas eleitas',
               backgroundColor: '#9BDB52',
               borderColor: '#9BDB52',
               pointRadius: 8,

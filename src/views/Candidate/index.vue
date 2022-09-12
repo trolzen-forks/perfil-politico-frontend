@@ -22,7 +22,7 @@
             <h1
               class="uppercase font-bold text-xl text-primary-base sm:text-left text-center"
             >
-              Comparação com os eleitos em 2018
+              Comparação com pessoas eleitas em 2018
             </h1>
           </div>
           <div class="flex items-center justify-between">
@@ -44,13 +44,13 @@
                   d="M15 19l-7-7 7-7"
                 ></path>
               </svg>
-              <span class="uppercase">Ano Anterior</span>
+              <span class="uppercase">Eleição Anterior</span>
             </button>
             <button
               type="button"
               class="text-primary-base font-bold rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 hover:underline"
             >
-              <span class="uppercase">Próximo Ano</span>
+              <span class="uppercase">Próxima Eleição</span>
               <svg
                 class="w-6 h-6"
                 fill="none"
@@ -84,7 +84,7 @@
           </CardInfo>
           <CardInfo>
             <template v-slot:title
-              >Sexo:
+              >Gênero:
               <span class="font-light ml-1">{{
                 store.Candidates.currentCandidateSelected.gender
               }}</span></template
@@ -116,7 +116,7 @@
             </template>
           </CardInfo>
           <CardInfo class="sm:col-span-2">
-            <template v-slot:title>Patrimônio declarado</template>
+            <template v-slot:title>Trajetória política e patrimonial</template>
             <template v-slot:content>
               <FiliationChart />
             </template>
