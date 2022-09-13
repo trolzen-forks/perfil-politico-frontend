@@ -63,13 +63,6 @@
               data: null,
             },
             {
-              label: 'Filiação a partido',
-              backgroundColor: '#333',
-              borderColor: '#333',
-              pointRadius: 8,
-              data: null,
-            },
-            {
               label: 'Mandato eletivo',
               backgroundColor: '#9BDB52',
               borderColor: '#9BDB52',
