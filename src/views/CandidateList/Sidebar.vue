@@ -85,16 +85,11 @@
               "
             >
               <button
-                data-tooltip-target="tooltip-right"
-                data-tooltip-placement="right"
                 type="button"
                 @click="selectRole(role.id)"
                 class="py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 flex justify-between w-full"
               >
                 <span>{{ role.name }}</span>
-                <!-- <span v-if="store.Role.currentRole === 'presidente'">{{ (role.id !== 'presidente') ? 0 : filterCountRole(role.id) }}</span>
-                <span v-else-if="store.Role.currentRole === 'deputado-distrital'">{{ (role.id !== 'deputado-distrital') ? 0 : filterCountRole(role.id) }}</span> -->
-                <!-- <span></span> -->
               </button>
             </li>
           </ul>

@@ -10,7 +10,7 @@
       </div>
       <div class="flex sm:flex-none md:order-2 px-2 sm:px-6 py-2.5">
         <div
-          class="c-footer__content-link-project flex items-center p-3 rounded-lg"
+          class="c-footer__content-link-project flex items-center p-3 h-full rounded-lg bg-white bg-opacity-10"
         >
           <img src="@/assets/icons/icon-github.svg" alt="Github" />
           <span
@@ -25,16 +25,53 @@
         </div>
       </div>
       <div class="hidden sm:w-3/5 grow md:flex md:order-1" id="navbar-sticky">
-        <div class="hidden relative md:block w-full">
+        <select
+            id="roleCandidates"
+            name="roleCandidates"
+            @change="selectRoleNavbar"
+            class="bg-white bg-opacity-10 h-full p-3 text-white text-sm rounded-l-lg border-transparent font-regular focus:ring-secondary-base focus:border-secondary-base block"
+            placeholder="Cargo"
+            required
+          >
+            <option selected disabled value="" v-if="!currentRole.value">Cargo</option>
+            <option v-for="role in data.roles" :key="role.id" :value="role.id" :selected="
+            currentRole === role.id ? true : false
+          ">
+              {{
+                role.name
+              }}
+            </option>
+          </select>
+        <select
+            id="localeCandidates"
+            name="localeCandidates"
+            @change="localeNavbarCandidates"
+            class="bg-background-purpleLight h-full p-3 text-white text-sm font-regular border-transparent focus:ring-secondary-base focus:border-secondary-base"
+            required
+            placeholder="Localidade"
+          >
+          <option v-if="currentLocale === 'br' || !currentLocale.value" selected disabled value="">Estado</option>
+          <option
+            v-for="(locale, index) in data.locales"
+            :key="index"
+            :value="locale.initials"
+            :selected="
+              currentLocale === locale.initials ? true : false
+            "
+          >
+            {{ locale.name }}
+          </option>
+          </select>
+        <div class="hidden relative md:block w-full h-full">
           <div
             class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none"
           >
-            <span class="material-symbols-outlined text-white">search</span>
+            <svg class="w-5 h-5" fill="none" stroke="#ffffff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
           </div>
           <input
             type="text"
             id="search-navbar"
-            class="block p-3 pl-10 w-full text-white bg-white bg-opacity-20 placeholder-white rounded-lg sm:text-sm focus:ring-secondary-base focus:border-secondary-base focus:bg-background-purpleLight"
+            class="block p-3 pl-10 w-full text-white bg-white bg-opacity-20 placeholder-white border-transparent rounded-r-lg sm:text-sm focus:ring-secondary-base focus:border-secondary-base focus:bg-background-purpleLight"
             placeholder="Digite o nome da pessoa candidata"
             autocomplete="off"
             required
@@ -76,7 +113,7 @@
           v-on:click="handleSearchCandidate(searchListCandidates.id)"
         >
           Buscar
-      </button>
+        </button>
       </div>
     </div>
   </nav>
@@ -85,18 +122,18 @@
 <script lang="ts">
 import useStore from "@/hooks/useStore";
 import services from "@/services";
-import { setInfoCandidateSelected } from "@/store/candidates";
+import { setCurrentCandidates, setInfoCandidateSelected } from "@/store/candidates";
 import { computed, defineComponent, reactive } from "vue";
 import * as roles from "../services/mocks/filtersRoles.json";
 import * as locales from "../services/mocks/filtersLocales.json";
+import { setCurrentLocale } from "@/store/locales";
+import { setCurrentRole } from "@/store/roles";
 export default defineComponent({
   name: "Navbar",
   props: ["candidates"],
   data() {
     return {
       location: false,
-      roleCandidates: "",
-      localeCandidates: "",
       dataInfoCandidates: [],
       dataNameCandidates: [],
       showListCandidates: false,
@@ -136,6 +173,35 @@ export default defineComponent({
     };
   },
   methods: {
+    localeNavbarCandidates(event) {
+      if (event.target.value && this.currentRole === "deputado-distrital") {
+        setCurrentLocale("df");
+        this.handleData(this.currentRole, "df");
+      } else if (event.target.value && this.currentRole !== "presidente") {
+        setCurrentLocale(event.target.value);
+        this.handleData(this.currentRole, event.target.value);
+      } else {
+        setCurrentLocale("br");
+        this.handleData(this.currentRole, "br");
+      }
+    },
+
+    selectRoleNavbar(event) {
+      setCurrentRole(event.target.value);
+      if (
+        event.target.value === "presidente" ||
+        (event.target.value === "presidente" && this.currentLocale.initials !== "br")
+      ) {
+        setCurrentLocale("br");
+        this.handleData(event.target.value, "br");
+      } else if (event.target.value === "deputado-distrital") {
+        setCurrentLocale("df");
+        this.handleData(event.target.value, "df");
+      } else if (event.target.value !== "presidente" && this.currentLocale.initials === "br")
+        alert("Selecione um estado!");
+      else this.handleData(event.target.value, this.currentLocale.initials);
+    },
+    
     async getCandidates(): Promise<any> {
       try {
         const { data } = await services.dataCandidates.candidatesList(
@@ -168,6 +234,29 @@ export default defineComponent({
         });
       } catch (error) {
         console.log("Erro no carregamento da pessoa candidata", error);
+      }
+    },
+
+    async handleData(role: any, locale: any) {
+      try {
+        const { data } = await services.dataCandidates.candidatesList(
+          2022,
+          locale,
+          role
+        );
+        setCurrentCandidates(data);
+        if(this.$router.currentRoute.value.name === "CandidateList") {
+          this.$router.replace({
+            name: "CandidateList",
+            params: {
+              year: 2022,
+              locale: locale,
+              role: role,
+            },
+          });
+        }
+      } catch (error) {
+        console.log("Erro no carregamento de candidatos", error);
       }
     },
   },
