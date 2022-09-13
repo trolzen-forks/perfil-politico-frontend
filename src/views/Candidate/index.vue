@@ -13,6 +13,7 @@
         :ethnicity="store.Candidates.currentCandidateSelected.ethnicity"
         :timeline="store.Candidates.currentCandidateSelected.election_history"
         :image="store.Candidates.currentCandidateSelected.image"
+        :status="store.Candidates.currentCandidateSelected.status"
       ></Sidebar>
       <div class="candidate__content w-full bg-background-light">
         <div
@@ -25,53 +26,11 @@
               Comparação com pessoas eleitas em 2018
             </h1>
           </div>
-          <div class="flex items-center justify-between">
-            <button
-              type="button"
-              class="text-primary-base font-bold rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 hover:underline"
-            >
-              <svg
-                class="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M15 19l-7-7 7-7"
-                ></path>
-              </svg>
-              <span class="uppercase">Eleição Anterior</span>
-            </button>
-            <button
-              type="button"
-              class="text-primary-base font-bold rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 hover:underline"
-            >
-              <span class="uppercase">Próxima Eleição</span>
-              <svg
-                class="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 5l7 7-7 7"
-                ></path>
-              </svg>
-            </button>
-          </div>
         </div>
         <div
           class="candidate__graphs py-10 sm:px-12 px-5 grid sm:grid-cols-2 grid-cols-1 gap-10"
         >
-          <CardInfo>
+          <CardInfo v-if="store.Role.currentRole !== 'presidente'">
             <template v-slot:title
               >Idade:
               <span class="font-light ml-1">{{
@@ -82,7 +41,7 @@
               <AgeChart />
             </template>
           </CardInfo>
-          <CardInfo>
+          <CardInfo v-if="store.Role.currentRole !== 'presidente'">
             <template v-slot:title
               >Gênero:
               <span class="font-light ml-1">{{
@@ -93,7 +52,7 @@
               <GenderChart />
             </template>
           </CardInfo>
-          <CardInfo>
+          <CardInfo v-if="store.Role.currentRole !== 'presidente'">
             <template v-slot:title
               >Cor/Raça:
               <span class="font-light ml-1">{{
@@ -104,7 +63,7 @@
               <EthnicityChart />
             </template>
           </CardInfo>
-          <CardInfo>
+          <CardInfo v-if="store.Role.currentRole !== 'presidente'">
             <template v-slot:title
               >Escolaridade:
               <span class="font-light ml-1">{{

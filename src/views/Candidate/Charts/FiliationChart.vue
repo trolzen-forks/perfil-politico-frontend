@@ -108,7 +108,6 @@
     },
     async mounted () {
       this.loaded = false
-      console.log("kaskso", this.store.Candidates.currentCandidateSelected.asset_history)
       try {
         const { data } = await services.dataCandidates.assets(this.currentLocale, this.currentRole);
         this.chartData.labels = data.mediana_patrimonios.map(i => i.year);

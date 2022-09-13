@@ -92,20 +92,24 @@
               v-for="candidate in hasSelectedParty === false
                 ? currentCandidates
                 : currentCandidatesFilter"
+              :key="candidate.id"
               :name="candidate.name"
               :number="candidate.ballot_number"
               :party="candidate.party"
               :role="candidate.post"
-              :key="candidate.id"
               :keyCandidate="candidate.id"
               :locale="data.Locale.currentLocale"
               :image="candidate.image"
+              :status="candidate.status"
             />
           </div>
           <div
             class="candidate-list__pagintation flex justify-center border-t border-neutral-base mt-10 p-5"
           >
-            <Pagination />
+            <Pagination
+              v-model="page"
+              :rows-number="rows"
+              :rows-per-page="8" />
           </div>
         </div>
       </main>
@@ -136,7 +140,10 @@ export default defineComponent({
     Sidebar,
   },
   data() {
-    return {};
+    return {
+      page: 1,
+      rows: 0,
+    };
   },
   setup() {
     const data = useStore();

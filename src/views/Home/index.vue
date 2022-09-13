@@ -412,6 +412,9 @@ export default {
 }
 
 @media (max-width: 600px) {
+  .home__banner {
+    min-height: 900px;
+  }
   .home__differentials {
     min-height: 880px;
   }

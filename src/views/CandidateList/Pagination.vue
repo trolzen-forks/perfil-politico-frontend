@@ -32,13 +32,6 @@
       <li>
         <a
           href="#"
-          class="block px-4 py-3 mr-2 leading-tight text-text-light rounded-full hover:bg-primary-base hover:text-white"
-          >2</a
-        >
-      </li>
-      <li>
-        <a
-          href="#"
           class="block p-3 leading-tight text-text-light rounded-full hover:bg-primary-base hover:text-white"
         >
           <span class="sr-only">Próximo</span>

@@ -1,31 +1,41 @@
 <template>
   <div class="c-card">
-    <div class="p-5 mt-16 bg-white rounded-2xl border border-neutral-base">
+    <div class="p-3 mt-16 bg-white rounded-2xl border border-neutral-base">
+      <div class="flex justify-between items-center text-center">
+        <div>
+          <h5 class="text-sm font-semibold text-black">{{ number }}</h5>
+          <span class="text-xs text-light text-black">Número</span>
+        </div>
+        <div>
+          <h5 class="text-sm font-semibold text-black break-words w-20">{{ party }}</h5>
+          <span class="text-xs text-light text-black">Partido</span>
+        </div>
+      </div>
       <div class="flex flex-col items-center mb-3">
         <div
           v-if="image"
-          class="w-28 h-28 rounded-full shadow-lg mb-3 -mt-16 overflow-hidden"
+          class="w-28 h-28 rounded-full shadow-lg mb-3 -mt-32 overflow-hidden"
         >
           <img :src="image" alt="Candidato" />
         </div>
 
         <IconCandidate
           v-else
-          class="w-28 h-28 shadow-lg mb-3 -mt-16"
+          class="w-28 h-28 shadow-lg mb-3 -mt-32"
         ></IconCandidate>
-        <h4 class="text-base font-semibold text-black text-center overflow-hidden">{{ name }}</h4>
-        <span class="text-sm font-light text-black">{{ role }}</span>
-      </div>
-      <div class="flex justify-around items-center text-center mb-6">
-        <div>
-          <h5 class="mb-1 text-base font-semibold text-black">Número</h5>
-          <span class="text-sm text-light text-black">{{ number }}</span>
+        
+        <div class="text-center">
+          <h4 class="text-base font-semibold mt-5 text-black overflow-hidden">{{ name }}</h4>
+          <span class="text-sm font-light text-black mr-2">{{ role }}</span>
         </div>
-        <div>
-          <h5 class="mb-1 text-base font-semibold text-black">Partido</h5>
-          <span class="text-sm text-light text-black">{{ party }}</span>
+        <div class="flex justify-between mt-3">  
+          <span v-if="status === 'APTO'" class="bg-green-100 text-green-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">Apto</span>
+          <span v-else-if="status === 'INAPTO'" class="bg-red-100 text-red-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">Inapto</span>
+          <span v-else-if="status === 'CADASTRADO'" class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">Cadastrado</span>
         </div>
       </div>
+      
+      
       <div class="flex flex-col items-center">
         <button
           class="w-full py-3 px-8 text-sm font-light text-center text-white bg-primary-base rounded-full hover:bg-primary-dark focus:ring-4 focus:outline-none focus:ring-secondary-base"
@@ -48,7 +58,7 @@ import services from "@/services";
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  props: ["name", "number", "party", "role", "image", "locale", "keyCandidate"],
+  props: ["name", "number", "party", "role", "image", "locale", "keyCandidate", "status"],
   components: { IconCandidate },
   methods: {
     async onClickCandidate(key, locale, role) {

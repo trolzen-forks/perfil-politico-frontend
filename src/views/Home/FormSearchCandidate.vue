@@ -129,7 +129,7 @@
       <div class="sm:flex block">
         <button
           type="submit"
-          class="flex-none sm:mt-0 xs:block w-full mt-4 text-primary-base uppercase font-bold bg-secondary-base hover:bg-secondary-light focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-3 text-center mr-2 mb-2"
+          class="flex-none mt-0 xs:block w-full text-primary-base uppercase font-bold bg-secondary-base hover:bg-secondary-light focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-3 text-center mr-2 mb-2"
           v-on:click="handleSubmitCompareCandidates"
         >
           Comparar candidaturas
@@ -227,7 +227,6 @@ export default defineComponent({
         setCurrentCandidates(data);
         setCurrentLocale(this.localeCandidates);
         setCurrentRole(this.roleCandidates);
-        console.log(data);
       } catch (error) {
         console.log("Erro no carregamento de candidatos", error);
       }
@@ -285,5 +284,15 @@ export default defineComponent({
 <style>
 .list-search {
   width: 470px;
+}
+@media (max-width: 375px) {
+  .list-search {
+    width: 300px;
+  }
+}
+@media (max-width: 320px) {
+  .list-search {
+    width: 250px;
+  }
 }
 </style>

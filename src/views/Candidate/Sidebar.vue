@@ -48,6 +48,11 @@
             <p class="text-xs font-light text-primary-base">
               {{ role }}
             </p>
+            <div class="flex justify-start mt-3">  
+              <span v-if="status === 'APTO'" class="bg-green-100 text-green-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">Apto</span>
+              <span v-else-if="status === 'INAPTO'" class="bg-red-100 text-red-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">Inapto</span>
+              <span v-else-if="status === 'CADASTRADO'" class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">Cadastrado</span>
+            </div>
           </div>
         </div>
         <div class="sm:px-10 px-5">
@@ -129,6 +134,7 @@ export default {
     "age",
     "timeline",
     "image",
+    "status"
   ],
   components: {
     CardInfo,

@@ -216,7 +216,6 @@ export default defineComponent({
     },
 
     async handleSearchCandidate(idCandidate) {
-      console.log("PESQUISA", idCandidate)
       try {
         const { dataCandidate } = await services.dataCandidates.candidate(
           idCandidate
