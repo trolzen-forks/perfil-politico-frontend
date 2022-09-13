@@ -8,6 +8,7 @@ module.exports = {
     "./index.html",
     "./src/**/*.{vue,js,ts,jsx,tsx}",
     "./node_modules/flowbite/**/*.js",
+    "./node_modules/flowbite/src/components/tooltip.js",
   ],
   theme: {
     extend: {
@@ -941,5 +942,7 @@ module.exports = {
     wordBreak: ["responsive"],
     zIndex: ["responsive", "focus-within", "focus"],
   },
-  plugins: [require("flowbite/plugin")],
+  plugins: [
+    require('flowbite/plugin')
+  ]
 };

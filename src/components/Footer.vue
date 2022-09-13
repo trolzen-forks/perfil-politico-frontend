@@ -35,18 +35,18 @@
     <div
       class="c-footer__content-actions container flex flex-col sm:flex-row sm:justify-between sm:items-center items-start text-white mt-10"
     >
-      <div class="flex flex-col sm:flex-row sm:items-center mb-5">
-        <h3 class="font-bold text-xl mr-3 sm:mb-0 mb-4">Link Úteis:</h3>
-        <ul class="flex flex-row flex-wrap font-regular text-xs">
-          <li class="sm:mr-3 mr-5 sm:mb-0 mb-5 hover:underline">
+      <div class="flex flex-col mb-5">
+        <div class="mb-5">
+          <h3 class="font-bold text-xl mr-3 sm:mb-0 mb-4">Link Úteis:</h3>
+        </div>
+        <ul class="flex flex-row flex-wrap items-center font-light text-base">
+          <li class="sm:mr-5 mr-5 sm:mb-0 mb-5 hover:underline">
             <router-link :to="{ name: 'About' }">Sobre o projeto</router-link>
           </li>
-          <li class="sm:mr-3 sm:mb-0 mb-5 hover:underline">
-            <router-link :to="{ name: 'Home' }"
-              >Perguntas frequentes</router-link
-            >
+          <li class="sm:mr-5 sm:mb-0 mb-5 hover:underline">
+            <router-link :to="'/#perguntas-frequentes'">Perguntas frequentes</router-link>
           </li>
-          <li class="sm:mr-3 sm:mb-0 mb-5 hover:underline">
+          <li class="sm:mr-5 sm:mb-0 mb-5 hover:underline">
             <a
               href="https://apoia.se/serenata"
               target="_blank"
@@ -57,14 +57,37 @@
           </li>
         </ul>
       </div>
-      <div class="flex flex-col sm:flex-row sm:items-center items-start">
-        <h3 class="font-bold text-xl mr-3 sm:mb-0 mb-4">Realização:</h3>
-        <a href="https://ok.org.br/" target="_blank" rel="noopener noreferrer">
-          <img
-            src="@/assets/images/logo-open-knowledge.svg"
-            alt="Open Knowledge"
-          />
-        </a>
+      <div class="flex flex-col mb-5">
+        <div class="mb-5">
+          <h3 class="font-bold text-xl mr-3 sm:mb-0 mb-4">Parceiros:</h3>
+        </div>
+        <div class="flex flex-row flex-wrap items-center">
+          <a href="https://theintercept.com/brasil/" class="mr-10" target="_blank" rel="noopener noreferrer">
+            <img
+              src="@/assets/images/logo-the-intercept.svg"
+              alt="The Intercept Brasil"
+            />
+          </a>
+          <a href="https://brasil.io/home/" target="_blank" rel="noopener noreferrer">
+            <img
+              src="@/assets/images/logo-brasil-io.svg"
+              alt="Brasil.io"
+            />
+          </a>
+        </div>
+      </div>
+      <div class="flex flex-col items-start">
+        <div class="mb-5">
+          <h3 class="font-bold text-xl mr-3 sm:mb-0 mb-4">Realização:</h3>
+        </div>
+        <div class="flex flex-row flex-wrap items-center font-regular text-xs">
+          <a href="https://ok.org.br/" target="_blank" rel="noopener noreferrer">
+            <img
+              src="@/assets/images/logo-open-knowledge.svg"
+              alt="Open Knowledge"
+            />
+          </a>
+        </div>
       </div>
     </div>
   </footer>

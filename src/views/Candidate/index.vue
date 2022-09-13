@@ -44,13 +44,13 @@
                   d="M15 19l-7-7 7-7"
                 ></path>
               </svg>
-              <span class="uppercase">Ano Anterior</span>
+              <span class="uppercase">Eleição Anterior</span>
             </button>
             <button
               type="button"
               class="text-primary-base font-bold rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 hover:underline"
             >
-              <span class="uppercase">Próximo Ano</span>
+              <span class="uppercase">Próxima Eleição</span>
               <svg
                 class="w-6 h-6"
                 fill="none"
@@ -116,7 +116,7 @@
             </template>
           </CardInfo>
           <CardInfo class="sm:col-span-2">
-            <template v-slot:title>Patrimônio declarado</template>
+            <template v-slot:title>Trajetória política e patrimonial</template>
             <template v-slot:content>
               <FiliationChart />
             </template>
