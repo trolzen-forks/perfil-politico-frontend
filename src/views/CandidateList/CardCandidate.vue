@@ -13,7 +13,7 @@
           v-else
           class="w-28 h-28 shadow-lg mb-3 -mt-16"
         ></IconCandidate>
-        <h4 class="text-lg font-semibold text-black">{{ name }}</h4>
+        <h4 class="text-base font-semibold text-black text-center overflow-hidden">{{ name }}</h4>
         <span class="text-sm font-light text-black">{{ role }}</span>
       </div>
       <div class="flex justify-around items-center text-center mb-6">
