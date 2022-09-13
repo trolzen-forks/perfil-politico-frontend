@@ -49,7 +49,7 @@
           labels: null,
           datasets: [
             {
-              label: 'Patrimônio declarado',
+              label: 'Patrimônio declarado da pessoa candidata',
               backgroundColor: '#5A44A0',
               borderColor: '#5A44A0',
               pointRadius: 8,

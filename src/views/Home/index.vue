@@ -87,7 +87,7 @@
                 <p class="text-text-light font-regular text-base">
                   A ficha de cada pessoa candidata apresenta o patrimônio
                   declarado patrimônio declarado ao longo de todas as eleições
-                  disputadas, e comparamos com o patrimônio das outras
+                  disputadas e a comparação com o patrimônio das outras
                   candidaturas do mesmo ano.
                 </p>
               </div>
@@ -129,14 +129,13 @@
             <p
               class="text-text-light my-10 sm:text-2xl sm:text-left text-center text-base font-regular"
             >
-              Perfil Político é uma plataforma baseada em dados abertos
-              disponibilizados por órgãos como o Tribunal Superior Eleitoral e
-              através de uma base de código aberta e colaborativa mantida pela
-              Open Knowledge Brasil. A plataforma permite comparar as
-              candidaturas e realizar perguntas sobre histórico e
-              representatividade de forma abrangente, transparente e gratuita
-              para dar mais poder ao eleitorado para escolher as candidaturas em
-              que irá votar.
+              O Perfil Político é uma plataforma desenvolvida pela Open 
+              Knowledge Brasil para tornar mais acessíveis as informações sobre
+              a trajetória das pessoas candidatas. A ferramenta utiliza dados
+              abertos por órgãos como o Tribunal Superior Eleitoral e a Receita
+              Federal do Brasil e tem seu código aberto para colaboração. Com
+              ela, a população pode consultar e comparar candidaturas do ponto
+              de vista de gênero, raça/cor, dentre outras características.
             </p>
             <router-link
               type="button"
@@ -184,13 +183,13 @@
               <li>
                 Acima da grade de candidaturas, ao expandir o menu de “Filtro
                 por Análises”, em roxo, você poderá clicar nas perguntas que
-                desejar e isto fará com que as candidaturas apresentadas na
-                listagem correspondam apenas às perguntas realizadas e a análise
+                desejar e isso fará com que as candidaturas apresentadas na
+                listagem correspondam apenas às perguntas realizadas. A análise
                 da representatividade aparece em gráfico;
               </li>
               <li>
                 A qualquer momento você pode clicar em uma pessoa candidata da
-                grade e isto te levará à página com informações detalhadas do
+                grade e isso levará à página com informações detalhadas do
                 perfil dela.
               </li>
             </ol>
@@ -198,19 +197,21 @@
           <Accordion title="Como utilizo a busca por nome?">
             Você pode buscar por uma candidatura específica selecionando um
             cargo e o estado (não se aplica em consulta de presidenciáveis ou
-            deputado(a) distrital) e clicando em “BUSCAR CANDIDATO(A)”; em
-            seguida digitando seu nome no campo “TEM UMA PESSOA CANDIDATA EM
-            MENTE?” e clicando no botão “BUSCAR”.
+            deputado(a) distrital). Em seguida, digite o nome da pessoa no
+            campo “TEM UMA PESSOA CANDIDATA EM MENTE?”, e selecione o nome da 
+            lista que aparece. Por fim, é só clicar no botão “BUSCAR” e
+            visualizar o perfil da pessoa candidata.
           </Accordion>
-          <Accordion title="Quem são os criadores do Perfil Político?">
-            O projeto faz parte do
-            <i>Programa Ciência de Dados para Inovação Cívica</i> da
+          <Accordion title="Quem desenvolveu e mantém o Perfil Político?">
+            A plataforma foi desenvolvida pelo programa 
+            <i>Ciência de Dados para Inovação Cívica</i> da 
             <a
               href="https://ok.org.br/"
               target="_blank"
               class="font-bold hover:underline"
               >Open Knowledge Brasil</a
-            >. O Perfil Político também em parceria com o
+            >. Em 2018, a primeira versão da plataforma foi realizada em
+            parceria com o site 
             <a
               href="https://theintercept.com/brasil/"
               target="_blank"
@@ -225,14 +226,18 @@
               >Brasil.io</a
             >.
           </Accordion>
-          <Accordion title="De onde são os dados do Perfil Político?">
+          <Accordion title="De onde vêm os dados do Perfil Político?">
             A fonte primária dos dados, ou seja, de onde eles foram retirados, é
-            o TSE (Tribunal Superior Eleitoral). Outras fontes também são
+            o Tribunal Superior Eleitoral (TSE). Outras fontes também são
             utilizadas, como a Câmara dos Deputados, o Senado Federal e a
             Receita Federal, e os dados estão disponíveis através da API para
-            serem utilizados por outros projetos, como o Parlametria, mas não
-            são utilizados na plataforma do Perfil Político no momento. Você
-            pode obter esses dados, já organizados, no
+            serem utilizados por outros projetos, como o 
+            <a
+              href="https://parlametria.org.br/"
+              target="_blank"
+              class="font-bold hover:underline"
+              >Parlametria</a
+            >. Você pode obter esses dados, já organizados, no
             <a
               href="https://brasil.io/home/"
               target="_blank"
@@ -254,7 +259,7 @@
             >.
           </Accordion>
           <Accordion title="Quais dados são utilizados na plataforma?">
-            A ficha dos candidatos reúne informações básicas como idade, sexo,
+            A ficha dos candidatos reúne informações básicas como idade, gênero,
             cor/raça, escolaridade e ocupação, mas também dados sobre patrimônio
             declarado em todas as eleições disputadas, mudanças de partidos,
             histórico de candidaturas e de eleições ganhas.
@@ -270,16 +275,16 @@
               disponibilizá-los em 20 de julho.
             </p>
             <p>
-              Já os dados de filiação partidária, deixaram de ser
-              disponibilizados em formato histórico em agosto de 2021 e passaram
-              a ser disponibilizadas apenas as filiações ativas poucos meses
-              antes das eleições. Os dados históricos têm sua última data de
-              coleta no final de 2020 e as filiações ativas das eleições de 2022
-              foram coletadas em agosto de 2022.
+              A série histórica de filiação partidária deixou de ser publicada
+              pelo TSE em razão da Lei Geral de Proteção de Dados (LGPD) em
+              agosto de 2021. Apenas as filiações ativas passaram a ser
+              disponibilizadas poucos meses antes das eleições. A última versão
+              do histórico partidário armazenada pelo Perfil Político é do final
+              de 2020 e as filiações atuais foram coletadas em agosto de 2022.  
             </p>
             <p>
               Os dados da Câmara dos Deputados e do Senado Federal foram
-              coletados em julho de 2022.Os dados da Receita Federal foram
+              coletados em julho de 2022 e os dados da Receita Federal foram
               coletados em outubro de 2021.
             </p>
           </Accordion>
@@ -344,13 +349,13 @@
             </p>
             <p>
               A ficha das pessoas candidatadas reúne informações básicas como
-              idade, sexo, cor/raça, escolaridade e ocupação, mas também dados
+              idade, gênero, cor/raça, escolaridade e ocupação, mas também dados
               sobre patrimônio declarado em todas as eleições disputadas,
               mudanças de partidos, histórico de candidaturas e de eleições
               ganhas
             </p>
           </Accordion>
-          <Accordion title="É código aberto?">
+          <Accordion title="O código da plataforma é aberto?">
             Sim! Temos dois repositórios com o código que faz o
             <span class="text-primary-base">Perfil Político</span> funcionar. Um
             para a
@@ -360,14 +365,14 @@
               class="font-bold hover:underline"
               >API</a
             >
-            que é em Python, e outro para a
+            que é em Python (Django), e outro para a
             <a
               href="https://github.com/okfn-brasil/perfil-politico-frontend/"
               target="_blank"
               class="font-bold hover:underline"
               >interface</a
             >
-            que é JavaScript(Vue), HTML e CSS.
+            que é JavaScript (Vue), HTML e CSS.
           </Accordion>
         </div>
       </section>

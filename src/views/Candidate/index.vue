@@ -22,7 +22,7 @@
             <h1
               class="uppercase font-bold text-xl text-primary-base sm:text-left text-center"
             >
-              Comparação com os eleitos em 2018
+              Comparação com pessoas eleitas em 2018
             </h1>
           </div>
           <div class="flex items-center justify-between">
@@ -84,7 +84,7 @@
           </CardInfo>
           <CardInfo>
             <template v-slot:title
-              >Sexo:
+              >Gênero:
               <span class="font-light ml-1">{{
                 store.Candidates.currentCandidateSelected.gender
               }}</span></template

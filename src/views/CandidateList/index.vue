@@ -7,7 +7,7 @@
         <div class="container sm:p-12 px-5">
           <div class="candidate-list__title mb-12">
             <h1 class="text-primary-base font-bold text-3xl mb-4">
-              Confira os candidatos para {{ currentRole }}
+              Confira as candidaturas para {{ currentRole }}
               {{ currentLocale.preposition }} {{ currentLocale.name }}
             </h1>
             <div class="pt-10 md:border-t border-neutral-base">

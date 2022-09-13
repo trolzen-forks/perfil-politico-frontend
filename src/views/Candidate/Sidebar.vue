@@ -71,7 +71,7 @@
         class="c-sidebar-candidate__cards sm:px-10 px-5 py-5 grid grid-cols-1 gap-5"
       >
         <CardInfo>
-          <template v-slot:title>Sobre o candidato</template>
+          <template v-slot:title>Resumo do perfil</template>
           <template v-slot:content>
             <div class="mb-4">
               <h4 class="font-light text-base text-neutral-baseMedium">
@@ -80,7 +80,7 @@
               <p class="font-bold text-base text-primary-base">{{ age }}</p>
             </div>
             <div class="mb-4">
-              <h4 class="font-light text-base text-neutral-baseMedium">Sexo</h4>
+              <h4 class="font-light text-base text-neutral-baseMedium">Gênero</h4>
               <p class="font-bold text-base text-primary-base">{{ gender }}</p>
             </div>
             <div class="mb-4">
