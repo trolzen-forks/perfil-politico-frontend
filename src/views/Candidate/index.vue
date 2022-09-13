@@ -95,9 +95,6 @@
                 </Tooltip>
             </template>
             <template v-slot:content>
-              <p>
-                Esta visualização apresenta o patrimônio declarado da pessoa destacada em comparação com a mediana de candidaturas eleitas em cada ano. Assim como os mandatos eletivos exercidos e o histórico de filiações.
-              </p>
               <FiliationChart />
             </template>
           </CardInfo>
