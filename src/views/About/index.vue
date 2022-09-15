@@ -17,13 +17,14 @@
               ajuda o eleitorado a selecionar as pessoas candidatas pelos seus
               perfis: você pode filtrar por pessoas novas e antigas na política.
               Pode ver como o seu estado está em termos de representatividade de
-              gênero e cor/raça – e se as candidaturas, de fato, representam você.
+              gênero e cor/raça – e se as candidaturas, de fato, representam
+              você.
             </p>
             <p>
-              A ficha das pessoas candidatas reúne informações básicas como idade,
-              gênero, escolaridade e ocupação, mas também dados sobre patrimônio
-              declarado em todas as eleições disputadas, mudanças de partidos,
-              histórico de candidaturas e de eleições ganhas.
+              A ficha das pessoas candidatas reúne informações básicas como
+              idade, gênero, escolaridade e ocupação, mas também dados sobre
+              patrimônio declarado em todas as eleições disputadas, mudanças de
+              partidos, histórico de candidaturas e de eleições ganhas.
             </p>
             <p>
               São milhares de candidaturas, dados e vários filtros para dar mais
@@ -44,7 +45,7 @@
               alguma inconsistência.
             </p>
             <p>
-              Se você encontrar algo estranho, envie um e-mail para 
+              Se você encontrar algo estranho, envie um e-mail para
               contato@serenata.ai. Precisamos de seu feeback para continuar
               aprimorando a ferramenta e para relatar aos órgãos públicos quando
               os seus bancos de dados trouxerem informações erradas ou
@@ -57,11 +58,11 @@
           <div class="font-regular text-black sm:text-lg text-base mb-20 mt-5">
             <p>
               A OKBR, também conhecida como Rede pelo Conhecimento Livre, é uma
-              organização da sociedade civil sem fins lucrativos e apartidária 
-              que atua no país desde 2013. Desenvolvemos e incentivamos o uso
-              de tecnologias cívicas e de dados abertos, realizamos análises de
-              políticas públicas e promovemos o conhecimento livre para tornar
-              a relação entre governo e sociedade mais transparente e
+              organização da sociedade civil sem fins lucrativos e apartidária
+              que atua no país desde 2013. Desenvolvemos e incentivamos o uso de
+              tecnologias cívicas e de dados abertos, realizamos análises de
+              políticas públicas e promovemos o conhecimento livre para tornar a
+              relação entre governo e sociedade mais transparente e
               participativa.
             </p>
             <p>
@@ -70,31 +71,32 @@
               iniciativa lançada em 2016 por profissionais independentes de
               diversas áreas (tecnologia, ciências sociais, jornalismo, design
               etc.). O Programa é responsável pela gestão e manutenção dos
-              projetos 
+              projetos
               <a
                 href="https://queridodiario.ok.org.br/"
                 target="_blank"
                 class="font-bold hover:underline"
                 >Querido Diário</a
-              >, 
+              >,
               <a
                 href="https://serenata.ai/"
                 target="_blank"
                 class="font-bold hover:underline"
                 >Operação Serenata de Amor</a
-              >, 
+              >,
               <a
                 href="https://parlametria.org.br/"
                 target="_blank"
                 class="font-bold hover:underline"
                 >Parlametria</a
-              >, Perfil Politico, 
+              >, Perfil Politico,
               <a
                 href="https://justa.org.br/"
                 target="_blank"
                 class="font-bold hover:underline"
                 >Justa</a
-              > e 
+              >
+              e
               <a
                 href="https://www.vitimasdaintolerancia.org/"
                 target="_blank"
@@ -103,7 +105,7 @@
               >.
             </p>
             <p>
-              Saiba mais em: 
+              Saiba mais em:
               <a
                 href="https://ok.org.br/"
                 target="_blank"

@@ -44,7 +44,20 @@
 
           <div class="flex flex-col items-center text-white">
             <p class="font-regular text-lg">Por que usar o Perfil Político?</p>
-            <svg class="w-6 h-6 animate__animated animate__bounce animate__infinite" fill="none" stroke="#FFFFFF" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            <svg
+              class="w-6 h-6 animate__animated animate__bounce animate__infinite"
+              fill="none"
+              stroke="#FFFFFF"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"
+              ></path>
+            </svg>
           </div>
         </div>
       </section>
@@ -129,7 +142,7 @@
             <p
               class="text-text-light my-10 sm:text-2xl sm:text-left text-center text-base font-regular"
             >
-              O Perfil Político é uma plataforma desenvolvida pela Open 
+              O Perfil Político é uma plataforma desenvolvida pela Open
               Knowledge Brasil para tornar mais acessíveis as informações sobre
               a trajetória das pessoas candidatas. A ferramenta utiliza dados
               abertos por órgãos como o Tribunal Superior Eleitoral e a Receita
@@ -197,21 +210,21 @@
           <Accordion title="Como utilizo a busca por nome?">
             Você pode buscar por uma candidatura específica selecionando um
             cargo e o estado (não se aplica em consulta de presidenciáveis ou
-            deputado(a) distrital). Em seguida, digite o nome da pessoa no
-            campo “TEM UMA PESSOA CANDIDATA EM MENTE?”, e selecione o nome da 
-            lista que aparece. Por fim, é só clicar no botão “BUSCAR” e
-            visualizar o perfil da pessoa candidata.
+            deputado(a) distrital). Em seguida, digite o nome da pessoa no campo
+            “TEM UMA PESSOA CANDIDATA EM MENTE?”, e selecione o nome da lista
+            que aparece. Por fim, é só clicar no botão “BUSCAR” e visualizar o
+            perfil da pessoa candidata.
           </Accordion>
           <Accordion title="Quem desenvolveu e mantém o Perfil Político?">
-            A plataforma foi desenvolvida pelo programa 
-            <i>Ciência de Dados para Inovação Cívica</i> da 
+            A plataforma foi desenvolvida pelo programa
+            <i>Ciência de Dados para Inovação Cívica</i> da
             <a
               href="https://ok.org.br/"
               target="_blank"
               class="font-bold hover:underline"
               >Open Knowledge Brasil</a
             >. Em 2018, a primeira versão da plataforma foi realizada em
-            parceria com o site 
+            parceria com o site
             <a
               href="https://theintercept.com/brasil/"
               target="_blank"
@@ -231,7 +244,7 @@
             o Tribunal Superior Eleitoral (TSE). Outras fontes também são
             utilizadas, como a Câmara dos Deputados, o Senado Federal e a
             Receita Federal, e os dados estão disponíveis através da API para
-            serem utilizados por outros projetos, como o 
+            serem utilizados por outros projetos, como o
             <a
               href="https://parlametria.org.br/"
               target="_blank"
@@ -280,7 +293,7 @@
               agosto de 2021. Apenas as filiações ativas passaram a ser
               disponibilizadas poucos meses antes das eleições. A última versão
               do histórico partidário armazenada pelo Perfil Político é do final
-              de 2020 e as filiações atuais foram coletadas em agosto de 2022.  
+              de 2020 e as filiações atuais foram coletadas em agosto de 2022.
             </p>
             <p>
               Os dados da Câmara dos Deputados e do Senado Federal foram

@@ -76,26 +76,52 @@
           </CardInfo>
           <CardInfo class="sm:col-span-2">
             <template v-slot:title>
-              Trajetória política e patrimonial   
-                <Tooltip arrow placement="bottom" class="w-auto">
-                  <svg class="ml-2 w-6 h-6" fill="none" stroke="#FFFFFF" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                  <template #content>
-                    <div class="text-left text-sm break-words font-light">
-                      <p class="mb-3">
-                        Esta visualização apresenta o patrimônio declarado da pessoa destacada em comparação com a mediana de candidaturas eleitas em cada ano. Assim como os mandatos eletivos exercidos e o histórico de filiações.
-                      </p>
-                      <p class="mb-3">
-                        <span class="font-bold">Nota</span>: Mediana é um tipo de média onde a presença de poucos valores muito baixos ou muito altos não a afetam.
-                      </p>
-                      <p>
-                        <span class="font-bold">Alerta</span>: A forma de publicação de filiações partidárias pelo TSE mudou em 2021. Anteriormente, os dados abrangiam todas as pessoas filiadas e apresentavam o histórico de movimentações completo. Agora, são publicadas apenas as filiações em situação regular poucos meses antes das eleições. A última versão que possuímos da base histórica é do final de 2020. Portanto, a partir de 2021 as filiações partidárias só podem ser observadas pontualmente em anos eleitorais.
-                      </p>
-                    </div>
-                  </template>
-                </Tooltip>
+              Trajetória política e patrimonial
+              <Tooltip arrow placement="bottom" class="w-auto">
+                <svg
+                  class="ml-2 w-6 h-6"
+                  fill="none"
+                  stroke="#FFFFFF"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  ></path>
+                </svg>
+                <template #content>
+                  <div class="text-left text-sm break-words font-light">
+                    <p class="mb-3">
+                      Esta visualização apresenta o patrimônio declarado da
+                      pessoa destacada em comparação com a mediana de
+                      candidaturas eleitas em cada ano. Assim como os mandatos
+                      eletivos exercidos e o histórico de filiações.
+                    </p>
+                    <p class="mb-3">
+                      <span class="font-bold">Nota</span>: Mediana é um tipo de
+                      média onde a presença de poucos valores muito baixos ou
+                      muito altos não a afetam.
+                    </p>
+                    <p>
+                      <span class="font-bold">Alerta</span>: A forma de
+                      publicação de filiações partidárias pelo TSE mudou em
+                      2021. Anteriormente, os dados abrangiam todas as pessoas
+                      filiadas e apresentavam o histórico de movimentações
+                      completo. Agora, são publicadas apenas as filiações em
+                      situação regular poucos meses antes das eleições. A última
+                      versão que possuímos da base histórica é do final de 2020.
+                      Portanto, a partir de 2021 as filiações partidárias só
+                      podem ser observadas pontualmente em anos eleitorais.
+                    </p>
+                  </div>
+                </template>
+              </Tooltip>
             </template>
             <template v-slot:content>
-              <FiliationChart />
+              <PatrimonyChart />
             </template>
           </CardInfo>
         </div>
@@ -118,9 +144,12 @@ import AgeChart from "./Charts/AgeChart.vue";
 import EducationChart from "./Charts/EducationChart.vue";
 import EthnicityChart from "./Charts/EthnicityChart.vue";
 import GenderChart from "./Charts/GenderChart.vue";
-import FiliationChart from "./Charts/FiliationChart.vue";
+import PatrimonyChart from "./Charts/PatrimonyChart.vue";
 import services from "@/services";
 import Tooltip from "../../components/Tooltip.vue";
+import { setInfoCandidateSelected } from "@/store/candidates";
+import { setCurrentLocale } from "@/store/locales";
+import { setCurrentRole } from "@/store/roles";
 
 export default defineComponent({
   components: {
@@ -132,13 +161,13 @@ export default defineComponent({
     EducationChart,
     EthnicityChart,
     GenderChart,
-    FiliationChart,
-    Tooltip
-},
+    PatrimonyChart,
+    Tooltip,
+  },
   data() {
     return {
       loadData: [],
-      showPopper: false
+      showPopper: false,
     };
   },
   setup() {
@@ -150,12 +179,25 @@ export default defineComponent({
   methods: {
     async dataAge() {
       const { data } = await services.dataCandidates.candidatesList(
-          2022,
-          this.store.Candidates.currentCandidateSelected.post,
-          'age'
+        2022,
+        this.store.Candidates.currentCandidateSelected.post,
+        "age"
       );
-      this.loadData = data
+      this.loadData = data;
     },
+  },
+  async mounted() {
+    const keyCandidate = Number(this.$route.params.keyCandidate);
+    const roleCandidate = (this.$route.params.role).toString();
+    const localeCandidate = (this.$route.params.locale).toString();
+    try {
+      const { dataCandidate } = await services.dataCandidates.candidate(keyCandidate);
+      setInfoCandidateSelected(dataCandidate);
+      setCurrentLocale(localeCandidate);
+      setCurrentRole(roleCandidate);
+    } catch (e) {
+      console.log("Erro", e)
+    }
   },
 });
 </script>

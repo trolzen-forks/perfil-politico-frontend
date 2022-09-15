@@ -25,8 +25,10 @@ import {
   LinearScale,
   PointElement,
   CategoryScale,
+  Plugin,
 } from "chart.js";
 
+import services from "@/services";
 import useStore from "@/hooks/useStore";
 
 ChartJS.register(
@@ -40,7 +42,7 @@ ChartJS.register(
 );
 
 export default defineComponent({
-  name: "FiliationChart",
+  name: "PatrimonyChart",
   components: {
     Line,
   },
@@ -49,17 +51,22 @@ export default defineComponent({
     loaded: false,
     error: false,
     chartData: {
-      labels: [],
+      labels: [""],
       datasets: [
         {
           label: "Patrimônio declarado da pessoa candidata",
-          backgroundColor: "#333",
-          borderColor: "#333",
+          backgroundColor: "#5A44A0",
+          borderColor: "#5A44A0",
           pointRadius: 8,
-          data: [
-            { x: "PCB", y: 2018 },
-            { x: "PCB", y: 2010 },
-          ],
+          data: null,
+        },
+        {
+          label:
+            "Mediana do patrimônio declarado de todas as candidaturas eleitas",
+          backgroundColor: "#9BDB52",
+          borderColor: "#9BDB52",
+          pointRadius: 8,
+          data: null,
         },
       ],
     },
@@ -105,11 +112,23 @@ export default defineComponent({
   },
   async mounted() {
     this.loaded = false;
+    const role = (this.$route.params.role).toString().toLowerCase();
+    const locale = (this.$route.params.locale).toString();
+
     try {
-      // const { data } = await services.dataCandidates.assets(this.currentLocale, this.currentRole);
-      // this.chartData.labels = this.store.Candidates.currentCandidateSelected.affiliation_history.map(i => i.started_in.slice(0,4));
-      // this.chartData.datasets[0].data = this.store.Candidates.currentCandidateSelected.affiliation_history.map(i => {i.party, 0});
-      // this.loaded = true;
+      const { data } = await services.dataCandidates.assets(
+        locale,
+        role
+      );
+      this.chartData.labels = data.mediana_patrimonios.map((i) => i.year);
+      this.chartData.datasets[0].data =
+        this.store.Candidates.currentCandidateSelected.asset_history.map(
+          (i) => i.value
+        );
+      this.chartData.datasets[1].data = data.mediana_patrimonios.map(
+        (i) => i.value
+      );
+      this.loaded = true;
     } catch (e) {
       this.error = true;
     }

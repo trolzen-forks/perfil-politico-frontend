@@ -106,10 +106,7 @@
           <div
             class="candidate-list__pagintation flex justify-center border-t border-neutral-base mt-10 p-5"
           >
-            <Pagination
-              v-model="page"
-              :rows-number="rows"
-              :rows-per-page="8" />
+            <Pagination v-model="page" :rows-number="rows" :rows-per-page="8" />
           </div>
         </div>
       </main>
@@ -129,6 +126,10 @@ import useStore from "../../hooks/useStore";
 import { computed, defineComponent, reactive } from "vue";
 import * as roles from "../../services/mocks/filtersRoles.json";
 import * as locales from "../../services/mocks/filtersLocales.json";
+import services from "@/services";
+import { setCurrentCandidates } from "@/store/candidates";
+import { setCurrentLocale } from "@/store/locales";
+import { setCurrentRole } from "@/store/roles";
 
 export default defineComponent({
   components: {
@@ -221,6 +222,20 @@ export default defineComponent({
       currentCandidatesFilter,
       hasSelectedParty,
     };
+  },
+  async mounted() {
+    const roleCandidate = (this.$route.params.role).toString();
+    const localeCandidate = (this.$route.params.locale).toString();
+    const yearCandidate = Number(this.$route.params.year);
+    try {
+     
+      const { data } = await services.dataCandidates.candidatesList(yearCandidate, localeCandidate, roleCandidate);
+      setCurrentCandidates(data);
+      setCurrentLocale(localeCandidate);
+      setCurrentRole(roleCandidate);
+    } catch (e) {
+      console.log("Erro", e)
+    }
   },
 });
 </script>

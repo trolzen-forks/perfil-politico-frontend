@@ -1,6 +1,6 @@
 <template>
   <ol class="relative border-l border-gray-200">
-    <li class="mb-10 ml-4" v-for="item of data.slice().reverse()" :key="item">
+    <li class="mb-10 ml-4" v-for="item of data" :key="item">
       <div
         class="absolute w-3 h-3 bg-secondary-base rounded-full mt-1.5 -left-1.5"
       ></div>

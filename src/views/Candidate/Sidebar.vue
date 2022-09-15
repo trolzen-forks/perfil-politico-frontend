@@ -48,10 +48,22 @@
             <p class="text-xs font-light text-primary-base">
               {{ role }}
             </p>
-            <div class="flex justify-start mt-3">  
-              <span v-if="status === 'APTO'" class="bg-green-100 text-green-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">Apto</span>
-              <span v-else-if="status === 'INAPTO'" class="bg-red-100 text-red-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">Inapto</span>
-              <span v-else-if="status === 'CADASTRADO'" class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">Cadastrado</span>
+            <div class="flex justify-start mt-3">
+              <span
+                v-if="status === 'APTO'"
+                class="bg-green-100 text-green-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"
+                >Candidatura apta</span
+              >
+              <span
+                v-else-if="status === 'INAPTO'"
+                class="bg-red-100 text-red-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"
+                >Candidatura inapta</span
+              >
+              <span
+                v-else-if="status === 'CADASTRADO'"
+                class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"
+                >Aguardando julgamento</span
+              >
             </div>
           </div>
         </div>
@@ -85,7 +97,9 @@
               <p class="font-bold text-base text-primary-base">{{ age }}</p>
             </div>
             <div class="mb-4">
-              <h4 class="font-light text-base text-neutral-baseMedium">Gênero</h4>
+              <h4 class="font-light text-base text-neutral-baseMedium">
+                Gênero
+              </h4>
               <p class="font-bold text-base text-primary-base">{{ gender }}</p>
             </div>
             <div class="mb-4">
@@ -134,7 +148,7 @@ export default {
     "age",
     "timeline",
     "image",
-    "status"
+    "status",
   ],
   components: {
     CardInfo,

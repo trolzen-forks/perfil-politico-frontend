@@ -44,7 +44,9 @@
             <router-link :to="{ name: 'About' }">Sobre o projeto</router-link>
           </li>
           <li class="sm:mr-5 sm:mb-0 mb-5 hover:underline">
-            <router-link :to="'/#perguntas-frequentes'">Perguntas frequentes</router-link>
+            <router-link :to="'/#perguntas-frequentes'"
+              >Perguntas frequentes</router-link
+            >
           </li>
           <li class="sm:mr-5 sm:mb-0 mb-5 hover:underline">
             <a
@@ -62,17 +64,23 @@
           <h3 class="font-bold text-xl mr-3 sm:mb-0 mb-4">Parceiros:</h3>
         </div>
         <div class="flex flex-row flex-wrap items-center">
-          <a href="https://theintercept.com/brasil/" class="mr-10" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://theintercept.com/brasil/"
+            class="mr-10"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img
               src="@/assets/images/logo-the-intercept.svg"
               alt="The Intercept Brasil"
             />
           </a>
-          <a href="https://brasil.io/home/" target="_blank" rel="noopener noreferrer">
-            <img
-              src="@/assets/images/logo-brasil-io.svg"
-              alt="Brasil.io"
-            />
+          <a
+            href="https://brasil.io/home/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src="@/assets/images/logo-brasil-io.svg" alt="Brasil.io" />
           </a>
         </div>
       </div>
@@ -81,7 +89,11 @@
           <h3 class="font-bold text-xl mr-3 sm:mb-0 mb-4">Realização:</h3>
         </div>
         <div class="flex flex-row flex-wrap items-center font-regular text-xs">
-          <a href="https://ok.org.br/" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://ok.org.br/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img
               src="@/assets/images/logo-open-knowledge.svg"
               alt="Open Knowledge"

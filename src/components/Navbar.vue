@@ -26,47 +26,68 @@
       </div>
       <div class="hidden sm:w-3/5 grow md:flex md:order-1" id="navbar-sticky">
         <select
-            id="roleCandidates"
-            name="roleCandidates"
-            @change="selectRoleNavbar"
-            class="bg-white bg-opacity-10 h-full p-3 text-white text-sm rounded-l-lg border-transparent font-regular focus:ring-secondary-base focus:border-secondary-base block"
-            placeholder="Cargo"
-            required
+          id="roleCandidates"
+          name="roleCandidates"
+          @change="selectRoleNavbar"
+          class="bg-white bg-opacity-10 h-full p-3 text-white text-sm rounded-l-lg border-transparent font-regular focus:ring-secondary-base focus:border-secondary-base block"
+          placeholder="Cargo"
+          required
+        >
+          <option selected disabled value="" v-if="!currentRole.value">
+            Cargo
+          </option>
+          <option
+            v-for="role in data.roles"
+            :key="role.id"
+            :value="role.id"
+            :selected="currentRole === role.id ? true : false"
           >
-            <option selected disabled value="" v-if="!currentRole.value">Cargo</option>
-            <option v-for="role in data.roles" :key="role.id" :value="role.id" :selected="
-            currentRole === role.id ? true : false
-          ">
-              {{
-                role.name
-              }}
-            </option>
-          </select>
+            {{ role.name }}
+          </option>
+        </select>
         <select
-            id="localeCandidates"
-            name="localeCandidates"
-            @change="localeNavbarCandidates"
-            class="bg-background-purpleLight h-full p-3 text-white text-sm font-regular border-transparent focus:ring-secondary-base focus:border-secondary-base"
-            required
-            placeholder="Localidade"
+          id="localeCandidates"
+          name="localeCandidates"
+          @change="localeNavbarCandidates"
+          class="bg-background-purpleLight h-full p-3 text-white text-sm font-regular border-transparent focus:ring-secondary-base focus:border-secondary-base"
+          required
+          placeholder="Localidade"
+        >
+          <option
+            v-if="currentLocale === 'br' || !currentLocale.value"
+            selected
+            disabled
+            value=""
           >
-          <option v-if="currentLocale === 'br' || !currentLocale.value" selected disabled value="">Estado</option>
+            Estado
+          </option>
           <option
             v-for="(locale, index) in data.locales"
             :key="index"
             :value="locale.initials"
-            :selected="
-              currentLocale === locale.initials ? true : false
-            "
+            :selected="currentLocale === locale.initials ? true : false"
           >
             {{ locale.name }}
           </option>
-          </select>
+        </select>
         <div class="hidden relative md:block w-full h-full">
           <div
             class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none"
           >
-            <svg class="w-5 h-5" fill="none" stroke="#ffffff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="#ffffff"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              ></path>
+            </svg>
           </div>
           <input
             type="text"
@@ -75,12 +96,12 @@
             placeholder="Digite o nome da pessoa candidata"
             autocomplete="off"
             required
-              v-model="searchListCandidates.name"
-              v-on:input="
-                searchListCandidates.name.length > 1
-                  ? (showListCandidates = true)
-                  : (showListCandidates = false)
-              "
+            v-model="searchListCandidates.name"
+            v-on:input="
+              searchListCandidates.name.length > 1
+                ? (showListCandidates = true)
+                : (showListCandidates = false)
+            "
           />
           <div v-if="showListCandidates" class="hidden md:block">
             <ul
@@ -122,7 +143,10 @@
 <script lang="ts">
 import useStore from "@/hooks/useStore";
 import services from "@/services";
-import { setCurrentCandidates, setInfoCandidateSelected } from "@/store/candidates";
+import {
+  setCurrentCandidates,
+  setInfoCandidateSelected,
+} from "@/store/candidates";
 import { computed, defineComponent, reactive } from "vue";
 import * as roles from "../services/mocks/filtersRoles.json";
 import * as locales from "../services/mocks/filtersLocales.json";
@@ -190,18 +214,22 @@ export default defineComponent({
       setCurrentRole(event.target.value);
       if (
         event.target.value === "presidente" ||
-        (event.target.value === "presidente" && this.currentLocale.initials !== "br")
+        (event.target.value === "presidente" &&
+          this.currentLocale.initials !== "br")
       ) {
         setCurrentLocale("br");
         this.handleData(event.target.value, "br");
       } else if (event.target.value === "deputado-distrital") {
         setCurrentLocale("df");
         this.handleData(event.target.value, "df");
-      } else if (event.target.value !== "presidente" && this.currentLocale.initials === "br")
+      } else if (
+        event.target.value !== "presidente" &&
+        this.currentLocale.initials === "br"
+      )
         alert("Selecione um estado!");
       else this.handleData(event.target.value, this.currentLocale.initials);
     },
-    
+
     async getCandidates(): Promise<any> {
       try {
         const { data } = await services.dataCandidates.candidatesList(
@@ -209,7 +237,7 @@ export default defineComponent({
           this.currentLocale,
           this.currentRole
         );
-        return data
+        return data;
       } catch (error) {
         console.log("Erro no carregamento de candidatos", error);
       }
@@ -244,7 +272,7 @@ export default defineComponent({
           role
         );
         setCurrentCandidates(data);
-        if(this.$router.currentRoute.value.name === "CandidateList") {
+        if (this.$router.currentRoute.value.name === "CandidateList") {
           this.$router.replace({
             name: "CandidateList",
             params: {
@@ -261,7 +289,7 @@ export default defineComponent({
   },
   computed: {
     filteredList() {
-      this.getCandidates()
+      this.getCandidates();
       return this.store.Candidates.currentCandidates.objects?.filter(
         (candidates) => {
           return candidates.name

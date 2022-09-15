@@ -31,8 +31,6 @@ httpClient.interceptors.response.use(
   }
 );
 
-
-
 export default {
   dataCandidates: CandidatesService(httpClient),
 };
