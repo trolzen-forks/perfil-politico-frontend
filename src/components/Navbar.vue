@@ -117,7 +117,7 @@
                     (showListCandidates = false)
                 "
               >
-                <span class="w-full capitalize">{{ candidate.name }} </span>
+                <span class="w-full capitalize">{{ candidate.name }} ({{ candidate.party }})</span>
               </li>
               <li
                 v-if="searchListCandidates && !filteredList.length"
