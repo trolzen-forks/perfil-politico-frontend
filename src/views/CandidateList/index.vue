@@ -89,9 +89,23 @@
             class="candidate-list__candidates block sm:grid grid-cols-4 gap-3"
           >
             <CardCandidate
-              v-for="candidate in hasSelectedParty === false
-                ? paginatedData
-                : currentCandidatesFilterParty"
+              v-for="candidate in hasSelectedParty === true
+                ? currentCandidatesFilterParty
+                : hasSelectedElectionsWon === true 
+                ? currentFilterElectionsWon
+                : hasSelectedElections === true
+                ? currentFilterElections
+                : hasSelectedNElections === true
+                ? currentFilterNElections
+                : hasSelectedGenderWoman === true
+                ? currentFilterGenderWoman
+                : hasSelectedGenderMan === true
+                ? currentFilterGenderMan
+                : hasSelectedEthnicityPPI === true
+                ? currentFilterEthnicityPPI
+                : hasSelectedEthnicityWhite === true
+                ? currentFilterEthnicityWhite
+                : paginatedData"
               :key="candidate.id"
               :name="candidate.name"
               :number="candidate.ballot_number"
@@ -198,6 +212,31 @@ export default defineComponent({
       return data.Party.hasSelectedParty;
     });
 
+    let hasSelectedElectionsWon = computed(function () {
+      return data.Filters.hasSelectedElectionsWon;
+    });
+
+    let hasSelectedElections = computed(function () {
+      return data.Filters.hasSelectedElections;
+    });
+
+    let hasSelectedNElections = computed(function () {
+      return data.Filters.hasSelectedNElections;
+    });
+
+    let hasSelectedGenderWoman = computed(function () {
+      return data.Filters.hasSelectedGenderWoman;
+    });
+    let hasSelectedGenderMan = computed(function () {
+      return data.Filters.hasSelectedGenderMan;
+    });
+    let hasSelectedEthnicityPPI = computed(function () {
+      return data.Filters.hasSelectedEthnicityPPI;
+    });
+    let hasSelectedEthnicityWhite = computed(function () {
+      return data.Filters.hasSelectedEthnicityWhite;
+    });
+
     let currentCandidatesFilterParty = computed(function () {
       const valuesData: any = [];
       data.Candidates.currentCandidates.objects?.forEach((i) =>
@@ -218,8 +257,100 @@ export default defineComponent({
       );
 
       return valuesData.filter(function (el) {
-        if (data.FiltersAnalysis.hasSelectedElectionsWon) {
+        if (data.Filters.hasSelectedElectionsWon) {
           if (el.elections_won != 0) {
+            return el;
+          }
+        }
+      });
+    });
+
+    let currentFilterElections = computed(function () {
+      const valuesData: any = [];
+      data.Candidates.currentCandidates.objects?.forEach((i) =>
+        valuesData.push(i)
+      );
+
+      return valuesData.filter(function (el) {
+        if (data.Filters.hasSelectedElections) {
+          if (el.elections_won == 0) {
+            return el;
+          }
+        }
+      });
+    });
+
+    let currentFilterNElections = computed(function () {
+      const valuesData: any = [];
+      data.Candidates.currentCandidates.objects?.forEach((i) =>
+        valuesData.push(i)
+      );
+
+      return valuesData.filter(function (el) {
+        if (data.Filters.hasSelectedNElections) {
+          if (el.elections == 0) {
+            return el;
+          }
+        }
+      });
+    });
+
+    let currentFilterGenderWoman = computed(function () {
+      const valuesData: any = [];
+      data.Candidates.currentCandidates.objects?.forEach((i) =>
+        valuesData.push(i)
+      );
+
+      return valuesData.filter(function (el) {
+        if (data.Filters.hasSelectedGenderWoman) {
+          console.log(el.gender)
+          if (el.gender == 'FEMININO') {
+            console.log(el.gender)
+            return el;
+          }
+        }
+      });
+    });
+
+    let currentFilterGenderMan = computed(function () {
+      const valuesData: any = [];
+      data.Candidates.currentCandidates.objects?.forEach((i) =>
+        valuesData.push(i)
+      );
+
+      return valuesData.filter(function (el) {
+        if (data.Filters.hasSelectedGenderMan) {
+          if (el.gender == 'MASCULINO') {
+            return el;
+          }
+        }
+      });
+    });
+
+    let currentFilterEthnicityPPI = computed(function () {
+      const valuesData: any = [];
+      data.Candidates.currentCandidates.objects?.forEach((i) =>
+        valuesData.push(i)
+      );
+
+      return valuesData.filter(function (el) {
+        if (data.Filters.hasSelectedEthnicityPPI) {
+          if (el.ethnicity == 'PARDA' || el.ethnicity == 'PRETA' || el.ethnicity == 'INDIGENA') {
+            return el;
+          }
+        }
+      });
+    });
+
+    let currentFilterEthnicityWhite = computed(function () {
+      const valuesData: any = [];
+      data.Candidates.currentCandidates.objects?.forEach((i) =>
+        valuesData.push(i)
+      );
+
+      return valuesData.filter(function (el) {
+        if (data.Filters.hasSelectedEthnicityWhite) {
+          if (el.ethnicity == 'BRANCA') {
             return el;
           }
         }
@@ -243,6 +374,20 @@ export default defineComponent({
       currentCandidates,
       currentCandidatesFilterParty,
       hasSelectedParty,
+      currentFilterElectionsWon,
+      hasSelectedElectionsWon,
+      currentFilterElections,
+      hasSelectedElections,
+      hasSelectedNElections,
+      currentFilterNElections,
+      currentFilterGenderWoman,
+      hasSelectedGenderWoman,
+      currentFilterGenderMan,
+      hasSelectedGenderMan,
+      currentFilterEthnicityPPI,
+      hasSelectedEthnicityPPI,
+      hasSelectedEthnicityWhite,
+      currentFilterEthnicityWhite
     };
   },
   methods: {

@@ -61,8 +61,7 @@
 </template>
 
 <script lang="ts">
-import useStore from "@/hooks/useStore";
-import { defineComponent, computed} from "vue";
+import { defineComponent } from "vue";
 import FiltersAnalysis from "./FiltersAnalysis.vue";
 
 export default defineComponent({

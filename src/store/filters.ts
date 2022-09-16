@@ -2,32 +2,50 @@ import { reactive } from "vue";
 
 const state: any = reactive({
   hasSelectedElections: false,
+  hasSelectedNElections: false,
   hasSelectedElectionsWon: false,
-  hasSelectedEthnicity: false,
-  hasSelectedGender: false
+  hasSelectedGenderMan: false,
+  hasSelectedGenderWoman: false,
+  hasSelectedEthnicityPPI: false,
+  hasSelectedEthnicityWhite: false
 });
 
 export default state;
 
-export function setElections() {
-    state.hasSelectedElections = true;
+export function setElections(item: boolean) {
+    state.hasSelectedElections = item;
 }
 
-export function setElectionsWon() {
-    state.hasSelectedElectionsWon = true;
+export function setNElections(item: boolean) {
+    state.hasSelectedNElections = item;
 }
 
-export function setEthnicity() {
-    state.hasSelectedEthnicity = true;
+export function setElectionsWon(item: boolean) {
+    state.hasSelectedElectionsWon = item;
 }
 
-export function setGender() {
-    state.hasSelectedGender = true;
+export function setGenderWoman(item: boolean) {
+    state.hasSelectedGenderWoman = item;
+}
+
+export function setGenderMan(item: boolean) {
+    state.hasSelectedGenderMan = item;
+}
+
+export function setEthnicityPPI(item: boolean) {
+    state.hasSelectedEthnicityPPI = item;
+}
+
+export function setEthnicityWhite(item: boolean) {
+    state.hasSelectedEthnicityWhite = item;
 }
 
 export function cleanFilters() {
-  state.hasSelectedElections = false;
+  state.hasSelectedElections =false;
+  state.hasSelectedNElections = false;
   state.hasSelectedElectionsWon = false;
-  state.hasSelectedEthnicity = false;
-  state.hasSelectedGender = false;
+  state.hasSelectedGenderMan = false;
+  state.hasSelectedGenderWoman = false;
+  state.hasSelectedEthnicityPPI = false;
+  state.hasSelectedEthnicityWhite = false;
 }
