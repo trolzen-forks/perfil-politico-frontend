@@ -1,67 +1,59 @@
 <template>
   <div class="container">
-    <Line
-      v-if="loaded"
-      :styles="stylesBar"
-      :chart-options="chartOptions"
-      :chart-data="chartData"
-    />
-    <div v-if="loaded && error">
-      <h4>Não foi possível carregar os dados</h4>
+    <div id="chart">
+      <apexchart
+        fill="#eeedf4"
+        x="70"
+        width="890"
+        y="290"
+        :options="chartOptions"
+        :series="series"
+      ></apexchart>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
-
-import { Line } from "vue-chartjs";
-import {
-  Chart as ChartJS,
-  Title,
-  Tooltip,
-  Legend,
-  LineElement,
-  LinearScale,
-  PointElement,
-  CategoryScale,
-} from "chart.js";
-
+import { computed, createApp, defineComponent } from "vue";
 import useStore from "@/hooks/useStore";
-
-ChartJS.register(
-  Title,
-  Tooltip,
-  Legend,
-  LineElement,
-  LinearScale,
-  PointElement,
-  CategoryScale
-);
 
 export default defineComponent({
   name: "FiliationChart",
-  components: {
-    Line,
-  },
   data: () => ({
-    data: null,
-    loaded: false,
-    error: false,
-    chartData: {
-      labels: [],
-      datasets: [
-        {
-          label: "Patrimônio declarado da pessoa candidata",
-          backgroundColor: "#333",
-          borderColor: "#333",
-          pointRadius: 8,
-          data: [
-            { x: "PCB", y: 2018 },
-            { x: "PCB", y: 2010 },
-          ],
+    series: [
+      {
+        name: "SAMPLE A",
+        data: [["2020", 0]],
+      },
+      {
+        name: "SAMPLE B",
+        data: [["2016", 0]],
+      },
+    ],
+    chartOptions: {
+      chart: {
+        height: 10,
+        type: "scatter",
+      },
+      grid: {
+        xaxis: {
+          lines: {
+            show: false,
+          },
         },
-      ],
+        yaxis: {
+          lines: {
+            show: false,
+          },
+        },
+      },
+      xaxis: {
+        type: "datetime",
+        tickPlacement: "between",
+      },
+      yaxis: {
+        max: 0,
+      },
     },
   }),
   setup() {
@@ -79,19 +71,26 @@ export default defineComponent({
       return store.Locale.currentLocale;
     });
 
-    const chartOptions = {
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-        x: {
-          position: "top",
-        },
-      },
-    };
+    // const chartOptions = {
+    //     responsive: true,
+    //     indexAxis: 'y',
+    //     maintainAspectRatio: false,
+    //     layout: {
+    //         padding: 10
+    //     },
+    //     scales: {
+    //         x: {
+    //             stacked: true,
+    //         },
+    //         y: {
+    //             stacked: true
+    //         }
+    //     }
+    // };
+
     return {
       store,
       currentRole,
-      chartOptions,
       currentCandidateSelected,
       currentLocale,
     };
@@ -103,16 +102,17 @@ export default defineComponent({
       };
     },
   },
-  async mounted() {
-    this.loaded = false;
-    try {
-      // const { data } = await services.dataCandidates.assets(this.currentLocale, this.currentRole);
-      // this.chartData.labels = this.store.Candidates.currentCandidateSelected.affiliation_history.map(i => i.started_in.slice(0,4));
-      // this.chartData.datasets[0].data = this.store.Candidates.currentCandidateSelected.affiliation_history.map(i => {i.party, 0});
-      // this.loaded = true;
-    } catch (e) {
-      this.error = true;
-    }
-  },
+  //   async mounted() {
+  //     console.log("AAAAA")
+  //     try {
+  //     console.log("BBBBB")
+  //     this.store.Candidates.currentCandidateSelected.affiliation_history.map(i => console.log(Number(i.started_in.substr(0,4))));
+  //       console.log("CCCCC")
+  //       this.chartData.labels = this.store.Candidates.currentCandidateSelected.affiliation_history.map(i => i.party);
+  //       this.chartData.datasets[0].data = this.store.Candidates.currentCandidateSelected.affiliation_history.map(i => Number(i.started_in.substr(0,4)));
+  //     } catch (e) {
+  //       this.error = true;
+  //     }
+  //   },
 });
 </script>

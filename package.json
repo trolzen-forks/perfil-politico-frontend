@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "animate.css": "^4.1.1",
+    "apexcharts": "^3.35.5",
     "axios": "^0.27.2",
     "chart.js": "^3.9.1",
     "core-js": "^3.6.5",
@@ -19,9 +20,11 @@
     "tiny-emitter": "^2.1.0",
     "vee-validate": "^4.5.8",
     "vue": "^3.0.0",
+    "vue-apexcharts": "^1.6.2",
     "vue-chartjs": "^4.1.1",
     "vue-class-component": "^8.0.0-0",
     "vue-router": "^4.0.0-0",
+    "vue3-apexcharts": "^1.4.1",
     "vue3-popper": "^1.5.0",
     "vuex": "^4.0.2"
   },

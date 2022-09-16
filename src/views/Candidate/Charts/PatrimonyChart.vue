@@ -92,6 +92,16 @@ export default defineComponent({
       scales: {
         x: {
           position: "top",
+          title: {
+            display: true,
+            text: "Anos",
+          },
+        },
+        y: {
+          title: {
+            display: true,
+            text: "R$ milhões",
+          },
         },
       },
     };
@@ -112,14 +122,11 @@ export default defineComponent({
   },
   async mounted() {
     this.loaded = false;
-    const role = (this.$route.params.role).toString().toLowerCase();
-    const locale = (this.$route.params.locale).toString();
+    const role = this.$route.params.role.toString().toLowerCase();
+    const locale = this.$route.params.locale.toString();
 
     try {
-      const { data } = await services.dataCandidates.assets(
-        locale,
-        role
-      );
+      const { data } = await services.dataCandidates.assets(locale, role);
       this.chartData.labels = data.mediana_patrimonios.map((i) => i.year);
       this.chartData.datasets[0].data =
         this.store.Candidates.currentCandidateSelected.asset_history.map(

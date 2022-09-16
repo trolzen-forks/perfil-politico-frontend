@@ -90,7 +90,7 @@
           >
             <CardCandidate
               v-for="candidate in hasSelectedParty === false
-                ? currentCandidates
+                ? paginatedData
                 : currentCandidatesFilter"
               :key="candidate.id"
               :name="candidate.name"
@@ -106,7 +106,13 @@
           <div
             class="candidate-list__pagintation flex justify-center border-t border-neutral-base mt-10 p-5"
           >
-            <Pagination v-model="page" :rows-number="rows" :rows-per-page="8" />
+            <Pagination
+              :totalPages="pageCount"
+              :minButtons="pageCount > 5 ? 5 : pageCount"
+              :perPage="resultsPerPage"
+              :currentPage="currentPage"
+              @pagechanged="onPageChange"
+            />
           </div>
         </div>
       </main>
@@ -140,15 +146,15 @@ export default defineComponent({
     CardCandidate,
     Sidebar,
   },
+  props: [],
   data() {
     return {
-      page: 1,
-      rows: 0,
+      currentPage: 0,
+      resultsPerPage: 8,
     };
   },
   setup() {
     const data = useStore();
-
     const items = reactive({
       roles: roles.data,
       locales: locales.data,
@@ -212,6 +218,7 @@ export default defineComponent({
       );
       return valuesData;
     });
+
     return {
       items,
       data,
@@ -223,18 +230,36 @@ export default defineComponent({
       hasSelectedParty,
     };
   },
+  methods: {
+    onPageChange(page) {
+      this.currentPage = page;
+    },
+  },
+  computed: {
+    pageCount() {
+      let candidatesSize = this.data.Candidates.currentCandidates.objects?.length, viewSize = this.resultsPerPage;
+      return Math.ceil(candidatesSize / viewSize);
+    },
+    paginatedData() {
+      const start = this.currentPage * this.resultsPerPage, end = start + this.resultsPerPage;
+      return this.data.Candidates.currentCandidates.objects?.slice(start, end);
+    },
+  },
   async mounted() {
-    const roleCandidate = (this.$route.params.role).toString();
-    const localeCandidate = (this.$route.params.locale).toString();
+    const roleCandidate = this.$route.params.role.toString();
+    const localeCandidate = this.$route.params.locale.toString();
     const yearCandidate = Number(this.$route.params.year);
     try {
-     
-      const { data } = await services.dataCandidates.candidatesList(yearCandidate, localeCandidate, roleCandidate);
+      const { data } = await services.dataCandidates.candidatesList(
+        yearCandidate,
+        localeCandidate,
+        roleCandidate
+      );
       setCurrentCandidates(data);
       setCurrentLocale(localeCandidate);
       setCurrentRole(roleCandidate);
     } catch (e) {
-      console.log("Erro", e)
+      console.log("Erro", e);
     }
   },
 });

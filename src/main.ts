@@ -7,5 +7,6 @@ import "flowbite";
 import "animate.css";
 import "@/assets/styles/main.css";
 import "@/assets/styles/fonts.css";
+import VueApexCharts from "vue3-apexcharts";
 
-createApp(App).use(router).mount("#app");
+createApp(App).use(router).use(VueApexCharts).mount("#app");

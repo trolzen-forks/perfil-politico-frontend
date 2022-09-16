@@ -188,15 +188,17 @@ export default defineComponent({
   },
   async mounted() {
     const keyCandidate = Number(this.$route.params.keyCandidate);
-    const roleCandidate = (this.$route.params.role).toString();
-    const localeCandidate = (this.$route.params.locale).toString();
+    const roleCandidate = this.$route.params.role.toString();
+    const localeCandidate = this.$route.params.locale.toString();
     try {
-      const { dataCandidate } = await services.dataCandidates.candidate(keyCandidate);
+      const { dataCandidate } = await services.dataCandidates.candidate(
+        keyCandidate
+      );
       setInfoCandidateSelected(dataCandidate);
       setCurrentLocale(localeCandidate);
       setCurrentRole(roleCandidate);
     } catch (e) {
-      console.log("Erro", e)
+      console.log("Erro", e);
     }
   },
 });

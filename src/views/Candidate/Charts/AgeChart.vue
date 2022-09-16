@@ -93,7 +93,7 @@ export default defineComponent({
   },
   async mounted() {
     this.loaded = false;
-    const role = (this.$route.params.role).toString();
+    const role = this.$route.params.role.toString();
 
     try {
       const { data } = await services.dataCandidates.characteristic(
