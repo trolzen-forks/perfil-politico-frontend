@@ -3,6 +3,7 @@ import CandidatesModule from "./candidates";
 import LocaleModule from "./locales";
 import RoleModule from "./roles";
 import PartyModule from "./party";
+import FiltersModule from "./filters";
 import GlobalModule from "./global";
 
 export default readonly({
@@ -11,4 +12,5 @@ export default readonly({
   Global: GlobalModule,
   Locale: LocaleModule,
   Role: RoleModule,
+  Filters: FiltersModule,
 });

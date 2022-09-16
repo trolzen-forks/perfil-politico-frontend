@@ -20,7 +20,6 @@
         >
           <img :src="image" alt="Candidato" />
         </div>
-
         <IconCandidate
           v-else
           class="w-28 h-28 shadow-lg mb-3 -mt-32"

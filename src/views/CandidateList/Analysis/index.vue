@@ -42,9 +42,9 @@
       </span>
     </button>
     <div :class="isOpenAnalisys ? 'd-block' : 'hidden'">
-      <div class="c-card-info__content p-5 sm:grid grid-cols-4 gap-4">
-        <div class="flex flex-col justify-center items-center pb-8 sm:pb-0">
-          <h2 class="text-secondary-base text-3xl font-bold mb-2">
+      <div class="c-card-info__content p-5 sm:grid grid-cols-3 gap-4">
+        <div class="flex flex-col justify-center pb-8 sm:pb-0">
+          <h2 class="text-secondary-base text-3xl font-bold mb-2 text-left">
             Análises sobre as candidaturas
           </h2>
           <p class="text-white">
@@ -52,8 +52,7 @@
             atendam aos critérios selecionados na listagem abaixo.
           </p>
         </div>
-        <div class="col-span-2"></div>
-        <div>
+        <div class="col-span-2">
           <FiltersAnalysis />
         </div>
       </div>
@@ -62,14 +61,16 @@
 </template>
 
 <script lang="ts">
+import useStore from "@/hooks/useStore";
+import { defineComponent, computed} from "vue";
 import FiltersAnalysis from "./FiltersAnalysis.vue";
 
-export default {
+export default defineComponent({
   components: { FiltersAnalysis },
   data() {
     return {
       isOpenAnalisys: true,
     };
-  },
-};
+  }
+});
 </script>

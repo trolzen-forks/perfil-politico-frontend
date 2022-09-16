@@ -91,7 +91,7 @@
             <CardCandidate
               v-for="candidate in hasSelectedParty === false
                 ? paginatedData
-                : currentCandidatesFilter"
+                : currentCandidatesFilterParty"
               :key="candidate.id"
               :name="candidate.name"
               :number="candidate.ballot_number"
@@ -198,7 +198,7 @@ export default defineComponent({
       return data.Party.hasSelectedParty;
     });
 
-    let currentCandidatesFilter = computed(function () {
+    let currentCandidatesFilterParty = computed(function () {
       const valuesData: any = [];
       data.Candidates.currentCandidates.objects?.forEach((i) =>
         valuesData.push(i)
@@ -207,6 +207,21 @@ export default defineComponent({
       return valuesData.filter(function (el) {
         if (el.party == data.Party.currentParty) {
           return el;
+        }
+      });
+    });
+
+    let currentFilterElectionsWon = computed(function () {
+      const valuesData: any = [];
+      data.Candidates.currentCandidates.objects?.forEach((i) =>
+        valuesData.push(i)
+      );
+
+      return valuesData.filter(function (el) {
+        if (data.FiltersAnalysis.hasSelectedElectionsWon) {
+          if (el.elections_won != 0) {
+            return el;
+          }
         }
       });
     });
@@ -226,7 +241,7 @@ export default defineComponent({
       currentRole,
       currentParty,
       currentCandidates,
-      currentCandidatesFilter,
+      currentCandidatesFilterParty,
       hasSelectedParty,
     };
   },
