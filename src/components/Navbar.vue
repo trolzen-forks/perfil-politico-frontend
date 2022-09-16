@@ -29,7 +29,7 @@
           id="roleCandidates"
           name="roleCandidates"
           @change="selectRoleNavbar"
-          class="bg-white bg-opacity-10 h-full p-3 text-white text-sm rounded-l-lg border-transparent font-regular focus:ring-secondary-base focus:border-secondary-base block"
+          class=" bg-background-purpleLight bg-opacity-70 h-full p-3 text-white text-sm rounded-l-lg border-transparent font-regular focus:ring-secondary-base focus:border-secondary-base block"
           placeholder="Cargo"
           required
         >
@@ -117,7 +117,7 @@
                     (showListCandidates = false)
                 "
               >
-                <span class="w-full capitalize">{{ candidate.name }} </span>
+                <span class="w-full capitalize">{{ candidate.name }} ({{ candidate.party }})</span>
               </li>
               <li
                 v-if="searchListCandidates && !filteredList.length"
