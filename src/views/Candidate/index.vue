@@ -162,7 +162,7 @@ export default defineComponent({
     EthnicityChart,
     GenderChart,
     PatrimonyChart,
-    Tooltip,
+    Tooltip
   },
   data() {
     return {

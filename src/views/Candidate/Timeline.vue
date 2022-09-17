@@ -1,5 +1,5 @@
 <template>
-  <ol class="relative border-l border-gray-200">
+  <ol class="relative border-l border-gray-200"  v-if="data[0]">
     <template v-for="item of data.slice().reverse()" :key="item">
       <li class="mb-10 ml-4" v-if="item.result !== '2O TURNO'">
         <div
@@ -22,6 +22,9 @@
       </li>
     </template>
   </ol>
+  <template v-else>
+    <h2>Não há dados no histórico da pessoa candidata</h2>
+  </template>
 </template>
 
 <script lang="ts">

@@ -91,6 +91,8 @@
             <CardCandidate
               v-for="candidate in hasSelectedParty === true
                 ? currentCandidatesFilterParty
+                : hasSelectedElectionsWon === true
+                ? unionAnalysis(currentFilterElectionsWon, currentFilterGenderWoman, currentFilterEthnicityPPI)
                 : hasSelectedElectionsWon === true 
                 ? currentFilterElectionsWon
                 : hasSelectedElections === true
@@ -116,6 +118,9 @@
               :image="candidate.image"
               :status="candidate.status"
             />
+            <div v-if="noResultsAnalysis" class="col-span-4 flex justify-center my-20">
+              <h2 class="text-primary-base font-bold text-3xl mb-4">Não há resultados para esta análise</h2>
+            </div>
           </div>
           <div
             class="candidate-list__pagintation flex justify-center border-t border-neutral-base mt-10 p-5"
@@ -165,6 +170,7 @@ export default defineComponent({
     return {
       currentPage: 0,
       resultsPerPage: 8,
+      noResultsAnalysis: false
     };
   },
   setup() {
@@ -394,6 +400,30 @@ export default defineComponent({
     onPageChange(page) {
       this.currentPage = page;
     },
+    unionAnalysis(item, item2, item3?){
+      const valuesData: any = [];
+      let intersection2: any = [];
+      let intersection3: any = [];
+
+      if(this.hasSelectedElectionsWon === true && this.hasSelectedGenderWoman === true && this.hasSelectedEthnicityPPI === true){
+        this.currentFilterElectionsWon.forEach((i) =>
+          valuesData.push(i)
+        );
+        valuesData.filter(function (el) {
+          intersection2 = item2.includes(el)
+        });
+        if(intersection2 && item3) intersection2.filter(function (el) {
+        intersection3 = item3.includes(el)
+      });
+      else return intersection2;
+      }
+
+      
+      if(intersection2 && item3) intersection2.filter(function (el) {
+        intersection3 = item3.includes(el)
+      });
+      else return intersection2;
+    }
   },
   computed: {
     pageCount() {

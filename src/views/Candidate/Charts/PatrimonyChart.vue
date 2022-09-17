@@ -6,6 +6,11 @@
       :chart-options="chartOptions"
       :chart-data="chartData"
     />
+    <svg viewBox="0 0 100% 100" width="100%" height="100">
+      <rect width="100%" height="12" y="0" x="70" fill="#eeedf4"></rect>
+      <rect class="affil-point" width="12" height="12" x="17%" y="0"></rect>
+      <text class="affil-text" text-anchor="middle" font-family="sans-serif" x="17.5%" dy="45">PT</text>
+    </svg>
     <div v-if="loaded && error">
       <h4>Não foi possível carregar os dados</h4>
     </div>
@@ -68,6 +73,11 @@ export default defineComponent({
           pointRadius: 8,
           data: null,
         },
+        {
+          label: "Filiações",
+          backgroundColor: "#333",
+          borderColor: "#333",
+        },
       ],
     },
   }),
@@ -93,14 +103,14 @@ export default defineComponent({
         x: {
           position: "top",
           title: {
-            display: true,
+            display: false,
             text: "Anos",
           },
         },
         y: {
           title: {
             display: true,
-            text: "R$ milhões",
+            text: "R$",
           },
         },
       },
@@ -127,13 +137,22 @@ export default defineComponent({
 
     try {
       const { data } = await services.dataCandidates.assets(locale, role);
-      this.chartData.labels = data.mediana_patrimonios.map((i) => i.year);
-      this.chartData.datasets[0].data =
-        this.store.Candidates.currentCandidateSelected.asset_history.map(
-          (i) => i.value
+      let yearMedian = data.mediana_patrimonios.map((i) => i.year);
+      let yearPatrimony = yearMedian.concat(this.store.Candidates.currentCandidateSelected.asset_history.map((i) => i.year));
+      const yearLabel = yearPatrimony.filter(function(value){
+        return !yearMedian.some(function(value2){
+            return value == value2;
+        });
+      });
+      
+      console.log(data.mediana_patrimonios.map((i) => i.year), this.store.Candidates.currentCandidateSelected.asset_history.map((i) => i.year), yearMedian.concat(yearLabel))
+      
+      this.chartData.labels = yearMedian.concat(yearLabel).sort();
+      this.chartData.datasets[0].data = this.store.Candidates.currentCandidateSelected.asset_history.map(
+          (i) => [i.year, i.value]
         );
       this.chartData.datasets[1].data = data.mediana_patrimonios.map(
-        (i) => i.value
+        (i) => [i.year, i.value]
       );
       this.loaded = true;
     } catch (e) {

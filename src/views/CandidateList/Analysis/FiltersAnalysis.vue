@@ -2,15 +2,14 @@
   <div class="c-filters-analysis text-white bg-primary-dark p-10 rounded">
     <div class="c-filters-analysis__header flex items-center">
       <h3 class="text-xl font-bold">Perguntas</h3>
-      <a
-        href="#"
+      <button
+        v-on:click="clearAnalysis()"
         class="text-secondary-base ml-5 text-sm underline hover:no-underline"
       >
         Limpar filtros
-      </a>
+    </button>
     </div>
     <div class="c-filters-analysis__content mt-5 flex">
-      {{checkedElectionsWon}}
       <div>
         <div class="w-full mb-3 mr-10">
           <label for="tNuncaEleitos" class="flex items-center cursor-pointer">
@@ -119,7 +118,7 @@
 
 <script lang="ts">
 import useStore from "@/hooks/useStore";
-import { setElections, setElectionsWon, setEthnicityPPI, setEthnicityWhite, setGenderMan, setGenderWoman, setNElections } from "@/store/filters";
+import { cleanFilters, setElections, setElectionsWon, setEthnicityPPI, setEthnicityWhite, setGenderMan, setGenderWoman, setNElections } from "@/store/filters";
 import { computed, defineComponent } from "vue";
 
 export default defineComponent({
@@ -197,6 +196,18 @@ export default defineComponent({
         this.checkedPPI = false;
       }
     }
+  },
+  methods: {
+  clearAnalysis() {
+      cleanFilters();
+      this.checkedElections = false
+      this.checkedElectionsWon = false
+      this.checkedNElections = false
+      this.checkedWoman = false
+      this.checkedMan = false
+      this.checkedPPI = false
+      this.checkedWhite = false
+    },
   }
 });
 </script>

@@ -1,14 +1,11 @@
 <template>
   <div class="container">
     <div id="chart">
-      <apexchart
-        fill="#eeedf4"
-        x="70"
-        width="890"
-        y="290"
-        :options="chartOptions"
-        :series="series"
-      ></apexchart>
+      <Scatter
+      :styles="stylesBar"
+      :chart-options="chartOptions"
+      :chart-data="chartData"
+    />
     </div>
   </div>
 </template>
@@ -16,44 +13,50 @@
 <script lang="ts">
 import { computed, createApp, defineComponent } from "vue";
 import useStore from "@/hooks/useStore";
+import { Scatter } from 'vue-chartjs'
+import {
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  Legend,
+  LineElement,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  Plugin
+} from 'chart.js'
+
+ChartJS.register(
+  Title,
+  Tooltip,
+  Legend,
+  LineElement,
+  CategoryScale,
+  LinearScale,
+  PointElement
+)
 
 export default defineComponent({
   name: "FiliationChart",
+  components: {
+    Scatter
+  },
   data: () => ({
-    series: [
-      {
-        name: "SAMPLE A",
-        data: [["2020", 0]],
-      },
-      {
-        name: "SAMPLE B",
-        data: [["2016", 0]],
-      },
-    ],
-    chartOptions: {
-      chart: {
-        height: 10,
-        type: "scatter",
-      },
-      grid: {
-        xaxis: {
-          lines: {
-            show: false,
-          },
+    loaded: false,
+    error: false,
+    chartData: {
+      labels:["a","b"],
+      datasets: [
+        {
+          label: "Quantidade",
+          borderColor:"rgb(75, 192, 192)",
+          borderRadius: Number.MAX_VALUE,
+          data: [
+            {x: 2010, y: 0}, 
+            {x: 2016, y: 0}
+          ],
         },
-        yaxis: {
-          lines: {
-            show: false,
-          },
-        },
-      },
-      xaxis: {
-        type: "datetime",
-        tickPlacement: "between",
-      },
-      yaxis: {
-        max: 0,
-      },
+      ],
     },
   }),
   setup() {
@@ -71,28 +74,34 @@ export default defineComponent({
       return store.Locale.currentLocale;
     });
 
-    // const chartOptions = {
-    //     responsive: true,
-    //     indexAxis: 'y',
-    //     maintainAspectRatio: false,
-    //     layout: {
-    //         padding: 10
-    //     },
-    //     scales: {
-    //         x: {
-    //             stacked: true,
-    //         },
-    //         y: {
-    //             stacked: true
-    //         }
-    //     }
-    // };
+    const chartOptions = {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        xAxes: [{
+          type: 'linear', // MANDATORY TO SHOW YOUR POINTS! (THIS IS THE IMPORTANT BIT) 
+          display: true, // mandatory
+          scaleLabel: {
+              display: true, // mandatory
+              labelString: 'Your label' // optional 
+          },
+        }], 
+        yAxes: [{ // and your y axis customization as you see fit...
+          display: true,
+          scaleLabel: {
+            display: true,
+            labelString: 'Count'
+          }
+        }],
+      }
+    };
 
     return {
       store,
       currentRole,
       currentCandidateSelected,
       currentLocale,
+      chartOptions
     };
   },
   computed: {
