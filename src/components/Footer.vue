@@ -65,17 +65,6 @@
         </div>
         <div class="flex flex-row flex-wrap items-center">
           <a
-            href="https://theintercept.com/brasil/"
-            class="mr-10"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              src="@/assets/images/logo-the-intercept.svg"
-              alt="The Intercept Brasil"
-            />
-          </a>
-          <a
             href="https://brasil.io/home/"
             target="_blank"
             rel="noopener noreferrer"

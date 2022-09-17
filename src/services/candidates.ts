@@ -34,7 +34,7 @@ export default (httpClient: any) => ({
     };
   },
 
-  assets: async (state: string, post: string) => {
+  assets: async (state?: string, post?: string) => {
     setGlobalLoading(true);
     const response = await httpClient.get(`/api/asset-stats/`, {
       params: { state: state, candidate_post: post },

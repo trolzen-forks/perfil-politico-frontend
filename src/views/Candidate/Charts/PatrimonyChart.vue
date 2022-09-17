@@ -136,18 +136,22 @@ export default defineComponent({
     const locale = this.$route.params.locale.toString();
 
     try {
-      const { data } = await services.dataCandidates.assets(locale, role);
+      const { data } = role != 'presidente' ? await services.dataCandidates.assets(locale, role) : await services.dataCandidates.assets();
+      
       let yearMedian = data.mediana_patrimonios.map((i) => i.year);
       let yearPatrimony = yearMedian.concat(this.store.Candidates.currentCandidateSelected.asset_history.map((i) => i.year));
+      
       const yearLabel = yearPatrimony.filter(function(value){
         return !yearMedian.some(function(value2){
             return value == value2;
         });
       });
-      
-      console.log(data.mediana_patrimonios.map((i) => i.year), this.store.Candidates.currentCandidateSelected.asset_history.map((i) => i.year), yearMedian.concat(yearLabel))
-      
-      this.chartData.labels = yearMedian.concat(yearLabel).sort();
+
+      const configureYearMedian = yearMedian.filter((c, index) => {
+          return yearMedian.indexOf(c) === index;
+      });
+
+      this.chartData.labels = configureYearMedian.concat(yearLabel).sort();
       this.chartData.datasets[0].data = this.store.Candidates.currentCandidateSelected.asset_history.map(
           (i) => [i.year, i.value]
         );
