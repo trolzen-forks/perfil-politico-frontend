@@ -8,8 +8,10 @@
     />
     <svg viewBox="0 0 100% 100" width="100%" height="100">
       <rect width="100%" height="12" y="0" x="70" fill="#eeedf4"></rect>
-      <rect class="affil-point" width="12" height="12" x="17%" y="0"></rect>
-      <text class="affil-text" text-anchor="middle" font-family="sans-serif" x="17.5%" dy="45">PT</text>
+      <template v-for="item of dataFiliation" :key="item">
+        <rect class="affil-point" width="12" height="12" :x="item[0].qtd+'%'" y="0"></rect>
+        <text class="affil-text" text-anchor="middle" font-family="sans-serif" :x="item[0].qtd+'%'" dy="45">{{item[0].name}}</text>
+      </template>
     </svg>
     <div v-if="loaded && error">
       <h4>Não foi possível carregar os dados</h4>
@@ -55,6 +57,7 @@ export default defineComponent({
     data: null,
     loaded: false,
     error: false,
+    dataFiliation: null,
     chartData: {
       labels: [""],
       datasets: [
@@ -151,7 +154,26 @@ export default defineComponent({
           return yearMedian.indexOf(c) === index;
       });
 
-      this.chartData.labels = configureYearMedian.concat(yearLabel).sort();
+      const years = configureYearMedian.concat(yearLabel).sort();
+      
+      let startedFiliations = this.store.Candidates.currentCandidateSelected.affiliation_history.map((i) => Number(i.started_in.substr(0,4)));
+      console.log(years, startedFiliations)
+      const configureYearFiliationMedian = startedFiliations.filter(function(value){
+        return !years.some(function(value2){
+            return value == value2;
+        });
+      });
+
+      const configureYearFiliation = configureYearFiliationMedian.filter((c, index) => {
+          return configureYearFiliationMedian.indexOf(c) === index;
+      });
+
+      const yearsWithFiliations = years.concat(configureYearFiliation).sort()
+
+      const party = this.store.Candidates.currentCandidateSelected.affiliation_history.map((i,index) => [{name: i.party, started: Number((i.started_in.substr(0,4))), qtd: (((years.concat(configureYearFiliation).sort()).indexOf(Number(i.started_in.substr(0,4)))+1)*100)/years.concat(configureYearFiliation).length}]);
+
+      this.dataFiliation = party
+      this.chartData.labels = !startedFiliations[0] ? years : yearsWithFiliations;
       this.chartData.datasets[0].data = this.store.Candidates.currentCandidateSelected.asset_history.map(
           (i) => [i.year, i.value]
         );
