@@ -372,7 +372,7 @@ export default defineComponent({
       data.Candidates.currentCandidates.objects?.forEach((i) =>
         valuesData.push(i)
       );
-      return valuesData;
+      return arrayShuffle(valuesData);
     });
 
     return {
@@ -429,10 +429,9 @@ export default defineComponent({
       else return intersection2;
     },
     paginatedData(candidates) {
-      const start = this.currentPage * this.resultsPerPage, end = start + this.resultsPerPage;
       this.pageQtd(candidates);
-      const arrayPaginatedCandidates = arrayShuffle(candidates)
-      return arrayPaginatedCandidates.slice(start, end);
+      const start = this.currentPage * this.resultsPerPage, end = start + this.resultsPerPage;
+      return candidates.slice(start, end);
     },
     pageQtd(candidates) {
       let candidatesSize = candidates.length, viewSize = this.resultsPerPage;
