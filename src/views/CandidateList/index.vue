@@ -431,7 +431,8 @@ export default defineComponent({
     paginatedData(candidates) {
       const start = this.currentPage * this.resultsPerPage, end = start + this.resultsPerPage;
       this.pageQtd(candidates);
-      return arrayShuffle(candidates.slice(start, end));
+      const arrayPaginatedCandidates = arrayShuffle(candidates)
+      return arrayPaginatedCandidates.slice(start, end);
     },
     pageQtd(candidates) {
       let candidatesSize = candidates.length, viewSize = this.resultsPerPage;
