@@ -89,7 +89,7 @@ export default defineComponent({
       try {
         const { dataCandidate } = await services.dataCandidates.candidate(key);
         setInfoCandidateSelected(dataCandidate);
-        
+
         this.$router.push({
           name: "Candidate",
           params: {

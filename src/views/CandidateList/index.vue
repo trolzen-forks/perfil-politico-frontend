@@ -82,32 +82,34 @@
               </p>
             </div>
           </div>
-          <div class="candidate-list__analisys w-full">
+          <div class="candidate-list__analisys w-full mb-10">
             <Analysis />
+          </div>
+          <div class="pb-5 md:border-b border-neutral-base">
+            <h2 class="text-primary-base font-bold text-2xl">São {{currentCandidates.length}} candidaturas a {{ currentRole }} {{ currentLocale.preposition }} {{ currentLocale.name }}</h2>
+            <h3 class="text-primary-base font-regular text-xl">Destes, 898 são de cor branca</h3>
           </div>
           <div
             class="candidate-list__candidates block sm:grid grid-cols-4 gap-3"
           >
             <CardCandidate
               v-for="candidate in hasSelectedParty === true
-                ? currentCandidatesFilterParty
+                ? (paginatedData(currentCandidatesFilterParty))
                 : hasSelectedElectionsWon === true
-                ? unionAnalysis(currentFilterElectionsWon, currentFilterGenderWoman, currentFilterEthnicityPPI)
-                : hasSelectedElectionsWon === true 
-                ? currentFilterElectionsWon
+                ? (paginatedData(currentFilterElectionsWon))
                 : hasSelectedElections === true
-                ? currentFilterElections
+                ? (paginatedData(currentFilterElections))
                 : hasSelectedNElections === true
-                ? currentFilterNElections
+                ? (paginatedData(currentFilterNElections))
                 : hasSelectedGenderWoman === true
-                ? currentFilterGenderWoman
+                ? (paginatedData(currentFilterGenderWoman))
                 : hasSelectedGenderMan === true
-                ? currentFilterGenderMan
+                ? (paginatedData(currentFilterGenderMan))
                 : hasSelectedEthnicityPPI === true
-                ? currentFilterEthnicityPPI
+                ? paginatedData(currentFilterEthnicityPPI)
                 : hasSelectedEthnicityWhite === true
-                ? currentFilterEthnicityWhite
-                : paginatedData"
+                ? paginatedData(currentFilterEthnicityWhite)
+                : paginatedData(currentCandidates)"
               :key="candidate.id"
               :name="candidate.name"
               :number="candidate.ballot_number"
@@ -155,6 +157,7 @@ import services from "@/services";
 import { setCurrentCandidates } from "@/store/candidates";
 import { setCurrentLocale } from "@/store/locales";
 import { setCurrentRole } from "@/store/roles";
+import arrayShuffle from "array-shuffle";
 
 export default defineComponent({
   components: {
@@ -168,6 +171,7 @@ export default defineComponent({
   props: [],
   data() {
     return {
+      pageCount: 1,
       currentPage: 0,
       resultsPerPage: 8,
       noResultsAnalysis: false
@@ -400,7 +404,7 @@ export default defineComponent({
     onPageChange(page) {
       this.currentPage = page;
     },
-    unionAnalysis(item, item2, item3?){
+    unionAnalysis(item, item2, item3?) {
       const valuesData: any = [];
       let intersection2: any = [];
       let intersection3: any = [];
@@ -423,17 +427,16 @@ export default defineComponent({
         intersection3 = item3.includes(el)
       });
       else return intersection2;
-    }
-  },
-  computed: {
-    pageCount() {
-      let candidatesSize = this.data.Candidates.currentCandidates.objects?.length, viewSize = this.resultsPerPage;
-      return Math.ceil(candidatesSize / viewSize);
     },
-    paginatedData() {
+    paginatedData(candidates) {
       const start = this.currentPage * this.resultsPerPage, end = start + this.resultsPerPage;
-      return this.data.Candidates.currentCandidates.objects?.slice(start, end);
+      this.pageQtd(candidates);
+      return arrayShuffle(candidates.slice(start, end));
     },
+    pageQtd(candidates) {
+      let candidatesSize = candidates.length, viewSize = this.resultsPerPage;
+      this.pageCount = Math.ceil(candidatesSize / viewSize);
+    }
   },
   async mounted() {
     const roleCandidate = this.$route.params.role.toString();

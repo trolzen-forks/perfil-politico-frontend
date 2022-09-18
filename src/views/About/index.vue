@@ -2,7 +2,7 @@
   <div class="flex flex-col min-h-screen">
     <Navbar></Navbar>
     <div class="about flex-grow">
-      <div class="sm:grid grid-cols-8 gap-5 sm:mt-44 mt-24 px-5">
+      <div class="sm:grid grid-cols-8 gap-5 sm:mt-32 mt-24 px-5">
         <div class="about__image col-span-2 sm:w-4/5 w-32 mx-auto">
           <IconPP></IconPP>
         </div>

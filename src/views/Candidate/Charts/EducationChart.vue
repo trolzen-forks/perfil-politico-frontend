@@ -48,13 +48,7 @@ export default defineComponent({
     error: false,
     dataAge: null,
     chartData: {
-      labels: [
-        "Superior Completo",
-        "Ensino Médio Completo",
-        "Superior Incompleto",
-        "Ensino Fundamental Completo",
-        "Ensino Médio Incompleto",
-      ],
+      labels: [],
       datasets: [
         {
           label: "Quantidade",
@@ -103,13 +97,14 @@ export default defineComponent({
         "education"
       );
       this.chartData.datasets[0].data = data.map((i) => i.total);
-
+      this.chartData.labels = data.map((i) => i.characteristic)
       this.chartData.datasets[0].backgroundColor = data.map((i) =>
         i.characteristic === this.currentCandidateSelected.education
           ? "#9BDB52"
           : "#D9D9D9"
       );
 
+      console.log(data.map((i) => i.characteristic))
       this.loaded = true;
     } catch (e) {
       this.error = true;
