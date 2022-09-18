@@ -9,8 +9,9 @@
     <svg viewBox="0 0 100% 100" width="100%" height="100">
       <rect width="100%" height="12" y="0" x="70" fill="#eeedf4"></rect>
       <template v-for="item of dataFiliation" :key="item">
-        <rect class="affil-point" width="12" height="12" :x="item[0].qtd+'%'" y="0"></rect>
-        <text class="affil-text" text-anchor="middle" font-family="sans-serif" :x="item[0].qtd+'%'" dy="45">{{item[0].name}}</text>
+          <rect class="affil-point" width="12" height="12" :x="item[0].qtd+'%'" y="0"></rect>
+          <text class="affil-text" text-anchor="middle" font-family="sans-serif" :x="item[0].qtd+'%'" dy="45">{{item[0].name}}</text>
+          <text class="affil-text text-xs" text-anchor="middle" font-family="sans-serif" :x="item[0].qtd+'%'" dy="65">({{item[0].started}})</text>
       </template>
     </svg>
     <div v-if="loaded && error">
@@ -51,8 +52,8 @@ ChartJS.register(
 export default defineComponent({
   name: "PatrimonyChart",
   components: {
-    Line,
-  },
+    Line
+},
   data: () => ({
     data: null,
     loaded: false,

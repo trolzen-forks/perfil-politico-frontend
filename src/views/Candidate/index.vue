@@ -77,7 +77,7 @@
           <CardInfo class="sm:col-span-2">
             <template v-slot:title>
               Trajetória política e patrimonial
-              <Tooltip arrow placement="bottom" class="w-auto">
+              <TooltipInfo arrow placement="bottom" class="w-auto">
                 <svg
                   class="ml-2 w-6 h-6"
                   fill="none"
@@ -118,7 +118,7 @@
                     </p>
                   </div>
                 </template>
-              </Tooltip>
+              </TooltipInfo>
             </template>
             <template v-slot:content>
               <PatrimonyChart />
@@ -146,7 +146,7 @@ import EthnicityChart from "./Charts/EthnicityChart.vue";
 import GenderChart from "./Charts/GenderChart.vue";
 import PatrimonyChart from "./Charts/PatrimonyChart.vue";
 import services from "@/services";
-import Tooltip from "../../components/Tooltip.vue";
+import TooltipInfo from "../../components/TooltipInfo.vue";
 import { setInfoCandidateSelected } from "@/store/candidates";
 import { setCurrentLocale } from "@/store/locales";
 import { setCurrentRole } from "@/store/roles";
@@ -162,7 +162,7 @@ export default defineComponent({
     EthnicityChart,
     GenderChart,
     PatrimonyChart,
-    Tooltip
+    TooltipInfo
   },
   data() {
     return {
