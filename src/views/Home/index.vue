@@ -13,7 +13,7 @@
             <div>
               <div class="home__banner-content text-white font-bold uppercase">
                 <div
-                  class="home__banner-content-emphasis flex items-center flex-col sm:flex-row mb-3"
+                  class="home__banner-content-emphasis flex items-center flex-col md:flex-row mb-3 sm:justify-center"
                 >
                   <div class="sm:pr-5 mb-4">
                     <img
@@ -23,9 +23,9 @@
                   </div>
                   <div>
                     <h1
-                      class="home__banner-content-emphasis_title text-white text-xl sm:text-4xl uppercase sm:text-left"
+                      class="home__banner-content-emphasis_title text-white md:text-4xl uppercase md:text-left text-center text-xl"
                     >
-                      Conheça o Perfil Político das <br />
+                      Conheça o Perfil Político das <br class="hidden md:block" />
                       <span class="text-secondary-base"
                         >pessoas candidatas em 2022</span
                       >
@@ -43,9 +43,9 @@
           </div>
 
           <div class="flex flex-col items-center text-white">
-            <p class="font-regular text-lg">Por que usar o Perfil Político?</p>
+            <p class="font-regular md:text-lg sm:text-base">Por que usar o Perfil Político?</p>
             <svg
-              class="w-6 h-6 animate__animated animate__bounce animate__infinite"
+              class="md:w-6 md:h-6 w-4 h-4 animate__animated animate__bounce animate__infinite"
               fill="none"
               stroke="#FFFFFF"
               viewBox="0 0 24 24"
@@ -72,48 +72,48 @@
             >
               Diferenciais do Perfil Político
             </h2>
-            <div class="mt-16 block sm:grid grid-flow-col gap-36">
-              <div class="flex flex-col justify-start items-center">
+            <div class="md:mt-16 mt-8 block lg:grid grid-flow-col xl:gap-36 gap-5">
+              <div class="flex flex-col justify-start items-center lg:mb-0 mb-6">
                 <img
                   src="@/assets/icons/icon-historico.svg"
                   alt="Visualização da trajetória política"
-                  class="w-32"
+                  class="md:w-32 w-24"
                 />
-                <h4 class="text-primary-base text-xl font-bold my-3">
+                <h4 class="text-primary-base md:text-xl font-bold my-3 text-base">
                   Visualização da trajetória política
                 </h4>
-                <p class="text-text-light font-regular text-base">
+                <p class="text-text-light font-regular md:text-base text-sm">
                   Você pode comparar e conhecer o histórico das milhares de
                   candidaturas, as mudanças de partido, eleições disputadas e
                   ganhas.
                 </p>
               </div>
-              <div class="flex flex-col justify-start items-center">
+              <div class="flex flex-col justify-start items-center lg:mb-0 mb-6">
                 <img
                   src="@/assets/icons/icon-patrimonio.svg"
                   alt="Patrimônio do candidato"
-                  class="w-32"
+                  class="md:w-32 w-24"
                 />
-                <h4 class="text-primary-base text-xl font-bold my-3">
+                <h4 class="text-primary-base md:text-xl font-bold my-3 text-base">
                   Histórico do patrimônio declarado
                 </h4>
-                <p class="text-text-light font-regular text-base">
+                <p class="text-text-light font-regular md:text-base text-sm">
                   A ficha de cada pessoa candidata apresenta o patrimônio
                   declarado patrimônio declarado ao longo de todas as eleições
                   disputadas e a comparação com o patrimônio das outras
                   candidaturas do mesmo ano.
                 </p>
               </div>
-              <div class="flex flex-col justify-start items-center">
+              <div class="flex flex-col justify-start items-center lg:mb-0 mb-6">
                 <img
                   src="@/assets/icons/icon-representatividade.svg"
                   alt="Análise de representatividade"
-                  class="w-32"
+                  class="md:w-32 w-24"
                 />
-                <h4 class="text-primary-base text-xl font-bold my-3">
+                <h4 class="text-primary-base md:text-xl font-bold my-3 text-base">
                   Análise de representatividade
                 </h4>
-                <p class="text-text-light font-regular text-base">
+                <p class="text-text-light font-regular md:text-base text-sm">
                   Veja como está a representatividade de gênero e cor/raça de
                   todas as candidaturas para um cargo - e se as pessoas, de
                   fato, representam você.
@@ -124,15 +124,15 @@
         </div>
       </section>
 
-      <section class="home__about bg-background-light sm:mt-20">
+      <section class="home__about bg-background-light lg:mt-20">
         <div
-          class="home__about-content container px-5 sm:grid sm:grid-cols-9 sm:gap-16 py-20"
+          class="home__about-content container px-5 xl:grid xl:grid-cols-9 xl:gap-16 lg:py-20"
         >
-          <div class="col-span-3 col-start-2 flex items-center justify-center">
+          <div class="col-span-3 col-start-2 flex items-center justify-center sm:mb-10">
             <IconPP></IconPP>
           </div>
           <div
-            class="col-span-4 flex flex-col justify-center sm:items-start items-center container"
+            class="col-span-4 flex flex-col justify-center xl:items-start items-center container"
           >
             <h2
               class="text-primary-base uppercase font-bold sm:text-4xl sm:text-left text-center text-xl"
@@ -140,7 +140,7 @@
               Sobre o Perfil Político
             </h2>
             <p
-              class="text-text-light my-10 sm:text-2xl sm:text-left text-center text-base font-regular"
+              class="text-text-light my-10 sm:text-2xl xl:text-left text-center text-base font-regular"
             >
               O Perfil Político é uma plataforma desenvolvida pela Open
               Knowledge Brasil para tornar mais acessíveis as informações sobre
@@ -424,12 +424,47 @@ export default {
   min-height: 400px;
 }
 
+@media (max-width: 1024px) {
+  .home__about {
+    @apply mt-2/3
+  }
+}
+
+@media (max-width: 768px) {
+  .home__about {
+    @apply mt-96
+  }
+}
+
 @media (max-width: 600px) {
   .home__banner {
     min-height: 900px;
   }
   .home__differentials {
     min-height: 880px;
+  }
+  .home__about {
+    @apply mt-0
+  }
+}
+
+@media (max-width: 425px) {
+  .list-search {
+    width: 350px;
+  }
+  
+}
+@media (max-width: 375px) {
+  .list-search {
+    width: 300px;
+  }
+  .home__about {
+    @apply mt-20
+  }
+}
+@media (max-width: 360px) {
+  .home__about {
+    @apply mt-20
   }
 }
 </style>

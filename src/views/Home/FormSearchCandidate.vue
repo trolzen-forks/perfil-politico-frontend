@@ -1,10 +1,10 @@
 <template>
   <div class="c-form-search-candidate flex flex-col self-start w-full">
-    <h3 class="home__banner-content-action_subtitle text-base text-left mb-4">
+    <h3 class="home__banner-content-action_subtitle md:text-base md:text-left text-sm text-center mb-4">
       Primeiro, selecione o(s) seguinte(s) campo(s)
     </h3>
     <div>
-      <form class="grid grid-cols-2 gap-2">
+      <form class="grid md:grid-cols-2 gap-2">
         <div :class="!location ? 'col-span-2' : ''">
           <span class="sr-only">Cargo</span>
           <select
@@ -59,11 +59,11 @@
       "
       :class="
         (roleCandidates && localeCandidates) || (roleCandidates && !location)
-          ? 'mt-10 animate__animated animate__fadeIn'
+          ? 'md:mt-10 mt-5 animate__animated animate__fadeIn'
           : 'hidden'
       "
     >
-      <h3 class="home__banner-content-action_subtitle text-base text-left my-3">
+      <h3 class="home__banner-content-action_subtitle md:text-base md:text-left text-sm text-center my-3">
         Tem uma pessoa candidata em mente?
       </h3>
       <div
@@ -97,14 +97,14 @@
               <li
                 v-for="candidate in filteredList.slice(0, 4)"
                 :key="candidate.id"
-                class="w-full cursor-pointer px-2 py-3 border-b border-primary-base"
+                class="md:w-full w-auto cursor-pointer px-2 py-3 border-b border-primary-base"
                 v-on:click="
                   (searchListCandidates.name = candidate.name),
                     (searchListCandidates.id = candidate.id),
                     (showListCandidates = false)
                 "
               >
-                <span class="w-full capitalize"
+                <span class="w-full capitalize md:text-base text-xs"
                   >{{ candidate.name }} ({{ candidate.party }})</span
                 >
               </li>
@@ -125,7 +125,7 @@
           Buscar
         </button>
       </div>
-      <h3 class="home__banner_subtitle text-left mt-6 mb-3">
+      <h3 class="home__banner_subtitle md:text-base md:text-left text-sm text-center mt-6 mb-3">
         Não tem alguém em mente?
       </h3>
       <div class="sm:flex block">
@@ -286,6 +286,11 @@ export default defineComponent({
 <style>
 .list-search {
   width: 470px;
+}
+@media (max-width: 425px) {
+  .list-search {
+    width: 350px;
+  }
 }
 @media (max-width: 375px) {
   .list-search {
