@@ -104,7 +104,7 @@
               :image="candidate.image"
               :status="candidate.status"
             />
-            <div v-if="noResultsAnalysis" class="col-span-4 flex justify-center my-20">
+            <div v-if="noResultsAnalysis" class="col-span-4 flex justify-center my-20" :class="noResultsAnalysis ? 'mb-10 mt-20' : ''">
               <h2 class="text-primary-base font-bold text-3xl mb-4">Não há resultados para esta análise</h2>
             </div>
           </div>
@@ -142,6 +142,7 @@ import { setCurrentCandidates } from "@/store/candidates";
 import { setCurrentLocale } from "@/store/locales";
 import { setCurrentRole } from "@/store/roles";
 import arrayShuffle from "array-shuffle";
+import { cleanFilters } from "@/store/filters";
 
 export default defineComponent({
   components: {
@@ -160,6 +161,11 @@ export default defineComponent({
       resultsPerPage: 8,
       noResultsAnalysis: false,
       FilterParty: false,
+      hasFiltersCandidates: false,
+      textFilter: {
+        name: "",
+        filter: ""
+      }
     };
   },
   setup() {
@@ -245,28 +251,27 @@ export default defineComponent({
       
       if (this.data.Filters.hasSelectedGenderWoman) {
         candidatesResult = candidatesResult.filter(
-          item => item.gender.includes("FEMININO")
-      )}
+          item => item.gender.includes("FEMININO"))}
       
       if (this.data.Filters.hasSelectedGenderMan) {
         candidatesResult = candidatesResult.filter(
-          item => item.gender.includes("MASCULINO")
-      )}
+          item => item.gender.includes("MASCULINO"))}
       
       if (this.data.Filters.hasSelectedEthnicityWhite) {
         candidatesResult = candidatesResult.filter(
-          item => item.ethnicity.includes("BRANCA")
-      )}
+          item => item.ethnicity.includes("BRANCA"))}
 
       if (this.data.Filters.hasSelectedEthnicityPPI) {
         candidatesResult = candidatesResult.filter(
-          item => (item.ethnicity == "PRETA" || item.ethnicity == "PARDA" || item.ethnicity == "INDIGENA") && item
-      )}
+          item => 
+            (item.ethnicity == "PRETA" || item.ethnicity == "PARDA" || item.ethnicity == "INDIGENA") && item
+          )}
 
       if (this.data.Filters.hasSelectedElections) {
         candidatesResult = candidatesResult.filter(
-          item => (item.elections != 0 && item.elections_won == 0) && item
-      )}
+          item => 
+            (item.elections != 0 && item.elections_won == 0) && item
+          )}
 
       if (this.data.Filters.hasSelectedNElections) {
         candidatesResult = candidatesResult.filter(
@@ -283,8 +288,14 @@ export default defineComponent({
           item => (item.party == this.data.Party.currentParty) && item
       )}
 
-      if(candidatesResult.length == 0) { this.noResultsAnalysis = true
-      } else { this.noResultsAnalysis = false }
+      if(candidatesResult.length == 0) { 
+        this.noResultsAnalysis = true;
+        this.hasFiltersCandidates = false;
+      } else {
+        this.pageQtd(candidatesResult);
+        this.noResultsAnalysis = false; 
+        this.hasFiltersCandidates = true
+      }
       
       const start = this.currentPage * this.resultsPerPage, end = start + this.resultsPerPage;
       return candidatesResult.slice(start, end);
@@ -304,6 +315,7 @@ export default defineComponent({
       setCurrentCandidates(data);
       setCurrentLocale(localeCandidate);
       setCurrentRole(roleCandidate);
+      cleanFilters();
     } catch (e) {
       console.log("Erro", e);
     }
