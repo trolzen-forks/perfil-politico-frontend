@@ -53,7 +53,7 @@
       <div class="flex flex-col items-center">
         <button
           class="w-full py-3 px-8 text-sm font-light text-center text-white bg-primary-base rounded-full hover:bg-primary-dark focus:ring-4 focus:outline-none focus:ring-secondary-base"
-          v-on:click="onClickCandidate(keyCandidate, locale, role)"
+          v-on:click="onClickCandidate(keyCandidate, locale, roleID)"
         >
           Ver perfil
         </button>
@@ -77,6 +77,7 @@ export default defineComponent({
     "number",
     "party",
     "role",
+    "roleID",
     "image",
     "locale",
     "keyCandidate",
@@ -95,7 +96,7 @@ export default defineComponent({
           params: {
             year: 2022,
             locale: locale,
-            role: role.toLowerCase(),
+            role: role,
             keyCandidate: key,
           },
         });

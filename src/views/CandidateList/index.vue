@@ -99,6 +99,7 @@
               :number="candidate.ballot_number"
               :party="candidate.party"
               :role="candidate.post"
+              :roleID="selectRole(candidate.post)"
               :keyCandidate="candidate.id"
               :locale="data.Locale.currentLocale"
               :image="candidate.image"
@@ -232,6 +233,14 @@ export default defineComponent({
     };
   },
   methods: { 
+    selectRole(role) {
+      if (role == "PRESIDENTE") return "presidente"  
+      if(role == "DEPUTADO DISTRITAL") return "deputado-distrital"
+      if(role == "DEPUTADO FEDERAL") return "deputado-federal"
+      if(role == "DEPUTADO ESTADUAL") return "deputado-estadual"
+      if(role == "GOVERNADOR") return "governador"
+      if(role == "SENADOR") return "senador"
+    },
     onPageChange(page) {
       this.currentPage = page;
     },
