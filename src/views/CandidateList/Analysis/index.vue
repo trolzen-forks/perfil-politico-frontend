@@ -42,9 +42,9 @@
       </span>
     </button>
     <div :class="isOpenAnalisys ? 'd-block' : 'hidden'">
-      <div class="c-card-info__content p-5 sm:grid grid-cols-3 gap-4">
-        <div class="flex flex-col justify-center pb-8 sm:pb-0">
-          <h2 class="text-secondary-base text-3xl font-bold mb-2 text-left">
+      <div class="c-card-info__content p-5 md:grid grid-cols-3 gap-4">
+        <div class="flex flex-col justify-center pb-8 md:pb-0">
+          <h2 class="text-secondary-base text-3xl font-bold mb-2 text-left break-words">
             Análises sobre as candidaturas
           </h2>
           <p class="text-white">

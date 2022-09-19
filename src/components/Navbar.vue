@@ -1,16 +1,16 @@
 <template>
-  <nav class="bg-primary-base fixed w-full z-20 top-0 left-0 sm:h-20 shadow-md">
+  <nav class="bg-primary-base fixed w-full z-20 top-0 left-0 md:h-20 shadow-md">
     <div class="flex flex-wrap justify-between items-center mx-auto">
       <div
-        class="sm:bg-black flex-none sm:bg-opacity-20 sm:w-1/4 w-2/4 sm:h-20 py-5 px-5 flex justify-center"
+        class="md:bg-black flex-none md:bg-opacity-20 md:w-1/4 w-2/4 md:h-20 py-5 px-5 flex md:justify-center"
       >
         <router-link :to="{ name: 'Home' }">
           <img src="@/assets/logo.svg" alt="Perfil Político" />
         </router-link>
       </div>
-      <div class="flex sm:flex-none md:order-2 px-2 sm:px-6 py-2.5">
+      <div class="md:flex xl:flex lg:hidden sm:flex-none md:order-2 px-2 sm:px-6 py-2.5">
         <div
-          class="c-footer__content-link-project flex items-center p-3 h-full rounded-lg bg-white bg-opacity-10"
+          class="flex items-center p-3 h-full rounded-lg bg-white bg-opacity-10"
         >
           <img src="@/assets/icons/icon-github.svg" alt="Github" />
           <span
@@ -24,7 +24,7 @@
           >
         </div>
       </div>
-      <div class="hidden sm:w-3/5 grow md:flex md:order-1" id="navbar-sticky">
+      <div class="hidden xl:w-3/5 lg:w-3/5 lg:container grow lg:flex lg:order-1" id="navbar-sticky">
         <select
           id="roleCandidates"
           name="roleCandidates"

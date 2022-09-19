@@ -1,10 +1,10 @@
 <template>
   <div class="flex flex-col min-h-screen">
     <Navbar></Navbar>
-    <div class="candidate-list mt-20 sm:flex flex-grow">
+    <div class="candidate-list mt-20 lg:flex flex-grow">
       <Sidebar />
       <main class="candidate-list__content w-full">
-        <div class="container sm:p-12 px-5">
+        <div class="container lg:p-12 px-5">
           <div class="candidate-list__title mb-12">
             <h1 class="text-primary-base font-bold text-3xl mb-4">
               Confira as candidaturas para {{ currentRole }}
@@ -94,7 +94,7 @@
             <!-- <h3 class="text-primary-base font-regular text-xl">Destes, 898 são de cor branca</h3> -->
           </div>
           <div
-            class="candidate-list__candidates block sm:grid grid-cols-4 gap-3"
+            class="candidate-list__candidates block md:grid md:grid-cols-2 2xl:grid-cols-4 gap-3"
           >
             <CardCandidate
               v-for="candidate in paginatedData(currentCandidates)"

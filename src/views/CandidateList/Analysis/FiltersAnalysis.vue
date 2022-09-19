@@ -9,9 +9,9 @@
         Limpar filtros
       </button>
     </div>
-    <div class="c-filters-analysis__content mt-5 flex">
+    <div class="c-filters-analysis__content mt-5 xl:flex">
       <div>
-        <div class="w-full mb-3 mr-10">
+        <div class="w-full mb-3 xl:mr-10">
           <label for="tNuncaEleitos" class="flex items-center cursor-pointer">
             <div class="relative">
               <input
@@ -30,7 +30,7 @@
             </div>
           </label>
         </div>
-        <div class="w-full mb-3 mr-10">
+        <div class="w-full mb-3 xl:mr-10">
           <label for="tElectionsWon" class="flex items-center cursor-pointer">
             <div class="relative">
               <input
@@ -49,7 +49,7 @@
             </div>
           </label>
         </div>
-        <div class="w-full mb-3 mr-10">
+        <div class="w-full mb-3 xl:mr-10">
           <label for="tNElections" class="flex items-center cursor-pointer">
             <div class="relative">
               <input

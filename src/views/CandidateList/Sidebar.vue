@@ -1,10 +1,10 @@
 <template>
   <nav
-    class="c-sidebar relative sm:w-1/3 w-full min-h-full border-r border-neutral-base"
+    class="c-sidebar relative lg:w-1/3 w-full border-b mb-5 lg:mb-0  min-h-full border-r border-neutral-base"
     aria-label="Sidebar"
   >
     <div
-      class="c-sidebar__mobile md:hidden pt-3 mb-5 border-b border-neutral-base"
+      class="c-sidebar__mobile lg:hidden pt-3 pb-5 container sm:px-10 border-neutral-base"
     >
       <button
         data-collapse-toggle="sidebar-candidates"
@@ -34,7 +34,7 @@
       </button>
     </div>
     <div
-      class="md:sticky md:top-20 md:block md:w-auto px-6 py-3 overflow-scroll"
+      class="lg:sticky lg:top-20 lg:block lg:w-auto px-6 py-3"
       id="sidebar-candidates"
       :class="isOpenSidebar ? 'd-block' : 'hidden'"
     >
