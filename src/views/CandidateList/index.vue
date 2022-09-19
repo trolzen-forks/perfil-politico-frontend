@@ -279,7 +279,6 @@ export default defineComponent({
     },
 
     paginatedData(candidates) {
-      this.pageQtd(candidates);
       return this.filteredItems(candidates);
     },
 
@@ -349,12 +348,12 @@ export default defineComponent({
         this.noResultsAnalysis = true;
         this.hasFiltersCandidates = false;
       } else {
-        this.pageQtd(candidatesResult);
         this.qtdResultsAnalysis = candidatesResult.length;
         this.noResultsAnalysis = false;
         this.hasFiltersCandidates = true;
       }
 
+      this.pageQtd(candidatesResult);
       const start = this.currentPage * this.resultsPerPage,
         end = start + this.resultsPerPage;
       return candidatesResult.slice(start, end);
