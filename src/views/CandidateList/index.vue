@@ -87,29 +87,13 @@
           </div>
           <div class="pb-5 md:border-b border-neutral-base">
             <h2 class="text-primary-base font-bold text-2xl">São {{currentCandidates.length}} candidaturas a {{ currentRole }} {{ currentLocale.preposition }} {{ currentLocale.name }}</h2>
-            <h3 class="text-primary-base font-regular text-xl">Destes, 898 são de cor branca</h3>
+            <!-- <h3 class="text-primary-base font-regular text-xl">Destes, 898 são de cor branca</h3> -->
           </div>
           <div
             class="candidate-list__candidates block sm:grid grid-cols-4 gap-3"
           >
             <CardCandidate
-              v-for="candidate in hasSelectedParty === true
-                ? (paginatedData(currentCandidatesFilterParty))
-                : hasSelectedElectionsWon === true
-                ? (paginatedData(currentFilterElectionsWon))
-                : hasSelectedElections === true
-                ? (paginatedData(currentFilterElections))
-                : hasSelectedNElections === true
-                ? (paginatedData(currentFilterNElections))
-                : hasSelectedGenderWoman === true
-                ? (paginatedData(currentFilterGenderWoman))
-                : hasSelectedGenderMan === true
-                ? (paginatedData(currentFilterGenderMan))
-                : hasSelectedEthnicityPPI === true
-                ? paginatedData(currentFilterEthnicityPPI)
-                : hasSelectedEthnicityWhite === true
-                ? paginatedData(currentFilterEthnicityWhite)
-                : paginatedData(currentCandidates)"
+              v-for="candidate in paginatedData(currentCandidates)"
               :key="candidate.id"
               :name="candidate.name"
               :number="candidate.ballot_number"
@@ -174,7 +158,8 @@ export default defineComponent({
       pageCount: 1,
       currentPage: 0,
       resultsPerPage: 8,
-      noResultsAnalysis: false
+      noResultsAnalysis: false,
+      FilterParty: false,
     };
   },
   setup() {
@@ -222,151 +207,6 @@ export default defineComponent({
       return data.Party.hasSelectedParty;
     });
 
-    let hasSelectedElectionsWon = computed(function () {
-      return data.Filters.hasSelectedElectionsWon;
-    });
-
-    let hasSelectedElections = computed(function () {
-      return data.Filters.hasSelectedElections;
-    });
-
-    let hasSelectedNElections = computed(function () {
-      return data.Filters.hasSelectedNElections;
-    });
-
-    let hasSelectedGenderWoman = computed(function () {
-      return data.Filters.hasSelectedGenderWoman;
-    });
-    let hasSelectedGenderMan = computed(function () {
-      return data.Filters.hasSelectedGenderMan;
-    });
-    let hasSelectedEthnicityPPI = computed(function () {
-      return data.Filters.hasSelectedEthnicityPPI;
-    });
-    let hasSelectedEthnicityWhite = computed(function () {
-      return data.Filters.hasSelectedEthnicityWhite;
-    });
-
-    let currentCandidatesFilterParty = computed(function () {
-      const valuesData: any = [];
-      data.Candidates.currentCandidates.objects?.forEach((i) =>
-        valuesData.push(i)
-      );
-
-      return valuesData.filter(function (el) {
-        if (el.party == data.Party.currentParty) {
-          return el;
-        }
-      });
-    });
-
-    let currentFilterElectionsWon = computed(function () {
-      const valuesData: any = [];
-      data.Candidates.currentCandidates.objects?.forEach((i) =>
-        valuesData.push(i)
-      );
-
-      return valuesData.filter(function (el) {
-        if (data.Filters.hasSelectedElectionsWon) {
-          if (el.elections_won != 0) {
-            return el;
-          }
-        }
-      });
-    });
-
-    let currentFilterElections = computed(function () {
-      const valuesData: any = [];
-      data.Candidates.currentCandidates.objects?.forEach((i) =>
-        valuesData.push(i)
-      );
-
-      return valuesData.filter(function (el) {
-        if (data.Filters.hasSelectedElections) {
-          if (el.elections_won == 0) {
-            return el;
-          }
-        }
-      });
-    });
-
-    let currentFilterNElections = computed(function () {
-      const valuesData: any = [];
-      data.Candidates.currentCandidates.objects?.forEach((i) =>
-        valuesData.push(i)
-      );
-
-      return valuesData.filter(function (el) {
-        if (data.Filters.hasSelectedNElections) {
-          if (el.elections == 0) {
-            return el;
-          }
-        }
-      });
-    });
-
-    let currentFilterGenderWoman = computed(function () {
-      const valuesData: any = [];
-      data.Candidates.currentCandidates.objects?.forEach((i) =>
-        valuesData.push(i)
-      );
-
-      return valuesData.filter(function (el) {
-        if (data.Filters.hasSelectedGenderWoman) {
-          console.log(el.gender)
-          if (el.gender == 'FEMININO') {
-            console.log(el.gender)
-            return el;
-          }
-        }
-      });
-    });
-
-    let currentFilterGenderMan = computed(function () {
-      const valuesData: any = [];
-      data.Candidates.currentCandidates.objects?.forEach((i) =>
-        valuesData.push(i)
-      );
-
-      return valuesData.filter(function (el) {
-        if (data.Filters.hasSelectedGenderMan) {
-          if (el.gender == 'MASCULINO') {
-            return el;
-          }
-        }
-      });
-    });
-
-    let currentFilterEthnicityPPI = computed(function () {
-      const valuesData: any = [];
-      data.Candidates.currentCandidates.objects?.forEach((i) =>
-        valuesData.push(i)
-      );
-
-      return valuesData.filter(function (el) {
-        if (data.Filters.hasSelectedEthnicityPPI) {
-          if (el.ethnicity == 'PARDA' || el.ethnicity == 'PRETA' || el.ethnicity == 'INDIGENA') {
-            return el;
-          }
-        }
-      });
-    });
-
-    let currentFilterEthnicityWhite = computed(function () {
-      const valuesData: any = [];
-      data.Candidates.currentCandidates.objects?.forEach((i) =>
-        valuesData.push(i)
-      );
-
-      return valuesData.filter(function (el) {
-        if (data.Filters.hasSelectedEthnicityWhite) {
-          if (el.ethnicity == 'BRANCA') {
-            return el;
-          }
-        }
-      });
-    });
-
     let currentCandidates = computed(function () {
       const valuesData: any = [];
       data.Candidates.currentCandidates.objects?.forEach((i) =>
@@ -382,60 +222,73 @@ export default defineComponent({
       currentRole,
       currentParty,
       currentCandidates,
-      currentCandidatesFilterParty,
-      hasSelectedParty,
-      currentFilterElectionsWon,
-      hasSelectedElectionsWon,
-      currentFilterElections,
-      hasSelectedElections,
-      hasSelectedNElections,
-      currentFilterNElections,
-      currentFilterGenderWoman,
-      hasSelectedGenderWoman,
-      currentFilterGenderMan,
-      hasSelectedGenderMan,
-      currentFilterEthnicityPPI,
-      hasSelectedEthnicityPPI,
-      hasSelectedEthnicityWhite,
-      currentFilterEthnicityWhite
+      hasSelectedParty
     };
   },
-  methods: {
+  methods: { 
     onPageChange(page) {
       this.currentPage = page;
     },
-    unionAnalysis(item, item2, item3?) {
-      const valuesData: any = [];
-      let intersection2: any = [];
-      let intersection3: any = [];
 
-      if(this.hasSelectedElectionsWon === true && this.hasSelectedGenderWoman === true && this.hasSelectedEthnicityPPI === true){
-        this.currentFilterElectionsWon.forEach((i) =>
-          valuesData.push(i)
-        );
-        valuesData.filter(function (el) {
-          intersection2 = item2.includes(el)
-        });
-        if(intersection2 && item3) intersection2.filter(function (el) {
-        intersection3 = item3.includes(el)
-      });
-      else return intersection2;
-      }
-
-      
-      if(intersection2 && item3) intersection2.filter(function (el) {
-        intersection3 = item3.includes(el)
-      });
-      else return intersection2;
-    },
     paginatedData(candidates) {
       this.pageQtd(candidates);
-      const start = this.currentPage * this.resultsPerPage, end = start + this.resultsPerPage;
-      return candidates.slice(start, end);
+      return this.filteredItems(candidates)
     },
+
     pageQtd(candidates) {
       let candidatesSize = candidates.length, viewSize = this.resultsPerPage;
       this.pageCount = Math.ceil(candidatesSize / viewSize);
+    },
+    
+    filteredItems(candidates) {
+      var candidatesResult = candidates;
+      
+      if (this.data.Filters.hasSelectedGenderWoman) {
+        candidatesResult = candidatesResult.filter(
+          item => item.gender.includes("FEMININO")
+      )}
+      
+      if (this.data.Filters.hasSelectedGenderMan) {
+        candidatesResult = candidatesResult.filter(
+          item => item.gender.includes("MASCULINO")
+      )}
+      
+      if (this.data.Filters.hasSelectedEthnicityWhite) {
+        candidatesResult = candidatesResult.filter(
+          item => item.ethnicity.includes("BRANCA")
+      )}
+
+      if (this.data.Filters.hasSelectedEthnicityPPI) {
+        candidatesResult = candidatesResult.filter(
+          item => (item.ethnicity == "PRETA" || item.ethnicity == "PARDA" || item.ethnicity == "INDIGENA") && item
+      )}
+
+      if (this.data.Filters.hasSelectedElections) {
+        candidatesResult = candidatesResult.filter(
+          item => (item.elections != 0 && item.elections_won == 0) && item
+      )}
+
+      if (this.data.Filters.hasSelectedNElections) {
+        candidatesResult = candidatesResult.filter(
+          item => (item.elections == 0) && item
+      )}
+
+      if (this.data.Filters.hasSelectedElectionsWon) {
+        candidatesResult = candidatesResult.filter(
+          item => (item.elections != 0 && item.elections_won != 0) && item
+      )}
+
+      if (this.data.Party.currentParty.length) {
+        candidatesResult = candidatesResult.filter(
+          item => (item.party == this.data.Party.currentParty) && item
+      )}
+
+      if(candidatesResult.length == 0) { this.noResultsAnalysis = true
+      } else { this.noResultsAnalysis = false }
+      
+      const start = this.currentPage * this.resultsPerPage, end = start + this.resultsPerPage;
+      return candidatesResult.slice(start, end);
+
     }
   },
   async mounted() {
