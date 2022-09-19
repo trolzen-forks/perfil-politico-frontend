@@ -87,11 +87,31 @@
           </div>
           <div class="pb-5 md:border-b border-neutral-base">
             <h2 class="text-primary-base font-bold text-2xl">
-              São {{ currentCandidates.length }} candidaturas a
+              São {{ currentCandidates.length }} pessoas candidatas a
               {{ currentRole }} {{ currentLocale.preposition }}
               {{ currentLocale.name }}
             </h2>
-            <!-- <h3 class="text-primary-base font-regular text-xl">Destes, 898 são de cor branca</h3> -->
+            <div v-if="data.Filters.dataFilterLength">
+              <h3 class="text-primary-base font-regular text-xl">Destas, {{qtdResultsAnalysis}}
+                <span v-if="data.Filters.hasSelectedElections && paginatedData(currentCandidates).length > 1"> nunca foram eleitas;</span>
+                <span v-if="data.Filters.hasSelectedElections && paginatedData(currentCandidates).length === 1"> nunca foi eleita;</span>
+                <span v-if="data.Filters.hasSelectedNElections && paginatedData(currentCandidates).length > 1"> nunca concorreram;</span>
+                <span v-if="data.Filters.hasSelectedNElections && paginatedData(currentCandidates).length === 1"> nunca concorreu;</span>
+                <span v-if="data.Filters.hasSelectedElectionsWon && paginatedData(currentCandidates).length > 1"> já foram eleitas;</span>
+                <span v-if="data.Filters.hasSelectedElectionsWon && paginatedData(currentCandidates).length === 1"> já foi eleita;</span>
+                <span v-if="data.Filters.hasSelectedGenderWoman && paginatedData(currentCandidates).length > 1"> são mulheres;</span>
+                <span v-if="data.Filters.hasSelectedGenderWoman && paginatedData(currentCandidates).length === 1"> é mulher;</span>
+                <span v-if="data.Filters.hasSelectedGenderMan && paginatedData(currentCandidates).length > 1"> são homen</span>
+                <span v-if="data.Filters.hasSelectedGenderMan && paginatedData(currentCandidates).length === 1"> é homem;</span>
+                <span v-if="data.Filters.hasSelectedEthnicityPPI && paginatedData(currentCandidates).length > 1"> são pretas, pardas ou indígenas;</span>
+                <span v-if="data.Filters.hasSelectedEthnicityPPI && paginatedData(currentCandidates).length === 1"> é preta, parda ou indígena;</span>
+                <span v-if="data.Filters.hasSelectedEthnicityWhite && paginatedData(currentCandidates).length > 1"> são brancas;</span>
+                <span v-if="data.Filters.hasSelectedEthnicityWhite && paginatedData(currentCandidates).length === 1"> é branca;</span>
+                <span v-if="data.Party.currentParty.length && paginatedData(currentCandidates).length === 1"> é do {{data.Party.currentParty}};</span>
+                <span v-if="data.Party.currentParty.length && paginatedData(currentCandidates).length > 1"> são do {{data.Party.currentParty}};</span>
+              </h3>
+            </div>
+            <!--  -->
           </div>
           <div
             class="candidate-list__candidates block md:grid md:grid-cols-2 2xl:grid-cols-4 gap-3"
@@ -155,6 +175,7 @@ import { setCurrentRole } from "@/store/roles";
 import arrayShuffle from "array-shuffle";
 import { cleanFilters } from "@/store/filters";
 import { ICandidate, ILocale } from "@/models/candidate.model";
+import { cleanCurrentParty } from "@/store/party";
 
 export default defineComponent({
   components: {
@@ -171,7 +192,8 @@ export default defineComponent({
       pageCount: 1,
       currentPage: 0,
       resultsPerPage: 8,
-      noResultsAnalysis: false,
+      noResultsAnalysis: true,
+      qtdResultsAnalysis: 0,
       FilterParty: false,
       hasFiltersCandidates: false,
       textFilter: {
@@ -327,6 +349,7 @@ export default defineComponent({
         this.hasFiltersCandidates = false;
       } else {
         this.pageQtd(candidatesResult);
+        this.qtdResultsAnalysis = candidatesResult.length;
         this.noResultsAnalysis = false;
         this.hasFiltersCandidates = true;
       }
@@ -350,6 +373,7 @@ export default defineComponent({
       setCurrentLocale(localeCandidate);
       setCurrentRole(roleCandidate);
       cleanFilters();
+      cleanCurrentParty();
     } catch (e) {
       console.log("Erro", e);
     }
