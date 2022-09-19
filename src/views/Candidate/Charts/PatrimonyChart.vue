@@ -161,10 +161,7 @@ export default defineComponent({
     const locale = this.$route.params.locale.toString();
 
     try {
-      const { data } =
-        role != "presidente"
-          ? await services.dataCandidates.assets(locale, role)
-          : await services.dataCandidates.assets();
+      const { data } = await services.dataCandidates.assets();
 
       let yearMedian = data.mediana_patrimonios.map((i) => i.year);
       let yearPatrimony = yearMedian.concat(

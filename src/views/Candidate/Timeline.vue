@@ -1,5 +1,5 @@
 <template>
-  <ol class="relative border-l border-gray-200" v-if="data">
+  <ol class="relative border-l border-gray-200" v-if="currentCandidate.election_history">
     <template v-for="item of data.slice().reverse()" :key="item">
       <li class="mb-10 ml-4" v-if="item.result !== '2O TURNO'">
         <div
@@ -28,10 +28,23 @@
 </template>
 
 <script lang="ts">
-export default {
+import { computed } from "vue";
+import useStore from "@/hooks/useStore";
+import { defineComponent } from "vue";
+
+export default defineComponent({
   name: "Timeline",
   props: ["data"],
-};
+  setup() {
+  const store = useStore();
+  let currentCandidate = computed(function () {
+      return store.Candidates.currentCandidateSelected;
+    });
+    return{
+      currentCandidate
+    }
+ }
+});
 </script>
 
 <style></style>

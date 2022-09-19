@@ -2,19 +2,7 @@
   <div class="flex flex-col min-h-screen">
     <Navbar></Navbar>
     <div class="candidate mt-20 xl:flex flex-grow">
-      <Sidebar
-        :name="store.Candidates.currentCandidateSelected.name"
-        :party="store.Candidates.currentCandidateSelected.party_abbreviation"
-        :number="store.Candidates.currentCandidateSelected.number"
-        :role="store.Candidates.currentCandidateSelected.post"
-        :age="store.Candidates.currentCandidateSelected.age"
-        :education="store.Candidates.currentCandidateSelected.education"
-        :gender="store.Candidates.currentCandidateSelected.gender"
-        :ethnicity="store.Candidates.currentCandidateSelected.ethnicity"
-        :timeline="store.Candidates.currentCandidateSelected.election_history"
-        :image="store.Candidates.currentCandidateSelected.image"
-        :status="store.Candidates.currentCandidateSelected.status"
-      ></Sidebar>
+      <Sidebar />
       <div class="candidate__content w-full bg-background-light">
         <div
           class="candidate__header xl:flex justify-between items-center py-5 xl:px-12 px-5 border border-neutral-light bg-white"
@@ -187,8 +175,8 @@ export default defineComponent({
   },
   async mounted() {
     const keyCandidate = Number(this.$route.params.keyCandidate);
-    const roleCandidate = this.$route.params.role.toString();
-    const localeCandidate = this.$route.params.locale.toString();
+    const roleCandidate = this.$route.params.role.toString().toLocaleLowerCase();
+    const localeCandidate = this.$route.params.locale.toString().toLocaleLowerCase();
     try {
       const { dataCandidate } = await services.dataCandidates.candidate(
         keyCandidate

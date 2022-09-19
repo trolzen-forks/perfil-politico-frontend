@@ -34,33 +34,33 @@
       <div class="c-sidebar-candidate__info-candidate">
         <div class="px-5 md:px-10 py-5 inline-flex items-center">
           <div
-            v-if="image"
+            v-if="currentCandidate.image"
             class="c-sidebar-candidate__image w-28 h-28 rounded-full ring-4 ring-primary-base overflow-hidden"
           >
-            <img class="w-full rounded-full" :src="image" alt="Candidato" />
+            <img class="w-full rounded-full" :src="currentCandidate.image" alt="Candidato" />
           </div>
           <IconCandidate
             v-else
             class="w-28 h-28 rounded-full p-1 ring-4 ring-primary-base"
           ></IconCandidate>
           <div class="c-sidebar-candidate__infos ml-5">
-            <h2 class="text-primary-base font-bold text-base">{{ name }}</h2>
+            <h2 class="text-primary-base font-bold text-base">{{ currentCandidate.name }}</h2>
             <p class="text-xs font-light text-primary-base">
-              {{ role }}
+              {{ currentCandidate.role }}
             </p>
             <div class="flex justify-start mt-3">
               <span
-                v-if="status === 'APTO'"
+                v-if="currentCandidate.status === 'APTO'"
                 class="bg-green-100 text-green-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"
                 >Candidatura apta</span
               >
               <span
-                v-else-if="status === 'INAPTO'"
+                v-else-if="currentCandidate.status === 'INAPTO'"
                 class="bg-red-100 text-red-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"
                 >Candidatura inapta</span
               >
               <span
-                v-else-if="status === 'CADASTRADO'"
+                v-else-if="currentCandidate.status === 'CADASTRADO'"
                 class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"
                 >Aguardando julgamento</span
               >
@@ -72,13 +72,13 @@
             <div
               class="py-3 text-sm w-1/2 font-medium text-white bg-primary-base rounded-l-full border"
             >
-              <p class="text-base font-bold">{{ party }}</p>
+              <p class="text-base font-bold">{{ currentCandidate.party_abbreviation }}</p>
               <p class="text-base font-light">Partido</p>
             </div>
             <div
               class="py-3 text-sm w-1/2 font-medium text-primary-base bg-secondary-base rounded-r-full border"
             >
-              <p class="text-base font-bold">{{ number }}</p>
+              <p class="text-base font-bold">{{ currentCandidate.number }}</p>
               <p class="text-base font-light">Número</p>
             </div>
           </div>
@@ -94,20 +94,20 @@
               <h4 class="font-light text-base text-neutral-baseMedium">
                 Idade
               </h4>
-              <p class="font-bold text-base text-primary-base">{{ age }}</p>
+              <p class="font-bold text-base text-primary-base">{{ currentCandidate.age }}</p>
             </div>
             <div class="mb-4">
               <h4 class="font-light text-base text-neutral-baseMedium">
                 Gênero
               </h4>
-              <p class="font-bold text-base text-primary-base">{{ gender }}</p>
+              <p class="font-bold text-base text-primary-base">{{ currentCandidate.gender }}</p>
             </div>
             <div class="mb-4">
               <h4 class="font-light text-base text-neutral-baseMedium">
                 Cor/Raça
               </h4>
               <p class="font-bold text-base text-primary-base">
-                {{ ethnicity }}
+                {{ currentCandidate.ethnicity }}
               </p>
             </div>
             <div>
@@ -115,7 +115,7 @@
                 Escolaridade
               </h4>
               <p class="font-bold text-base text-primary-base">
-                {{ education }}
+                {{ currentCandidate.education }}
               </p>
             </div>
           </template>
@@ -123,7 +123,7 @@
         <CardInfo>
           <template v-slot:title>Histórico de candidaturas</template>
           <template v-slot:content>
-            <Timeline :data="timeline"></Timeline>
+            <Timeline :data="currentCandidate.election_history"></Timeline>
           </template>
         </CardInfo>
       </div>
@@ -135,6 +135,8 @@
 import CardInfo from "@/components/CardInfo.vue";
 import Timeline from "./Timeline.vue";
 import IconCandidate from "@/components/IconCandidate.vue";
+import useStore from '@/hooks/useStore';
+import { computed } from 'vue';
 
 export default {
   props: [
@@ -155,6 +157,15 @@ export default {
     Timeline,
     IconCandidate,
   },
+ setup() {
+  const store = useStore();
+  let currentCandidate = computed(function () {
+      return store.Candidates.currentCandidateSelected;
+    });
+    return{
+      currentCandidate
+    }
+ }
 };
 </script>
 
