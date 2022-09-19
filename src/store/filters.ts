@@ -7,41 +7,41 @@ const state: any = reactive({
   hasSelectedGenderMan: false,
   hasSelectedGenderWoman: false,
   hasSelectedEthnicityPPI: false,
-  hasSelectedEthnicityWhite: false
+  hasSelectedEthnicityWhite: false,
 });
 
 export default state;
 
 export function setElections(item: boolean) {
-    state.hasSelectedElections = item;
+  state.hasSelectedElections = item;
 }
 
 export function setNElections(item: boolean) {
-    state.hasSelectedNElections = item;
+  state.hasSelectedNElections = item;
 }
 
 export function setElectionsWon(item: boolean) {
-    state.hasSelectedElectionsWon = item;
+  state.hasSelectedElectionsWon = item;
 }
 
 export function setGenderWoman(item: boolean) {
-    state.hasSelectedGenderWoman = item;
+  state.hasSelectedGenderWoman = item;
 }
 
 export function setGenderMan(item: boolean) {
-    state.hasSelectedGenderMan = item;
+  state.hasSelectedGenderMan = item;
 }
 
 export function setEthnicityPPI(item: boolean) {
-    state.hasSelectedEthnicityPPI = item;
+  state.hasSelectedEthnicityPPI = item;
 }
 
 export function setEthnicityWhite(item: boolean) {
-    state.hasSelectedEthnicityWhite = item;
+  state.hasSelectedEthnicityWhite = item;
 }
 
 export function cleanFilters() {
-  state.hasSelectedElections =false;
+  state.hasSelectedElections = false;
   state.hasSelectedNElections = false;
   state.hasSelectedElectionsWon = false;
   state.hasSelectedGenderMan = false;

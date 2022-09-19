@@ -70,6 +70,6 @@ export default defineComponent({
     return {
       isOpenAnalisys: true,
     };
-  }
+  },
 });
 </script>

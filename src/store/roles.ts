@@ -6,10 +6,10 @@ const state: any = reactive({
 
 export default state;
 
-export function setCurrentRole(role: any) {
+export function setCurrentRole(role: string): void {
   state.currentRole = role;
 }
 
-export function cleanCurrentRole() {
+export function cleanCurrentRole(): void {
   state.currentRole = {};
 }

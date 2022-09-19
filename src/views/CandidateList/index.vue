@@ -86,7 +86,11 @@
             <Analysis />
           </div>
           <div class="pb-5 md:border-b border-neutral-base">
-            <h2 class="text-primary-base font-bold text-2xl">São {{currentCandidates.length}} candidaturas a {{ currentRole }} {{ currentLocale.preposition }} {{ currentLocale.name }}</h2>
+            <h2 class="text-primary-base font-bold text-2xl">
+              São {{ currentCandidates.length }} candidaturas a
+              {{ currentRole }} {{ currentLocale.preposition }}
+              {{ currentLocale.name }}
+            </h2>
             <!-- <h3 class="text-primary-base font-regular text-xl">Destes, 898 são de cor branca</h3> -->
           </div>
           <div
@@ -105,8 +109,14 @@
               :image="candidate.image"
               :status="candidate.status"
             />
-            <div v-if="noResultsAnalysis" class="col-span-4 flex justify-center my-20" :class="noResultsAnalysis ? 'mb-10 mt-20' : ''">
-              <h2 class="text-primary-base font-bold text-3xl mb-4">Não há resultados para esta análise</h2>
+            <div
+              v-if="noResultsAnalysis"
+              class="col-span-4 flex justify-center my-20"
+              :class="noResultsAnalysis ? 'mb-10 mt-20' : ''"
+            >
+              <h2 class="text-primary-base font-bold text-3xl mb-4">
+                Não há resultados para esta análise
+              </h2>
             </div>
           </div>
           <div
@@ -144,6 +154,7 @@ import { setCurrentLocale } from "@/store/locales";
 import { setCurrentRole } from "@/store/roles";
 import arrayShuffle from "array-shuffle";
 import { cleanFilters } from "@/store/filters";
+import { ICandidate, ILocale } from "@/models/candidate.model";
 
 export default defineComponent({
   components: {
@@ -165,8 +176,8 @@ export default defineComponent({
       hasFiltersCandidates: false,
       textFilter: {
         name: "",
-        filter: ""
-      }
+        filter: "",
+      },
     };
   },
   setup() {
@@ -185,7 +196,7 @@ export default defineComponent({
         preposition: "",
         name: "",
       };
-      items.locales.forEach((i: any) => {
+      items.locales.forEach((i: ILocale) => {
         if (i.initials === data.Locale.currentLocale) {
           dataLocale = {
             name: i.name,
@@ -215,7 +226,7 @@ export default defineComponent({
     });
 
     let currentCandidates = computed(function () {
-      const valuesData: any = [];
+      const valuesData: ICandidate[] = [];
       data.Candidates.currentCandidates.objects?.forEach((i) =>
         valuesData.push(i)
       );
@@ -229,17 +240,17 @@ export default defineComponent({
       currentRole,
       currentParty,
       currentCandidates,
-      hasSelectedParty
+      hasSelectedParty,
     };
   },
-  methods: { 
+  methods: {
     selectRole(role) {
-      if (role == "PRESIDENTE") return "presidente"  
-      if(role == "DEPUTADO DISTRITAL") return "deputado-distrital"
-      if(role == "DEPUTADO FEDERAL") return "deputado-federal"
-      if(role == "DEPUTADO ESTADUAL") return "deputado-estadual"
-      if(role == "GOVERNADOR") return "governador"
-      if(role == "SENADOR") return "senador"
+      if (role == "PRESIDENTE") return "presidente";
+      if (role == "DEPUTADO DISTRITAL") return "deputado-distrital";
+      if (role == "DEPUTADO FEDERAL") return "deputado-federal";
+      if (role == "DEPUTADO ESTADUAL") return "deputado-estadual";
+      if (role == "GOVERNADOR") return "governador";
+      if (role == "SENADOR") return "senador";
     },
     onPageChange(page) {
       this.currentPage = page;
@@ -247,69 +258,83 @@ export default defineComponent({
 
     paginatedData(candidates) {
       this.pageQtd(candidates);
-      return this.filteredItems(candidates)
+      return this.filteredItems(candidates);
     },
 
     pageQtd(candidates) {
-      let candidatesSize = candidates.length, viewSize = this.resultsPerPage;
+      let candidatesSize = candidates.length,
+        viewSize = this.resultsPerPage;
       this.pageCount = Math.ceil(candidatesSize / viewSize);
     },
-    
+
     filteredItems(candidates) {
       var candidatesResult = candidates;
-      
+
       if (this.data.Filters.hasSelectedGenderWoman) {
-        candidatesResult = candidatesResult.filter(
-          item => item.gender.includes("FEMININO"))}
-      
+        candidatesResult = candidatesResult.filter((item) =>
+          item.gender.includes("FEMININO")
+        );
+      }
+
       if (this.data.Filters.hasSelectedGenderMan) {
-        candidatesResult = candidatesResult.filter(
-          item => item.gender.includes("MASCULINO"))}
-      
+        candidatesResult = candidatesResult.filter((item) =>
+          item.gender.includes("MASCULINO")
+        );
+      }
+
       if (this.data.Filters.hasSelectedEthnicityWhite) {
-        candidatesResult = candidatesResult.filter(
-          item => item.ethnicity.includes("BRANCA"))}
+        candidatesResult = candidatesResult.filter((item) =>
+          item.ethnicity.includes("BRANCA")
+        );
+      }
 
       if (this.data.Filters.hasSelectedEthnicityPPI) {
         candidatesResult = candidatesResult.filter(
-          item => 
-            (item.ethnicity == "PRETA" || item.ethnicity == "PARDA" || item.ethnicity == "INDIGENA") && item
-          )}
+          (item) =>
+            (item.ethnicity == "PRETA" ||
+              item.ethnicity == "PARDA" ||
+              item.ethnicity == "INDIGENA") &&
+            item
+        );
+      }
 
       if (this.data.Filters.hasSelectedElections) {
         candidatesResult = candidatesResult.filter(
-          item => 
-            (item.elections != 0 && item.elections_won == 0) && item
-          )}
+          (item) => item.elections != 0 && item.elections_won == 0 && item
+        );
+      }
 
       if (this.data.Filters.hasSelectedNElections) {
         candidatesResult = candidatesResult.filter(
-          item => (item.elections == 0) && item
-      )}
+          (item) => item.elections == 0 && item
+        );
+      }
 
       if (this.data.Filters.hasSelectedElectionsWon) {
         candidatesResult = candidatesResult.filter(
-          item => (item.elections != 0 && item.elections_won != 0) && item
-      )}
+          (item) => item.elections != 0 && item.elections_won != 0 && item
+        );
+      }
 
       if (this.data.Party.currentParty.length) {
         candidatesResult = candidatesResult.filter(
-          item => (item.party == this.data.Party.currentParty) && item
-      )}
+          (item) => item.party == this.data.Party.currentParty && item
+        );
+      }
 
-      if(candidatesResult.length == 0) { 
+      if (candidatesResult.length == 0) {
         this.noResultsAnalysis = true;
         this.hasFiltersCandidates = false;
       } else {
         this.pageQtd(candidatesResult);
-        this.noResultsAnalysis = false; 
-        this.hasFiltersCandidates = true
+        this.noResultsAnalysis = false;
+        this.hasFiltersCandidates = true;
       }
-      
-      const start = this.currentPage * this.resultsPerPage, end = start + this.resultsPerPage;
-      return candidatesResult.slice(start, end);
 
-    }
+      const start = this.currentPage * this.resultsPerPage,
+        end = start + this.resultsPerPage;
+      return candidatesResult.slice(start, end);
+    },
   },
   async mounted() {
     const roleCandidate = this.$route.params.role.toString();

@@ -5,6 +5,12 @@ export interface IRole {
   plural: string;
 }
 
+export interface ILocale {
+  initials: string;
+  name: string;
+  preposition: string;
+}
+
 export interface ICandidate {
   ballot_number: number;
   elections: number;

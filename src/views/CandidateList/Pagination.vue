@@ -28,14 +28,18 @@
           type="button"
           @click="onClickPage(page.name)"
           :disabled="page.isDisabled"
-          :class="isPageActive(page.name) ? 'text-white bg-primary-base' : 'text-text-light'"
-          class="font-regular border border-transparent w-full h-full leading-tight block rounded-full  hover:bg-primary-base hover:text-white"
+          :class="
+            isPageActive(page.name)
+              ? 'text-white bg-primary-base'
+              : 'text-text-light'
+          "
+          class="font-regular border border-transparent w-full h-full leading-tight block rounded-full hover:bg-primary-base hover:text-white"
         >
-          {{ page.name + 1}}
+          {{ page.name + 1 }}
         </button>
       </li>
-        <li>
-          <button
+      <li>
+        <button
           @click="onClickNextPage"
           :disabled="isInLastPage"
           class="block p-3 leading-tight text-text-light rounded-full hover:bg-primary-base hover:text-white"
@@ -55,7 +59,7 @@
             ></path>
           </svg>
         </button>
-        </li>
+      </li>
     </ul>
   </nav>
 </template>
@@ -82,26 +86,27 @@ export default defineComponent({
     minButtons: {
       type: Number,
       required: true,
-    }
+    },
   },
   setup() {
     const store = useStore();
     return {
-      store
-    }
+      store,
+    };
   },
   methods: {
     isPageActive(page) {
       return this.currentPage === page;
     },
     onClickPreviousPage() {
-      if(this.currentPage > 0) this.$emit("pagechanged", this.currentPage - 1);
+      if (this.currentPage > 0) this.$emit("pagechanged", this.currentPage - 1);
     },
     onClickPage(page) {
       this.$emit("pagechanged", page);
     },
     onClickNextPage() {
-      if(this.currentPage <= this.totalPages) this.$emit("pagechanged", this.currentPage + 1);
+      if (this.currentPage <= this.totalPages)
+        this.$emit("pagechanged", this.currentPage + 1);
     },
   },
   computed: {
@@ -120,12 +125,13 @@ export default defineComponent({
       const range: any = [];
       for (
         let i = this.startPage;
-        i <= Math.min(this.startPage + this.minButtons - 1, this.totalPages-1);
+        i <=
+        Math.min(this.startPage + this.minButtons - 1, this.totalPages - 1);
         i++
       ) {
         range.push({
           name: i,
-          isDisabled: i === this.currentPage
+          isDisabled: i === this.currentPage,
         });
       }
       return range;

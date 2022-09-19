@@ -9,9 +9,31 @@
     <svg viewBox="0 0 100% 100" width="100%" height="100">
       <rect width="100%" height="12" y="0" x="70" fill="#eeedf4"></rect>
       <template v-for="item of dataFiliation" :key="item">
-          <rect class="affil-point" width="12" height="12" :x="item[0].qtd+'%'" y="0"></rect>
-          <text class="affil-text" text-anchor="middle" font-family="sans-serif" :x="item[0].qtd+'%'" dy="45">{{item[0].name}}</text>
-          <text class="affil-text text-xs" text-anchor="middle" font-family="sans-serif" :x="item[0].qtd+'%'" dy="65">({{item[0].started}})</text>
+        <rect
+          class="affil-point"
+          width="12"
+          height="12"
+          :x="item[0].qtd + '%'"
+          y="0"
+        ></rect>
+        <text
+          class="affil-text"
+          text-anchor="middle"
+          font-family="sans-serif"
+          :x="item[0].qtd + '%'"
+          dy="45"
+        >
+          {{ item[0].name }}
+        </text>
+        <text
+          class="affil-text text-xs"
+          text-anchor="middle"
+          font-family="sans-serif"
+          :x="item[0].qtd + '%'"
+          dy="65"
+        >
+          ({{ item[0].started }})
+        </text>
       </template>
     </svg>
     <div v-if="loaded && error">
@@ -33,7 +55,6 @@ import {
   LinearScale,
   PointElement,
   CategoryScale,
-  Plugin,
 } from "chart.js";
 
 import services from "@/services";
@@ -52,8 +73,8 @@ ChartJS.register(
 export default defineComponent({
   name: "PatrimonyChart",
   components: {
-    Line
-},
+    Line,
+  },
   data: () => ({
     data: null,
     loaded: false,
@@ -140,47 +161,80 @@ export default defineComponent({
     const locale = this.$route.params.locale.toString();
 
     try {
-      const { data } = role != 'presidente' ? await services.dataCandidates.assets(locale, role) : await services.dataCandidates.assets();
-      
+      const { data } =
+        role != "presidente"
+          ? await services.dataCandidates.assets(locale, role)
+          : await services.dataCandidates.assets();
+
       let yearMedian = data.mediana_patrimonios.map((i) => i.year);
-      let yearPatrimony = yearMedian.concat(this.store.Candidates.currentCandidateSelected.asset_history.map((i) => i.year));
-      
-      const yearLabel = yearPatrimony.filter(function(value){
-        return !yearMedian.some(function(value2){
-            return value == value2;
+      let yearPatrimony = yearMedian.concat(
+        this.store.Candidates.currentCandidateSelected.asset_history.map(
+          (i) => i.year
+        )
+      );
+
+      const yearLabel = yearPatrimony.filter(function (value) {
+        return !yearMedian.some(function (value2) {
+          return value == value2;
         });
       });
 
       const configureYearMedian = yearMedian.filter((c, index) => {
-          return yearMedian.indexOf(c) === index;
+        return yearMedian.indexOf(c) === index;
       });
 
       const years = configureYearMedian.concat(yearLabel).sort();
-      
-      let startedFiliations = this.store.Candidates.currentCandidateSelected.affiliation_history.map((i) => Number(i.started_in.substr(0,4)));
-      console.log(years, startedFiliations)
-      const configureYearFiliationMedian = startedFiliations.filter(function(value){
-        return !years.some(function(value2){
-            return value == value2;
+
+      let startedFiliations =
+        this.store.Candidates.currentCandidateSelected.affiliation_history.map(
+          (i) => Number(i.started_in.substr(0, 4))
+        );
+      const configureYearFiliationMedian = startedFiliations.filter(function (
+        value
+      ) {
+        return !years.some(function (value2) {
+          return value == value2;
         });
       });
 
-      const configureYearFiliation = configureYearFiliationMedian.filter((c, index) => {
+      const configureYearFiliation = configureYearFiliationMedian.filter(
+        (c, index) => {
           return configureYearFiliationMedian.indexOf(c) === index;
-      });
+        }
+      );
 
-      const yearsWithFiliations = years.concat(configureYearFiliation).sort()
+      const yearsWithFiliations = years.concat(configureYearFiliation).sort();
 
-      const party = this.store.Candidates.currentCandidateSelected.affiliation_history.map((i,index) => [{name: i.party, started: Number((i.started_in.substr(0,4))), qtd: (((years.concat(configureYearFiliation).sort()).indexOf(Number(i.started_in.substr(0,4)))+1)*100)/years.concat(configureYearFiliation).length}]);
+      const party =
+        this.store.Candidates.currentCandidateSelected.affiliation_history.map(
+          (i) => [
+            {
+              name: i.party,
+              started: Number(i.started_in.substr(0, 4)),
+              qtd:
+                ((years
+                  .concat(configureYearFiliation)
+                  .sort()
+                  .indexOf(Number(i.started_in.substr(0, 4))) +
+                  1) *
+                  100) /
+                years.concat(configureYearFiliation).length,
+            },
+          ]
+        );
 
-      this.dataFiliation = party
-      this.chartData.labels = !startedFiliations[0] ? years : yearsWithFiliations;
-      this.chartData.datasets[0].data = this.store.Candidates.currentCandidateSelected.asset_history.map(
+      this.dataFiliation = party;
+      this.chartData.labels = !startedFiliations[0]
+        ? years
+        : yearsWithFiliations;
+      this.chartData.datasets[0].data =
+        this.store.Candidates.currentCandidateSelected.asset_history.map(
           (i) => [i.year, i.value]
         );
-      this.chartData.datasets[1].data = data.mediana_patrimonios.map(
-        (i) => [i.year, i.value]
-      );
+      this.chartData.datasets[1].data = data.mediana_patrimonios.map((i) => [
+        i.year,
+        i.value,
+      ]);
       this.loaded = true;
     } catch (e) {
       this.error = true;

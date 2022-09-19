@@ -142,6 +142,7 @@ import { setCurrentLocale } from "@/store/locales";
 import services from "@/services";
 import { setCurrentCandidates } from "@/store/candidates";
 import { setCurrentRole } from "@/store/roles";
+import { ICandidate, ILocale, IRole } from "@/models/candidate.model";
 
 export default defineComponent({
   data() {
@@ -170,7 +171,7 @@ export default defineComponent({
         initials: "",
         name: "",
       };
-      items.locales.forEach((i: any) => {
+      items.locales.forEach((i: ILocale) => {
         if (i.initials === store.Locale.currentLocale) {
           dataLocale = {
             name: i.name,
@@ -195,7 +196,7 @@ export default defineComponent({
     });
 
     let reduceParty = computed(function () {
-      const valuesData: any = [];
+      const valuesData: ICandidate[] = [];
       let set = new Set();
 
       store.Candidates.currentCandidates.objects?.forEach((i) =>
@@ -225,7 +226,7 @@ export default defineComponent({
     };
   },
   methods: {
-    selectParty(item: any) {
+    selectParty(item: string) {
       setCurrentParty(item);
     },
 
@@ -246,7 +247,7 @@ export default defineComponent({
       }
     },
 
-    selectRole(item: any) {
+    selectRole(item: string) {
       setCurrentRole(item);
       if (
         item === "presidente" ||
@@ -262,7 +263,7 @@ export default defineComponent({
       else this.handleData(item, this.currentLocale.initials);
     },
 
-    async handleData(role: any, locale: any) {
+    async handleData(role: string, locale: string) {
       try {
         const { data } = await services.dataCandidates.candidatesList(
           2022,

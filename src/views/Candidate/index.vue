@@ -132,7 +132,6 @@
 </template>
 
 <script lang="ts">
-import * as d3 from "d3";
 import { defineComponent } from "vue";
 
 import Footer from "@/components/Footer.vue";
@@ -162,7 +161,7 @@ export default defineComponent({
     EthnicityChart,
     GenderChart,
     PatrimonyChart,
-    TooltipInfo
+    TooltipInfo,
   },
   data() {
     return {

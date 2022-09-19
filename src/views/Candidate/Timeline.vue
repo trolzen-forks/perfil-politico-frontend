@@ -1,5 +1,5 @@
 <template>
-  <ol class="relative border-l border-gray-200"  v-if="data[0]">
+  <ol class="relative border-l border-gray-200" v-if="data[0]">
     <template v-for="item of data.slice().reverse()" :key="item">
       <li class="mb-10 ml-4" v-if="item.result !== '2O TURNO'">
         <div

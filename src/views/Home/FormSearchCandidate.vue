@@ -104,7 +104,9 @@
                     (showListCandidates = false)
                 "
               >
-                <span class="w-full capitalize">{{ candidate.name }} ({{ candidate.party }})</span>
+                <span class="w-full capitalize"
+                  >{{ candidate.name }} ({{ candidate.party }})</span
+                >
               </li>
               <li
                 v-if="searchListCandidates && !filteredList.length"
@@ -143,7 +145,7 @@
 import services from "@/services/index";
 import * as roles from "../../services/mocks/filtersRoles.json";
 import * as locales from "../../services/mocks/filtersLocales.json";
-import { computed, defineComponent, reactive, ref } from "vue";
+import { computed, defineComponent, reactive } from "vue";
 import {
   cleanCurrentCandidates,
   setCurrentCandidates,

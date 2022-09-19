@@ -29,7 +29,7 @@
           id="roleCandidates"
           name="roleCandidates"
           @change="selectRoleNavbar"
-          class=" bg-background-purpleLight bg-opacity-70 h-full p-3 text-white text-sm rounded-l-lg border-transparent font-regular focus:ring-secondary-base focus:border-secondary-base block"
+          class="bg-background-purpleLight bg-opacity-70 h-full p-3 pr-8 text-white text-sm rounded-l-lg border-transparent font-regular focus:ring-secondary-base focus:border-secondary-base block"
           placeholder="Cargo"
           required
         >
@@ -49,7 +49,7 @@
           id="localeCandidates"
           name="localeCandidates"
           @change="localeNavbarCandidates"
-          class="bg-background-purpleLight h-full p-3 text-white text-sm font-regular border-transparent focus:ring-secondary-base focus:border-secondary-base"
+          class="bg-background-purpleLight h-full p-3 pr-8 text-white text-sm font-regular border-transparent focus:ring-secondary-base focus:border-secondary-base"
           required
           placeholder="Localidade"
         >
@@ -117,7 +117,9 @@
                     (showListCandidates = false)
                 "
               >
-                <span class="w-full capitalize">{{ candidate.name }} ({{ candidate.party }})</span>
+                <span class="w-full capitalize"
+                  >{{ candidate.name }} ({{ candidate.party }})</span
+                >
               </li>
               <li
                 v-if="searchListCandidates && !filteredList.length"

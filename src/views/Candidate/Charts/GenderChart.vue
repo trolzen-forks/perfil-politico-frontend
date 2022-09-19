@@ -23,7 +23,6 @@ import {
   Legend,
   ArcElement,
   CategoryScale,
-  Plugin,
 } from "chart.js";
 
 import services from "@/services";
