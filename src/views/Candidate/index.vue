@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col min-h-screen">
     <Navbar></Navbar>
-    <div class="candidate mt-20 sm:flex flex-grow">
+    <div class="candidate mt-20 xl:flex flex-grow">
       <Sidebar
         :name="store.Candidates.currentCandidateSelected.name"
         :party="store.Candidates.currentCandidateSelected.party_abbreviation"
@@ -17,18 +17,18 @@
       ></Sidebar>
       <div class="candidate__content w-full bg-background-light">
         <div
-          class="candidate__header sm:flex justify-between items-center py-5 sm:px-12 px-5 border border-neutral-light bg-white"
+          class="candidate__header xl:flex justify-between items-center py-5 xl:px-12 px-5 border border-neutral-light bg-white"
         >
           <div>
             <h1
-              class="uppercase font-bold text-xl text-primary-base sm:text-left text-center"
+              class="uppercase font-bold text-xl text-primary-base xl:text-left text-center"
             >
               Comparação com pessoas eleitas em 2018
             </h1>
           </div>
         </div>
         <div
-          class="candidate__graphs py-10 sm:px-12 px-5 grid sm:grid-cols-2 grid-cols-1 gap-10"
+          class="candidate__graphs py-10 xl:px-12 px-5 grid xl:grid-cols-2 grid-cols-1 gap-10"
         >
           <CardInfo v-if="store.Role.currentRole !== 'presidente'">
             <template v-slot:title
@@ -74,7 +74,7 @@
               <EducationChart />
             </template>
           </CardInfo>
-          <CardInfo class="sm:col-span-2">
+          <CardInfo class="xl:col-span-2">
             <template v-slot:title>
               Trajetória política e patrimonial
               <TooltipInfo arrow placement="bottom" class="w-auto">
@@ -93,7 +93,7 @@
                   ></path>
                 </svg>
                 <template #content>
-                  <div class="text-left text-sm break-words font-light">
+                  <div class="text-left text-xl break-words font-light">
                     <p class="mb-3">
                       Esta visualização apresenta o patrimônio declarado da
                       pessoa destacada em comparação com a mediana de

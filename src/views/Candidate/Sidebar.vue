@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="c-sidebar-candidate sticky sm:w-1/3 min-h-full"
+    class="c-sidebar-candidate sticky xl:w-1/3 min-h-full"
     aria-label="Sidebar"
   >
     <div
