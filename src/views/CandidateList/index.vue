@@ -101,7 +101,7 @@
                 <span v-if="data.Filters.hasSelectedElectionsWon && paginatedData(currentCandidates).length === 1"> já foi eleita;</span>
                 <span v-if="data.Filters.hasSelectedGenderWoman && paginatedData(currentCandidates).length > 1"> são mulheres;</span>
                 <span v-if="data.Filters.hasSelectedGenderWoman && paginatedData(currentCandidates).length === 1"> é mulher;</span>
-                <span v-if="data.Filters.hasSelectedGenderMan && paginatedData(currentCandidates).length > 1"> são homen</span>
+                <span v-if="data.Filters.hasSelectedGenderMan && paginatedData(currentCandidates).length > 1"> são homens;</span>
                 <span v-if="data.Filters.hasSelectedGenderMan && paginatedData(currentCandidates).length === 1"> é homem;</span>
                 <span v-if="data.Filters.hasSelectedEthnicityPPI && paginatedData(currentCandidates).length > 1"> são pretas, pardas ou indígenas;</span>
                 <span v-if="data.Filters.hasSelectedEthnicityPPI && paginatedData(currentCandidates).length === 1"> é preta, parda ou indígena;</span>
@@ -279,7 +279,6 @@ export default defineComponent({
     },
 
     paginatedData(candidates) {
-      this.pageQtd(candidates);
       return this.filteredItems(candidates);
     },
 
@@ -349,12 +348,12 @@ export default defineComponent({
         this.noResultsAnalysis = true;
         this.hasFiltersCandidates = false;
       } else {
-        this.pageQtd(candidatesResult);
         this.qtdResultsAnalysis = candidatesResult.length;
         this.noResultsAnalysis = false;
         this.hasFiltersCandidates = true;
       }
 
+      this.pageQtd(candidatesResult);
       const start = this.currentPage * this.resultsPerPage,
         end = start + this.resultsPerPage;
       return candidatesResult.slice(start, end);
