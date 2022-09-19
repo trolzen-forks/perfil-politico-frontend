@@ -28,6 +28,10 @@ export function setElectionsWon(item: boolean) {
    item ? state.dataFilterLength++ : state.dataFilterLength > 0 ? state.dataFilterLength-- :  state.dataFilterLength = 0;
 }
 
+export function setDataFilterLength(item: boolean) {
+  state.dataFilterLength = item
+}
+
 export function setGenderWoman(item: boolean) {
   state.hasSelectedGenderWoman = item;
    item ? state.dataFilterLength++ : state.dataFilterLength > 0 ? state.dataFilterLength-- :  state.dataFilterLength = 0;

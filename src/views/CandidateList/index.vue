@@ -91,7 +91,7 @@
               {{ currentRole }} {{ currentLocale.preposition }}
               {{ currentLocale.name }}
             </h2>
-            <div v-if="data.Filters.dataFilterLength">
+            <div v-if="(data.Filters.hasSelectedElections || data.Filters.hasSelectedNElections || data.Filters.hasSelectedElectionsWon || data.Filters.hasSelectedGenderWoman || data.Filters.hasSelectedGenderMan || data.Filters.hasSelectedEthnicityPPI || data.Filters.hasSelectedEthnicityWhite || data.Party.currentParty.length) && qtdResultsAnalysis">
               <h3 class="text-primary-base font-regular text-xl">Destas, {{qtdResultsAnalysis}}
                 <span v-if="data.Filters.hasSelectedElections && paginatedData(currentCandidates).length > 1"> nunca foram eleitas;</span>
                 <span v-if="data.Filters.hasSelectedElections && paginatedData(currentCandidates).length === 1"> nunca foi eleita;</span>
@@ -345,6 +345,7 @@ export default defineComponent({
       }
 
       if (candidatesResult.length == 0) {
+        this.qtdResultsAnalysis = candidatesResult.length;
         this.noResultsAnalysis = true;
         this.hasFiltersCandidates = false;
       } else {
