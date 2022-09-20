@@ -72,6 +72,7 @@ ChartJS.register(
 
 export default defineComponent({
   name: "PatrimonyChart",
+  props: ['candidate'],
   components: {
     Line,
   },
@@ -109,18 +110,6 @@ export default defineComponent({
   setup() {
     const store = useStore();
 
-    let currentCandidateSelected = computed(function () {
-      return store.Candidates.currentCandidateSelected;
-    });
-
-    let currentRole = computed(function () {
-      return store.Role.currentRole;
-    });
-
-    let currentLocale = computed(function () {
-      return store.Locale.currentLocale;
-    });
-
     const chartOptions = {
       responsive: true,
       maintainAspectRatio: false,
@@ -142,10 +131,7 @@ export default defineComponent({
     };
     return {
       store,
-      currentRole,
       chartOptions,
-      currentCandidateSelected,
-      currentLocale,
     };
   },
   computed: {
@@ -158,7 +144,7 @@ export default defineComponent({
   async mounted() {
     this.loaded = false;
     const role = this.$route.params.role.toString().toLowerCase();
-    const locale = this.$route.params.locale.toString();
+    const locale = this.$route.params.locale.toString().toLowerCase();
 
     try {
       const { data } = await services.dataCandidates.assets();

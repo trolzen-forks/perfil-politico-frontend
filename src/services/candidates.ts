@@ -20,9 +20,25 @@ export default (httpClient: any) => ({
   },
 
   characteristic: async (
+    year?: number,
+    post?: string,
+    characteristic?: string,
+    locale?: string,
+  ) => {
+    setGlobalLoading(true);
+    const response = await httpClient.get(
+      `/api/stats/${locale}/${year}/${post}/${characteristic}/`
+    );
+
+    return {
+      data: response.data,
+    };
+  },
+
+  characteristicFederal: async (
     year: number,
     post: string,
-    characteristic: string
+    characteristic: string,
   ) => {
     setGlobalLoading(true);
     const response = await httpClient.get(

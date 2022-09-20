@@ -9,16 +9,47 @@
         >
           <div>
             <h1
-              class="uppercase font-bold text-xl text-primary-base xl:text-left text-center"
+              class="uppercase font-bold text-2xl mb-5 text-primary-base xl:text-left text-center"
             >
               Comparação com pessoas eleitas em 2018
             </h1>
+            <div v-if="store.Role.currentRole === 'presidente'">
+              <p>
+                Como esta candidatura se compara à eleita anteriormente? As visualizações de características abaixo permitem comparações com a pessoa eleita à presidência em 2018. Já a trajetória política e patrimonial traça uma comparação de bens declarados com todas as candidaturas eleitas (independente de cargo) em cada ano eleitoral.
+              </p>
+            </div>
+            <div v-if="store.Role.currentRole === 'governador'">
+              <p>
+                Como esta candidatura se compara à eleita anteriormente? As visualizações de características abaixo permitem comparações com a pessoa eleita ao governo do estado em 2018. Já a visualização de patrimônio traça uma comparação de bens declarados com todas as candidaturas eleitas (independente de cargo) em cada ano eleitoral.
+              </p>
+            </div>
+            <div v-if="store.Role.currentRole === 'senador'">
+              <p>
+                Como esta candidatura compõe o Senado Federal? As visualizações de características abaixo permitem comparações com todas as candidaturas eleitas para o Senado em 2018. Já a visualização de patrimônio traça uma comparação de bens declarados com todas as candidaturas eleitas (independente de cargo) em cada ano eleitoral.
+              </p>
+            </div>
+            <div v-if="store.Role.currentRole === 'deputado-federal'">
+              <p>
+                Como esta candidatura compõe a Câmara Federal? As visualizações de características abaixo permitem comparações com todas as candidaturas eleitas para a Câmara em 2018. Já a visualização de patrimônio traça uma comparação de bens declarados com todas as candidaturas eleitas (independente de cargo) em cada ano eleitoral.
+              </p>
+            </div>
+            <div v-if="store.Role.currentRole === 'deputado-distrital'">
+              <p>
+                Como esta candidatura compõe a Câmara Legislativa do Distrito Federal? As visualizações de características abaixo permitem comparações com todas as candidaturas eleitas para o legislativo distrital em 2018. Já a visualização de patrimônio traça uma comparação de bens declarados com todas as candidaturas eleitas (independente de cargo) em cada ano eleitoral.
+              </p>
+            </div>
+            <div v-if="store.Role.currentRole === 'deputado-estadual'">
+              <p>
+                Como esta candidatura compõe a Assembleia Legislativa? As visualizações de características abaixo permitem comparações com todas as candidaturas eleitas para o legislativo estadual em 2018. Já a visualização de patrimônio traça uma comparação de bens declarados com todas as candidaturas eleitas (independente de cargo) em cada ano eleitoral.
+              </p>
+            </div>
           </div>
+         
         </div>
         <div
           class="candidate__graphs py-10 xl:px-12 px-5 grid xl:grid-cols-2 grid-cols-1 gap-10"
         >
-          <CardInfo v-if="store.Role.currentRole !== 'presidente'">
+          <CardInfo>
             <template v-slot:title
               >Idade:
               <span class="font-light ml-1">{{
@@ -26,10 +57,10 @@
               }}</span></template
             >
             <template v-slot:content>
-              <AgeChart />
+              <AgeChart :candidate="store.Candidates.currentCandidateSelected" />
             </template>
           </CardInfo>
-          <CardInfo v-if="store.Role.currentRole !== 'presidente'">
+          <CardInfo>
             <template v-slot:title
               >Gênero:
               <span class="font-light ml-1">{{
@@ -37,10 +68,10 @@
               }}</span></template
             >
             <template v-slot:content>
-              <GenderChart />
+              <GenderChart :candidate="store.Candidates.currentCandidateSelected" />
             </template>
           </CardInfo>
-          <CardInfo v-if="store.Role.currentRole !== 'presidente'">
+          <CardInfo>
             <template v-slot:title
               >Cor/Raça:
               <span class="font-light ml-1">{{
@@ -48,10 +79,10 @@
               }}</span></template
             >
             <template v-slot:content>
-              <EthnicityChart />
+              <EthnicityChart :candidate="store.Candidates.currentCandidateSelected" />
             </template>
           </CardInfo>
-          <CardInfo v-if="store.Role.currentRole !== 'presidente'">
+          <CardInfo>
             <template v-slot:title
               >Escolaridade:
               <span class="font-light ml-1">{{
@@ -59,7 +90,7 @@
               }}</span></template
             >
             <template v-slot:content>
-              <EducationChart />
+              <EducationChart :candidate="store.Candidates.currentCandidateSelected" />
             </template>
           </CardInfo>
           <CardInfo class="xl:col-span-2">
@@ -81,7 +112,7 @@
                   ></path>
                 </svg>
                 <template #content>
-                  <div class="text-left text-xl break-words font-light">
+                  <div class="text-left xl:text-base text-sm break-words font-light">
                     <p class="mb-3">
                       Esta visualização apresenta o patrimônio declarado da
                       pessoa destacada em comparação com a mediana de
@@ -109,7 +140,7 @@
               </TooltipInfo>
             </template>
             <template v-slot:content>
-              <PatrimonyChart />
+              <PatrimonyChart :candidate="store.Candidates.currentCandidateSelected" />
             </template>
           </CardInfo>
         </div>
@@ -163,20 +194,10 @@ export default defineComponent({
       store,
     };
   },
-  methods: {
-    async dataAge() {
-      const { data } = await services.dataCandidates.candidatesList(
-        2022,
-        this.store.Candidates.currentCandidateSelected.post,
-        "age"
-      );
-      this.loadData = data;
-    },
-  },
   async mounted() {
     const keyCandidate = Number(this.$route.params.keyCandidate);
-    const roleCandidate = this.$route.params.role.toString().toLocaleLowerCase();
-    const localeCandidate = this.$route.params.locale.toString().toLocaleLowerCase();
+    const roleCandidate = this.$route.params.role.toString().toLowerCase();
+    const localeCandidate = this.$route.params.locale.toString().toLowerCase();
     try {
       const { dataCandidate } = await services.dataCandidates.candidate(
         keyCandidate

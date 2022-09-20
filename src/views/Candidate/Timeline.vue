@@ -1,5 +1,5 @@
 <template>
-  <ol class="relative border-l border-gray-200" v-if="currentCandidate.election_history">
+  <ol class="relative border-l border-gray-200" v-if="currentHistory">
     <template v-for="item of data.slice().reverse()" :key="item">
       <li class="mb-10 ml-4" v-if="item.result !== '2O TURNO'">
         <div
@@ -37,11 +37,11 @@ export default defineComponent({
   props: ["data"],
   setup() {
   const store = useStore();
-  let currentCandidate = computed(function () {
-      return store.Candidates.currentCandidateSelected;
+  let currentHistory = computed(function () {
+      return store.Candidates.currentCandidateSelected.election_history.length;
     });
     return{
-      currentCandidate
+      currentHistory
     }
  }
 });

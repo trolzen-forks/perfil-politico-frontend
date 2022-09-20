@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
+import { computed, h, defineComponent } from "vue";
 
 import { Bar } from "vue-chartjs";
 import {
@@ -40,6 +40,7 @@ ChartJS.register(
 
 export default defineComponent({
   name: "AgeChart",
+  props: ['candidate'],
   components: {
     Bar,
   },
@@ -66,22 +67,13 @@ export default defineComponent({
     },
   }),
   setup() {
-    const store = useStore();
-    let currentRole = computed(function () {
-      return store.Role.currentRole;
-    });
-    let currentCandidateSelected = computed(function () {
-      return store.Candidates.currentCandidateSelected;
-    });
     const chartOptions = {
       responsive: true,
       maintainAspectRatio: false,
       indexAxis: "y",
     };
     return {
-      currentRole,
-      chartOptions,
-      currentCandidateSelected,
+      chartOptions
     };
   },
   computed: {
@@ -93,30 +85,30 @@ export default defineComponent({
   },
   async mounted() {
     this.loaded = false;
-    const role = this.$route.params.role.toString();
-
+    const role = this.$route.params.role.toString().toLowerCase();
+    const locale = this.$route.params.locale.toString().toLowerCase();
+    
     try {
-      const { data } = await services.dataCandidates.characteristic(
-        2018,
-        role,
-        "age"
-      );
+      const { data } =
+        ((role != "presidente") && (role != "senador") && (role != "deputado-federal"))
+          ? await services.dataCandidates.characteristic(2018, role, "age", locale)
+          : await services.dataCandidates.characteristicFederal(2018, role, "age");
       this.chartData.datasets[0].data = data.map((i) => i.total);
 
       this.chartData.datasets[0].backgroundColor =
-        this.currentCandidateSelected.age < 25
+      this.candidate.age < 25
           ? ["#9BDB52", "#D9D9D9", "#D9D9D9", "#D9D9D9", "#D9D9D9", "#D9D9D9"]
-          : this.currentCandidateSelected.age >= 25 &&
-            this.currentCandidateSelected.age < 35
+          : this.candidate.age >= 25 &&
+            this.candidate.age < 35
           ? ["#D9D9D9", "#9BDB52", "#D9D9D9", "#D9D9D9", "#D9D9D9", "#D9D9D9"]
-          : this.currentCandidateSelected.age >= 35 &&
-            this.currentCandidateSelected.age < 45
+          : this.candidate.age >= 35 &&
+            this.candidate.age < 45
           ? ["#D9D9D9", "#D9D9D9", "#9BDB52", "#D9D9D9", "#D9D9D9", "#D9D9D9"]
-          : this.currentCandidateSelected.age >= 45 &&
-            this.currentCandidateSelected.age < 60
+          : this.candidate.age >= 45 &&
+            this.candidate.age < 60
           ? ["#D9D9D9", "#D9D9D9", "#D9D9D9", "#9BDB52", "#D9D9D9", "#D9D9D9"]
-          : this.currentCandidateSelected.age >= 60 &&
-            this.currentCandidateSelected.age < 70
+          : this.candidate.age >= 60 &&
+            this.candidate.age < 70
           ? ["#D9D9D9", "#D9D9D9", "#D9D9D9", "#D9D9D9", "#9BDB52", "#D9D9D9"]
           : ["#D9D9D9", "#D9D9D9", "#D9D9D9", "#D9D9D9", "#D9D9D9", "#9BDB52"];
 
@@ -124,6 +116,7 @@ export default defineComponent({
     } catch (e) {
       this.error = true;
     }
+    
   },
 });
 </script>

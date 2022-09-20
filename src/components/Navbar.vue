@@ -236,7 +236,7 @@ export default defineComponent({
       try {
         const { data } = await services.dataCandidates.candidatesList(
           2022,
-          this.currentLocale,
+          this.store.Locale.currentLocale,
           this.currentRole
         );
         return data;
@@ -270,8 +270,8 @@ export default defineComponent({
       try {
         const { data } = await services.dataCandidates.candidatesList(
           2022,
-          locale,
-          role
+          this.currentLocale,
+          this.currentRole
         );
         setCurrentCandidates(data);
         if (this.$router.currentRoute.value.name === "CandidateList") {

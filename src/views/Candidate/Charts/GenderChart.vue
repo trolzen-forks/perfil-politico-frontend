@@ -31,6 +31,7 @@ ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale);
 
 export default defineComponent({
   name: "Chart",
+  props: ['candidate'],
   components: {
     Doughnut,
   },
@@ -50,22 +51,12 @@ export default defineComponent({
     },
   }),
   setup() {
-    const store = useStore();
-    let currentRole = computed(function () {
-      return store.Role.currentRole;
-    });
-    let currentCandidateSelected = computed(function () {
-      return store.Candidates.currentCandidateSelected;
-    });
     const chartOptions = {
       responsive: true,
       maintainAspectRatio: false,
     };
     return {
-      store,
-      currentRole,
-      chartOptions,
-      currentCandidateSelected,
+      chartOptions
     };
   },
   computed: {
@@ -77,18 +68,18 @@ export default defineComponent({
   },
   async mounted() {
     this.loaded = false;
-    const role = this.$route.params.role.toString();
+    const role = this.$route.params.role.toString().toLowerCase();
+    const locale = this.$route.params.locale.toString().toLowerCase();
 
     try {
-      const { data } = await services.dataCandidates.characteristic(
-        2018,
-        role,
-        "gender"
-      );
+      const { data } =
+        ((role != "presidente") && (role != "senador") && (role != "deputado-federal"))
+          ? await services.dataCandidates.characteristic(2018, role, "gender", locale)
+          : await services.dataCandidates.characteristicFederal(2018, role, "gender");
       this.chartData.datasets[0].data = data.map((i) => i.total);
 
       this.chartData.datasets[0].backgroundColor = data.map((i) =>
-        i.characteristic === this.currentCandidateSelected.gender
+        i.characteristic === this.candidate.gender
           ? "#9BDB52"
           : "#D9D9D9"
       );

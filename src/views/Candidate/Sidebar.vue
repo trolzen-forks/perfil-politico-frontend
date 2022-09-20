@@ -44,7 +44,7 @@
             class="w-28 h-28 rounded-full p-1 ring-4 ring-primary-base"
           ></IconCandidate>
           <div class="c-sidebar-candidate__infos ml-5">
-            <h2 class="text-primary-base font-bold text-base">{{ currentCandidate.ballot_name }}</h2>
+            <h2 class="text-primary-base font-bold text-xl">{{ currentCandidate.ballot_name }}</h2>
             <p class="text-xs font-light text-primary-base">
               {{ currentCandidate.role }}
             </p>

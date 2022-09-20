@@ -40,6 +40,7 @@ ChartJS.register(
 
 export default defineComponent({
   name: "EducationChart",
+  props: ['candidate'],
   components: {
     Bar,
   },
@@ -60,23 +61,13 @@ export default defineComponent({
     },
   }),
   setup() {
-    const store = useStore();
-    let currentRole = computed(function () {
-      return store.Role.currentRole;
-    });
-    let currentCandidateSelected = computed(function () {
-      return store.Candidates.currentCandidateSelected;
-    });
     const chartOptions = {
       responsive: true,
       maintainAspectRatio: false,
       indexAxis: "y",
     };
     return {
-      store,
-      currentRole,
       chartOptions,
-      currentCandidateSelected,
     };
   },
   computed: {
@@ -88,18 +79,19 @@ export default defineComponent({
   },
   async mounted() {
     this.loaded = false;
-    const role = this.$route.params.role.toString();
+    const role = this.$route.params.role.toString().toLowerCase();
+    const locale = this.$route.params.locale.toString().toLowerCase();
 
     try {
-      const { data } = await services.dataCandidates.characteristic(
-        2018,
-        role,
-        "education"
-      );
+      const { data } =
+        ((role != "presidente") && (role != "senador") && (role != "deputado-federal"))
+          ? await services.dataCandidates.characteristic(2018, role, "education", locale)
+          : await services.dataCandidates.characteristicFederal(2018, role, "education");
+
       this.chartData.datasets[0].data = data.map((i) => i.total);
-      this.chartData.labels = data.map((i) => i.characteristic);
+      this.chartData.labels = data.map((i) => i.characteristic)
       this.chartData.datasets[0].backgroundColor = data.map((i) =>
-        i.characteristic === this.currentCandidateSelected.education
+        i.characteristic === this.candidate.education
           ? "#9BDB52"
           : "#D9D9D9"
       );
