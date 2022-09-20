@@ -1,12 +1,11 @@
 <template>
   <div class="container">
     <Doughnut
-      v-if="loaded"
       :styles="stylesBar"
       :chart-options="chartOptions"
       :chart-data="chartData"
     />
-    <div v-if="loaded && error">
+    <div v-if="error">
       <h4>Não foi possível carregar os dados</h4>
     </div>
   </div>
@@ -23,22 +22,32 @@ import {
   Legend,
   ArcElement,
   CategoryScale,
+  Plugin,
 } from "chart.js";
 
 import services from "@/services";
 import useStore from "@/hooks/useStore";
+import { setCharacteristicGender } from "@/store/candidates";
 ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale);
 
 export default defineComponent({
-  name: "Chart",
-  props: ['candidate'],
+  name: "EthnicityChart",
+  props: {
+    candidate: {
+      type: String,
+      required: true,
+    },
+    dataGenderChart: {
+      type: Object,
+      required: true,
+    },
+  },
   components: {
     Doughnut,
   },
   data: () => ({
     loaded: false,
     error: false,
-    dataAge: null,
     chartData: {
       labels: ["Masculino", "Feminino"],
       datasets: [
@@ -55,39 +64,42 @@ export default defineComponent({
       responsive: true,
       maintainAspectRatio: false,
     };
+    const store = useStore();
     return {
-      chartOptions
+      chartOptions,
+      store
     };
   },
-  computed: {
-    stylesBar() {
-      return {
-        position: "relative",
-      };
-    },
-  },
-  async mounted() {
-    this.loaded = false;
-    const role = this.$route.params.role.toString().toLowerCase();
-    const locale = this.$route.params.locale.toString().toLowerCase();
-
-    try {
-      const { data } =
-        ((role != "presidente") && (role != "senador") && (role != "deputado-federal"))
-          ? await services.dataCandidates.characteristic(2018, role, "gender", locale)
-          : await services.dataCandidates.characteristicFederal(2018, role, "gender");
-      this.chartData.datasets[0].data = data.map((i) => i.total);
-
-      this.chartData.datasets[0].backgroundColor = data.map((i) =>
-        i.characteristic === this.candidate.gender
+  watch: {
+    candidate() {
+        return this.chartData.datasets[0].backgroundColor = this.dataGenderChart.map((i) =>
+        i.characteristic === this.candidate
           ? "#9BDB52"
           : "#D9D9D9"
       );
+    },
+  },
+  methods: {
+    dataGender() {
+      this.chartData.datasets[0].data = this.store.Candidates.currentCharacteristicGender.map((i) => i.total);
 
-      this.loaded = true;
-    } catch (e) {
-      this.error = true;
+      this.chartData.datasets[0].backgroundColor = this.store.Candidates.currentCharacteristicGender.map((i) =>
+        i.characteristic === this.candidate
+          ? "#9BDB52"
+          : "#D9D9D9"
+      );
     }
   },
+  async mounted() {
+    const roleCandidate = this.$route.params.role.toString().toLowerCase();
+    const localeCandidate = this.$route.params.locale.toString().toLowerCase();
+    const { data } = ((roleCandidate != "presidente") && (roleCandidate != "senador") && (roleCandidate != "deputado-federal"))
+      ? await services.dataCandidates.characteristic(2018, roleCandidate, "gender", localeCandidate)
+      : await services.dataCandidates.characteristicFederal(2018, roleCandidate, "gender"
+      );
+      
+    setCharacteristicGender(data);
+    this.dataGender();
+  }
 });
 </script>

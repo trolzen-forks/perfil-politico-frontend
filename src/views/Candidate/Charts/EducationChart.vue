@@ -1,19 +1,18 @@
 <template>
   <div class="container">
     <Bar
-      v-if="loaded"
       :styles="stylesBar"
       :chart-options="chartOptions"
       :chart-data="chartData"
     />
-    <div v-if="loaded && error">
+    <div v-if="error">
       <h4>Não foi possível carregar os dados</h4>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
+import { defineComponent } from "vue";
 
 import { Bar } from "vue-chartjs";
 import {
@@ -25,8 +24,8 @@ import {
   CategoryScale,
   LinearScale,
 } from "chart.js";
-
 import services from "@/services";
+import { setCharacteristicEducation } from "@/store/candidates";
 import useStore from "@/hooks/useStore";
 
 ChartJS.register(
@@ -40,14 +39,22 @@ ChartJS.register(
 
 export default defineComponent({
   name: "EducationChart",
-  props: ['candidate'],
+  props: {
+    candidate: {
+      type: String,
+      required: true,
+    },
+    dataEducationChart: {
+      type: Object,
+      required: true,
+    },
+  },
   components: {
     Bar,
   },
   data: () => ({
     loaded: false,
     error: false,
-    dataAge: null,
     chartData: {
       labels: [],
       datasets: [
@@ -66,8 +73,10 @@ export default defineComponent({
       maintainAspectRatio: false,
       indexAxis: "y",
     };
+    const store = useStore();
     return {
       chartOptions,
+      store
     };
   },
   computed: {
@@ -77,28 +86,36 @@ export default defineComponent({
       };
     },
   },
-  async mounted() {
-    this.loaded = false;
-    const role = this.$route.params.role.toString().toLowerCase();
-    const locale = this.$route.params.locale.toString().toLowerCase();
-
-    try {
-      const { data } =
-        ((role != "presidente") && (role != "senador") && (role != "deputado-federal"))
-          ? await services.dataCandidates.characteristic(2018, role, "education", locale)
-          : await services.dataCandidates.characteristicFederal(2018, role, "education");
-
-      this.chartData.datasets[0].data = data.map((i) => i.total);
-      this.chartData.labels = data.map((i) => i.characteristic)
-      this.chartData.datasets[0].backgroundColor = data.map((i) =>
-        i.characteristic === this.candidate.education
+  watch: {
+    candidate() {
+        return this.chartData.datasets[0].backgroundColor = this.dataEducationChart.map((i) =>
+        i.characteristic === this.candidate
           ? "#9BDB52"
           : "#D9D9D9"
       );
-      this.loaded = true;
-    } catch (e) {
-      this.error = true;
+    },
+  },
+  methods: {
+    dataEducation() {
+      this.chartData.datasets[0].data = this.store.Candidates.currentCharacteristicEducation.map(i => i.total)
+      this.chartData.labels = this.store.Candidates.currentCharacteristicEducation.map(i => i.characteristic)
+      this.chartData.datasets[0].backgroundColor = this.store.Candidates.currentCharacteristicEducation.map(i =>
+        i.characteristic === this.candidate
+          ? "#9BDB52"
+          : "#D9D9D9"
+      );
     }
   },
+  async mounted() {
+    const roleCandidate = this.$route.params.role.toString().toLowerCase();
+    const localeCandidate = this.$route.params.locale.toString().toLowerCase();
+    const { data } = ((roleCandidate != "presidente") && (roleCandidate != "senador") && (roleCandidate != "deputado-federal"))
+      ? await services.dataCandidates.characteristic(2018, roleCandidate, "education", localeCandidate)
+      : await services.dataCandidates.characteristicFederal(2018, roleCandidate, "education"
+      );
+      
+    setCharacteristicEducation(data);
+    this.dataEducation();
+  }
 });
 </script>

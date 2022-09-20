@@ -27,3 +27,8 @@ export interface ICandidate {
   state: string;
   status: string;
 }
+
+export interface ICharacteristic {
+  characteristic: string,
+  total: number
+}

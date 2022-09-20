@@ -5,6 +5,7 @@
       :styles="stylesBar"
       :chart-options="chartOptions"
       :chart-data="chartData"
+      :chart-update="chartData"
     />
     <div v-if="loaded && error">
       <h4>Não foi possível carregar os dados</h4>
@@ -13,7 +14,7 @@
 </template>
 
 <script lang="ts">
-import { computed, h, defineComponent } from "vue";
+import { computed, defineComponent } from "vue";
 
 import { Bar } from "vue-chartjs";
 import {
@@ -40,7 +41,12 @@ ChartJS.register(
 
 export default defineComponent({
   name: "AgeChart",
-  props: ['candidate'],
+  props: {
+    candidate: {
+      type: Number,
+      required: true,
+    },
+  },
   components: {
     Bar,
   },
@@ -67,13 +73,24 @@ export default defineComponent({
     },
   }),
   setup() {
+    const store = useStore();
     const chartOptions = {
       responsive: true,
       maintainAspectRatio: false,
       indexAxis: "y",
     };
+    let currentRole = computed(function () {
+      return store.Role.currentRole;
+    });
+
+    let currentLocale = computed(function () {
+      return store.Locale.currentLocale;
+    });
     return {
-      chartOptions
+      store,
+      chartOptions,
+      currentRole,
+      currentLocale
     };
   },
   computed: {
@@ -81,42 +98,70 @@ export default defineComponent({
       return {
         position: "relative",
       };
-    },
+    }
   },
-  async mounted() {
+  watch: {
+    candidate() {
+        return this.chartData.datasets[0].backgroundColor =
+          this.candidate < 25
+          ? ["#9BDB52", "#D9D9D9", "#D9D9D9", "#D9D9D9", "#D9D9D9", "#D9D9D9"]
+          : this.candidate >= 25 &&
+            this.candidate < 35
+          ? ["#D9D9D9", "#9BDB52", "#D9D9D9", "#D9D9D9", "#D9D9D9", "#D9D9D9"]
+          : this.candidate >= 35 &&
+            this.candidate < 45
+          ? ["#D9D9D9", "#D9D9D9", "#9BDB52", "#D9D9D9", "#D9D9D9", "#D9D9D9"]
+          : this.candidate >= 45 &&
+            this.candidate < 60
+          ? ["#D9D9D9", "#D9D9D9", "#D9D9D9", "#9BDB52", "#D9D9D9", "#D9D9D9"]
+          : this.candidate >= 60 &&
+            this.candidate < 70
+          ? ["#D9D9D9", "#D9D9D9", "#D9D9D9", "#D9D9D9", "#9BDB52", "#D9D9D9"]
+          : ["#D9D9D9", "#D9D9D9", "#D9D9D9", "#D9D9D9", "#D9D9D9", "#9BDB52"];
+      },
+  },
+  methods: {
+    dataCandidate(data) {
+      return data.map((i) => i.total)
+    },
+    async useChartData(role, locale) {
+      try {
+        const { data } =
+        ((role != "presidente") && (role != "senador") && (role != "deputado-federal"))
+          ? await services.dataCandidates.characteristic(2018, role, "age", locale)
+          : await services.dataCandidates.characteristicFederal(2018, role, "age");
+
+          this.chartData.datasets[0].data = this.dataCandidate(data);
+          this.chartData.datasets[0].backgroundColor =
+          this.candidate < 25
+          ? ["#9BDB52", "#D9D9D9", "#D9D9D9", "#D9D9D9", "#D9D9D9", "#D9D9D9"]
+          : this.candidate >= 25 &&
+            this.candidate < 35
+          ? ["#D9D9D9", "#9BDB52", "#D9D9D9", "#D9D9D9", "#D9D9D9", "#D9D9D9"]
+          : this.candidate >= 35 &&
+            this.candidate < 45
+          ? ["#D9D9D9", "#D9D9D9", "#9BDB52", "#D9D9D9", "#D9D9D9", "#D9D9D9"]
+          : this.candidate >= 45 &&
+            this.candidate < 60
+          ? ["#D9D9D9", "#D9D9D9", "#D9D9D9", "#9BDB52", "#D9D9D9", "#D9D9D9"]
+          : this.candidate >= 60 &&
+            this.candidate < 70
+          ? ["#D9D9D9", "#D9D9D9", "#D9D9D9", "#D9D9D9", "#9BDB52", "#D9D9D9"]
+          : ["#D9D9D9", "#D9D9D9", "#D9D9D9", "#D9D9D9", "#D9D9D9", "#9BDB52"];
+          
+      this.loaded = true;
+    } catch (e) {
+      this.error = true;
+      }
+
+    }
+  },
+  mounted() {
     this.loaded = false;
     const role = this.$route.params.role.toString().toLowerCase();
     const locale = this.$route.params.locale.toString().toLowerCase();
     
-    try {
-      const { data } =
-        ((role != "presidente") && (role != "senador") && (role != "deputado-federal"))
-          ? await services.dataCandidates.characteristic(2018, role, "age", locale)
-          : await services.dataCandidates.characteristicFederal(2018, role, "age");
-      this.chartData.datasets[0].data = data.map((i) => i.total);
-
-      this.chartData.datasets[0].backgroundColor =
-      this.candidate.age < 25
-          ? ["#9BDB52", "#D9D9D9", "#D9D9D9", "#D9D9D9", "#D9D9D9", "#D9D9D9"]
-          : this.candidate.age >= 25 &&
-            this.candidate.age < 35
-          ? ["#D9D9D9", "#9BDB52", "#D9D9D9", "#D9D9D9", "#D9D9D9", "#D9D9D9"]
-          : this.candidate.age >= 35 &&
-            this.candidate.age < 45
-          ? ["#D9D9D9", "#D9D9D9", "#9BDB52", "#D9D9D9", "#D9D9D9", "#D9D9D9"]
-          : this.candidate.age >= 45 &&
-            this.candidate.age < 60
-          ? ["#D9D9D9", "#D9D9D9", "#D9D9D9", "#9BDB52", "#D9D9D9", "#D9D9D9"]
-          : this.candidate.age >= 60 &&
-            this.candidate.age < 70
-          ? ["#D9D9D9", "#D9D9D9", "#D9D9D9", "#D9D9D9", "#9BDB52", "#D9D9D9"]
-          : ["#D9D9D9", "#D9D9D9", "#D9D9D9", "#D9D9D9", "#D9D9D9", "#9BDB52"];
-
-      this.loaded = true;
-    } catch (e) {
-      this.error = true;
-    }
-    
+    this.useChartData(role, locale);
   },
 });
 </script>

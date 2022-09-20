@@ -1,26 +1,26 @@
 <template>
   <div class="container">
     <Line
-      v-if="loaded"
       :styles="stylesBar"
       :chart-options="chartOptions"
       :chart-data="chartData"
+      :chart-update="chartData"
     />
     <svg viewBox="0 0 100% 100" width="100%" height="100">
       <rect width="100%" height="12" y="0" x="70" fill="#eeedf4"></rect>
-      <template v-for="item of dataFiliation" :key="item">
+      <template v-for="item of dataFiliation" @change="dataFiliation" :key="item">
         <rect
           class="affil-point"
           width="12"
           height="12"
-          :x="item[0].qtd + '%'"
+          :x="item[0].qtd >= 100 ? '98%' : item[0].qtd + '%'"
           y="0"
         ></rect>
         <text
-          class="affil-text"
+          class="affil-text text-sm"
           text-anchor="middle"
           font-family="sans-serif"
-          :x="item[0].qtd + '%'"
+          :x="item[0].qtd >= 100 ? '98%' : item[0].qtd + '%'"
           dy="45"
         >
           {{ item[0].name }}
@@ -29,7 +29,7 @@
           class="affil-text text-xs"
           text-anchor="middle"
           font-family="sans-serif"
-          :x="item[0].qtd + '%'"
+          :x="item[0].qtd >= 100 ? '98%' : item[0].qtd + '%'"
           dy="65"
         >
           ({{ item[0].started }})
@@ -59,6 +59,7 @@ import {
 
 import services from "@/services";
 import useStore from "@/hooks/useStore";
+import { setAssets } from "@/store/candidates";
 
 ChartJS.register(
   Title,
@@ -72,7 +73,16 @@ ChartJS.register(
 
 export default defineComponent({
   name: "PatrimonyChart",
-  props: ['candidate'],
+  props: {
+    candidate: {
+      type: Object,
+      required: true,
+    },
+    dataAssets: {
+      type: Object,
+      required: true,
+    },
+  },
   components: {
     Line,
   },
@@ -80,7 +90,7 @@ export default defineComponent({
     data: null,
     loaded: false,
     error: false,
-    dataFiliation: null,
+    dataFiliation: {},
     chartData: {
       labels: [""],
       datasets: [
@@ -134,24 +144,12 @@ export default defineComponent({
       chartOptions,
     };
   },
-  computed: {
-    stylesBar() {
-      return {
-        position: "relative",
-      };
-    },
-  },
-  async mounted() {
-    this.loaded = false;
-    const role = this.$route.params.role.toString().toLowerCase();
-    const locale = this.$route.params.locale.toString().toLowerCase();
-
-    try {
-      const { data } = await services.dataCandidates.assets();
-
-      let yearMedian = data.mediana_patrimonios.map((i) => i.year);
+  watch: {
+    candidate() {
+      let yearMedian = this.dataAssets.mediana_patrimonios.map((i) => i.year);
+      
       let yearPatrimony = yearMedian.concat(
-        this.store.Candidates.currentCandidateSelected.asset_history.map(
+        this.candidate.asset_history.map(
           (i) => i.year
         )
       );
@@ -168,13 +166,81 @@ export default defineComponent({
 
       const years = configureYearMedian.concat(yearLabel).sort();
 
-      let startedFiliations =
-        this.store.Candidates.currentCandidateSelected.affiliation_history.map(
+      let startedFiliations = this.candidate.affiliation_history.map(
           (i) => Number(i.started_in.substr(0, 4))
+      );
+      
+      const configureYearFiliationMedian = startedFiliations.filter(function (value) {
+        return !years.some(function (value2) {
+          return value == value2;
+        });
+      });
+
+      const configureYearFiliation = configureYearFiliationMedian.filter(
+        (c, index) => {
+          return configureYearFiliationMedian.indexOf(c) === index;
+        }
+      );
+
+      const yearsWithFiliations = years.concat(configureYearFiliation).sort();
+
+      this.dataFiliation = this.candidate.affiliation_history.map(
+        (i) => [
+          {
+            name: i.party,
+            started: Number(i.started_in.substr(0, 4)),
+            qtd:
+              ((years
+                .concat(configureYearFiliation)
+                .sort()
+                .indexOf(Number(i.started_in.substr(0, 4))) +
+                1) *
+                100) /
+              years.concat(configureYearFiliation).length,
+          },
+        ]
+      );
+
+      this.chartData.labels = !startedFiliations[0]
+        ? years
+        : yearsWithFiliations;
+      this.chartData.datasets[0].data =
+        this.candidate.asset_history.map(
+          (i) => [i.year, i.value]
         );
-      const configureYearFiliationMedian = startedFiliations.filter(function (
-        value
-      ) {
+      this.chartData.datasets[1].data = this.dataAssets.mediana_patrimonios.map((i) => [
+        i.year,
+        i.value,
+      ]);
+    },
+  },
+  methods: {
+    dataAssetsAndAffiliations() {
+      let yearMedian = this.store.Candidates.currentAssets.mediana_patrimonios.map((i) => i.year);
+      
+      let yearPatrimony = yearMedian.concat(
+        this.candidate.asset_history.map(
+          (i) => i.year
+        )
+      );
+
+      const yearLabel = yearPatrimony.filter(function (value) {
+        return !yearMedian.some(function (value2) {
+          return value == value2;
+        });
+      });
+
+      const configureYearMedian = yearMedian.filter((c, index) => {
+        return yearMedian.indexOf(c) === index;
+      });
+
+      const years = configureYearMedian.concat(yearLabel).sort();
+
+      let startedFiliations = this.candidate.affiliation_history.map(
+          (i) => Number(i.started_in.substr(0, 4))
+      );
+      
+      const configureYearFiliationMedian = startedFiliations.filter(function (value) {
         return !years.some(function (value2) {
           return value == value2;
         });
@@ -189,7 +255,7 @@ export default defineComponent({
       const yearsWithFiliations = years.concat(configureYearFiliation).sort();
 
       const party =
-        this.store.Candidates.currentCandidateSelected.affiliation_history.map(
+        this.candidate.affiliation_history.map(
           (i) => [
             {
               name: i.party,
@@ -211,17 +277,20 @@ export default defineComponent({
         ? years
         : yearsWithFiliations;
       this.chartData.datasets[0].data =
-        this.store.Candidates.currentCandidateSelected.asset_history.map(
+        this.candidate.asset_history.map(
           (i) => [i.year, i.value]
         );
-      this.chartData.datasets[1].data = data.mediana_patrimonios.map((i) => [
+      this.chartData.datasets[1].data = this.store.currentAssets.mediana_patrimonios.map((i) => [
         i.year,
         i.value,
       ]);
-      this.loaded = true;
-    } catch (e) {
-      this.error = true;
     }
   },
+  async mounted() {
+    const { data } = await services.dataCandidates.assets();
+
+    setAssets(data);
+    this.dataAssetsAndAffiliations();
+  }
 });
 </script>

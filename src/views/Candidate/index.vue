@@ -57,7 +57,7 @@
               }}</span></template
             >
             <template v-slot:content>
-              <AgeChart :candidate="store.Candidates.currentCandidateSelected" />
+              <AgeChart :candidate="store.Candidates.currentCandidateSelected.age" />
             </template>
           </CardInfo>
           <CardInfo>
@@ -68,7 +68,9 @@
               }}</span></template
             >
             <template v-slot:content>
-              <GenderChart :candidate="store.Candidates.currentCandidateSelected" />
+              <GenderChart 
+              :candidate="store.Candidates.currentCandidateSelected.gender"
+              :dataGenderChart="store.Candidates.currentCharacteristicGender" />
             </template>
           </CardInfo>
           <CardInfo>
@@ -79,7 +81,9 @@
               }}</span></template
             >
             <template v-slot:content>
-              <EthnicityChart :candidate="store.Candidates.currentCandidateSelected" />
+              <EthnicityChart 
+              :candidate="store.Candidates.currentCandidateSelected.ethnicity"
+              :dataEthnicityChart="store.Candidates.currentCharacteristicEthnicity" />
             </template>
           </CardInfo>
           <CardInfo>
@@ -90,7 +94,10 @@
               }}</span></template
             >
             <template v-slot:content>
-              <EducationChart :candidate="store.Candidates.currentCandidateSelected" />
+              <EducationChart 
+                :candidate="store.Candidates.currentCandidateSelected.education"
+                :dataEducationChart="store.Candidates.currentCharacteristicEducation"
+              />
             </template>
           </CardInfo>
           <CardInfo class="xl:col-span-2">
@@ -140,7 +147,9 @@
               </TooltipInfo>
             </template>
             <template v-slot:content>
-              <PatrimonyChart :candidate="store.Candidates.currentCandidateSelected" />
+              <PatrimonyChart 
+              :candidate="store.Candidates.currentCandidateSelected"
+              :dataAssets="store.Candidates.currentAssets" />
             </template>
           </CardInfo>
         </div>
@@ -151,7 +160,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent } from "vue";
 
 import Footer from "@/components/Footer.vue";
 import Navbar from "@/components/Navbar.vue";
@@ -165,7 +174,7 @@ import GenderChart from "./Charts/GenderChart.vue";
 import PatrimonyChart from "./Charts/PatrimonyChart.vue";
 import services from "@/services";
 import TooltipInfo from "../../components/TooltipInfo.vue";
-import { setInfoCandidateSelected } from "@/store/candidates";
+import { setCharacteristicEducation, setInfoCandidateSelected } from "@/store/candidates";
 import { setCurrentLocale } from "@/store/locales";
 import { setCurrentRole } from "@/store/roles";
 
@@ -191,7 +200,7 @@ export default defineComponent({
   setup() {
     const store = useStore();
     return {
-      store,
+      store
     };
   },
   async mounted() {
@@ -202,6 +211,7 @@ export default defineComponent({
       const { dataCandidate } = await services.dataCandidates.candidate(
         keyCandidate
       );
+
       setInfoCandidateSelected(dataCandidate);
       setCurrentLocale(localeCandidate);
       setCurrentRole(roleCandidate);
