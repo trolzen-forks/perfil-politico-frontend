@@ -1,7 +1,7 @@
 # Perfil Político
 
 Front-end for [Perfil Político](https://github.com/okfn-brasil/perfil-politico)
- — a platform for profiling candidates in Brazilian 2018 General Election,
+ — a platform for profiling candidates in Brazilian 2022 General Election,
  based entirely on open data.
 
 ## Prerequisites
