@@ -1,0 +1,40 @@
+{
+    "data": [
+        {
+            "id": "presidente",
+            "name": "Presidente(a)",
+            "feminine": "Presidenta",
+            "plural": "Presidente(as)"
+        },
+        {
+            "id": "senador",
+            "name": "Senador(a)",
+            "feminine": "Senadora",
+            "plural": "Senadores(as)"
+        },
+        {
+            "id": "deputado-federal",
+            "name": "Deputado(a) Federal",
+            "feminine": "Deputada Federal",
+            "plural": "Deputados(as) Federais"
+        },
+        {
+            "id": "governador",
+            "name": "Governador(a)",
+            "feminine": "Governadora",
+            "plural": "Governadores(as)"
+        },
+        {
+            "id": "deputado-distrital",
+            "name": "Deputado(a) Distrital",
+            "feminine": "Deputada Distrital",
+            "plural": "Deputados(as) Distritais"
+        },
+        {
+            "id": "deputado-estadual",
+            "name": "Deputado(a) Estadual",
+            "feminine": "Deputada Estadual",
+            "plural": "Deputados(as) Estaduais"
+        }
+    ]
+}
