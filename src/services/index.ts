@@ -5,7 +5,7 @@ import CandidatesService from "./candidates";
 import router from "../router";
 
 const httpClient = axios.create({
-  baseURL: apis.staging,
+  baseURL: apis.production,
 });
 
 httpClient.interceptors.response.use(
