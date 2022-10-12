@@ -12,7 +12,13 @@ Front-end for [Perfil Político](https://github.com/okfn-brasil/perfil-politico)
 You can use `nvm` to manage multiple installations of node.js on your computer (check nvm installation guides for MacOS
 and Linux [here](https://github.com/nvm-sh/nvm) and for Windows [here](https://docs.microsoft.com/en-us/windows/nodejs/setup-on-windows)).
 
-Once you have it, you can use the right node version for the project using these commands:
+Once you have it, you can use the right node version for the project and update `npm` using these commands:
+
+```sh
+nvm install 16
+nvm use 16
+npm -g update npm
+```
 
 ## Project setup
 ```
